@@ -1,8 +1,8 @@
 import React from 'react';
-import RootRoute from './routers/router.index';
+import RootRoute from './routes/index';
 
-function App() {
+const App = () => {
 	return <RootRoute />;
-}
+};
 
 export default App;
