@@ -108,12 +108,34 @@ const SignUp = () => {
 						{isSignup && (
 							<Input
 								name='confirmPassword'
-								label='Repeat Password'
+								label='confirm Password'
 								handleChange={handleChange}
 								type='password'
 							/>
 						)}
+						
 					</Grid>
+
+					<Button
+						type='Forgot'
+						fullWidth
+						variant='outlined'
+						color='secondary'
+					
+					>
+						Forgot Email
+					</Button>
+
+					<Button
+						type='Forgot'
+						fullWidth
+						variant='outlined'
+						color='secondary'
+					
+					>
+						Forgot Password
+					</Button>
+
 					<Button
 						type='submit'
 						fullWidth
@@ -135,7 +157,7 @@ const SignUp = () => {
 								startIcon={<authIcon />}
 								variant='contained'
 							>
-								Google Sign In
+								Sign in with Google
 							</Button>
 						)}
 						onSuccess={googleSuccess}
@@ -147,7 +169,7 @@ const SignUp = () => {
 							<Button onClick={switchMode}>
 								{isSignup
 									? 'Already have an account? Sign In'
-									: 'Do not have an account? Sign Up'}
+									: 'Don\'t have an account? Sign Up'}
 							</Button>
 						</Grid>
 					</Grid>
