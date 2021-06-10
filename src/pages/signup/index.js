@@ -113,7 +113,29 @@ const SignUp = () => {
 								type='password'
 							/>
 						)}
+						
 					</Grid>
+
+					<Button
+						type='Forgot'
+						fullWidth
+						variant='outlined'
+						color='secondary'
+					
+					>
+						Forgot Email
+					</Button>
+
+					<Button
+						type='Forgot'
+						fullWidth
+						variant='outlined'
+						color='secondary'
+					
+					>
+						Forgot Password
+					</Button>
+
 					<Button
 						type='submit'
 						fullWidth
