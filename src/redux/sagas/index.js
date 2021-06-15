@@ -1,8 +1,8 @@
 import { all, fork } from 'redux-saga/effects';
-import sagaSignUp from './saga.signup';
+import sagaAuth from './sagaAuth';
 
 function* rootSaga() {
-	yield all([fork(sagaSignUp)]);
+	yield all([fork(sagaAuth)]);
 }
 
 export default rootSaga;

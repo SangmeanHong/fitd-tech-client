@@ -5,10 +5,17 @@ import { GoogleLogin } from 'react-google-login';
 
 import Input from './input';
 import useStyles from './styles';
-import actionSignup from '../../redux/actions/signup';
+import { actionSignUp, actionSignIn } from '../../redux/actions/actionAuth';
 import authIcon from './authIcon';
 
-import { Avatar, Button, Container, Grid, Paper, Typography } from '@material-ui/core';
+import {
+	Avatar,
+	Button,
+	Container,
+	Grid,
+	Paper,
+	Typography,
+} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 const initialState = {
@@ -24,7 +31,6 @@ const SignUp = () => {
 
 	const classes = useStyles();
 	const dispatch = useDispatch();
-	const history = useHistory();
 
 	const [isSignup, setIsSignup] = useState(false);
 	const [formData, setFormData] = useState(initialState);
@@ -33,10 +39,9 @@ const SignUp = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (isSignup) {
-			dispatch(actionSignup(formData));
+			dispatch(actionSignUp(formData));
 		} else {
-			console.log(`actionSignup`, actionSignup);
-			//dispatch(signin(formData, history));
+			dispatch(actionSignIn(formData));
 		}
 	};
 
@@ -54,10 +59,10 @@ const SignUp = () => {
 
 	const googleSuccess = async (res) => {
 		const result = res?.profileObj;
-		const token = res?.tokenId;
+		const accessToken = res?.accessToken;
 		try {
-			dispatch({ type: 'AUTH', data: { result, token } });
-			history.pushState('/');
+			dispatch(actionSignIn({ token: accessToken }));
+			//history.push('/');
 		} catch (error) {
 			console.error(error);
 		}
@@ -113,26 +118,13 @@ const SignUp = () => {
 								type='password'
 							/>
 						)}
-						
 					</Grid>
 
-					<Button
-						type='Forgot'
-						fullWidth
-						variant='outlined'
-						color='secondary'
-					
-					>
+					<Button type='Forgot' fullWidth variant='outlined' color='secondary'>
 						Forgot Email
 					</Button>
 
-					<Button
-						type='Forgot'
-						fullWidth
-						variant='outlined'
-						color='secondary'
-					
-					>
+					<Button type='Forgot' fullWidth variant='outlined' color='secondary'>
 						Forgot Password
 					</Button>
 
@@ -146,30 +138,19 @@ const SignUp = () => {
 						{isSignup ? 'Sign Up' : 'Sign In'}
 					</Button>
 					<GoogleLogin
-						clientId='GOOGLE_ID'
-						render={(renderProps) => (
-							<Button
-								className={classes.googleButton}
-								color='primary'
-								fullWidth
-								onClick={renderProps.onClick}
-								disabled={renderProps.disabled}
-								startIcon={<authIcon />}
-								variant='contained'
-							>
-								Sign in with Google
-							</Button>
-						)}
+						clientId={process.env.REACT_APP_CLIENT_ID}
+						buttonText='Google Login'
 						onSuccess={googleSuccess}
 						onFailure={googleError}
-						cookiePolicy='single_host_origin'
+						cookiePolicy={'single_host_origin'}
+						style={{ marginTop: '100px' }}
 					/>
 					<Grid container justify='flex-end'>
 						<Grid item>
 							<Button onClick={switchMode}>
 								{isSignup
 									? 'Already have an account? Sign In'
-									: 'Don\'t have an account? Sign Up'}
+									: "Don't have an account? Sign Up"}
 							</Button>
 						</Grid>
 					</Grid>
