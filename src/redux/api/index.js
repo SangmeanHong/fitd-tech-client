@@ -16,15 +16,23 @@ const signIn = async (formData) => {
 	console.log(`formData`, formData);
 	const { email, password, token } = formData;
 	if (token) {
-		API.post('/api/user/google', { token });
+		return await API.post('/api/user/google', { token });
 	} else {
 		return await API.post('/api/user/login', { email, password });
 	}
-	//API.post('/api/user/login', { email, password });
 };
 
 const signUp = async (formData) => {
 	return await API.post('/api/user/register', formData);
 };
 
-export { signUp, signIn };
+const apiForgotPwd = async (email) => {
+	return await API.post('/api/user/forgot', email);
+};
+
+const apiResetPwd = async (data) => {
+	console.log(`data`, data);
+	return await API.post('/api/user/resetpw', data);
+};
+
+export { signUp, signIn, apiForgotPwd, apiResetPwd };
