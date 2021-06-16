@@ -1,13 +1,13 @@
-import React, { Fragment, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import React, { Fragment, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
 
 import Input from './input';
 import useStyles from './styles';
 import { actionSignUp, actionSignIn } from '../../redux/actions/actionAuth';
-import authIcon from './authIcon';
-
+import actionNameError from '../../redux/actions/actionNameError';
+import AuthIcon from './authIcon';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {
 	Avatar,
 	Button,
@@ -16,8 +16,10 @@ import {
 	Paper,
 	Typography,
 } from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-
+import LoadingSpinner from '../../components/LoadingSpinner';
+import { MessageBox } from '../../components/MessageBox';
+import { useHistory } from 'react-router-dom';
+import actionClear from '../../redux/actions/actionClear';
 const initialState = {
 	firstName: '',
 	lastName: '',
@@ -27,19 +29,32 @@ const initialState = {
 };
 
 const SignUp = () => {
-	console.log(`### SIGN-UP ###`);
-
 	const classes = useStyles();
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	const [isSignup, setIsSignup] = useState(false);
 	const [formData, setFormData] = useState(initialState);
 	const [showPassword, setShowPassword] = useState(false);
+	const { loading, authData, err } = useSelector((state) => state.authReducer);
+	const isValid =
+		formData.password === formData.confirmPassword &&
+		formData.password !== '' &&
+		formData.confirmPassword !== ''
+			? true
+			: false;
+	const nameRegEx = /^[a-zA-Z]+$/;
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (isSignup) {
-			dispatch(actionSignUp(formData));
+			const { firstName, lastName } = formData;
+			if (!firstName.match(nameRegEx) || !lastName.match(nameRegEx)) {
+				dispatch(actionNameError());
+				return;
+			} else {
+				dispatch(actionSignUp(formData));
+			}
 		} else {
 			dispatch(actionSignIn(formData));
 		}
@@ -58,11 +73,9 @@ const SignUp = () => {
 	};
 
 	const googleSuccess = async (res) => {
-		const result = res?.profileObj;
-		const accessToken = res?.accessToken;
+		const { tokenId } = res;
 		try {
-			dispatch(actionSignIn({ token: accessToken }));
-			//history.push('/');
+			dispatch(actionSignIn({ token: tokenId }));
 		} catch (error) {
 			console.error(error);
 		}
@@ -71,6 +84,23 @@ const SignUp = () => {
 	const googleError = () =>
 		console.error('Google Sign In was unsuccessful. Try again later');
 
+	const forgotPassword = (e) => {
+		history.push('/forgotPwd');
+	};
+
+	useEffect(() => {
+		if (authData && authData.userId) {
+			history.push('/');
+		}
+		if (authData && authData.success) {
+			setIsSignup(false);
+		}
+	}, [authData, history]);
+
+	useEffect(() => {
+		dispatch(actionClear());
+	}, [dispatch, isSignup]);
+
 	return (
 		<Container component='main' maxWidth='xs'>
 			<Paper className={classes.paper} elevation={3}>
@@ -78,6 +108,8 @@ const SignUp = () => {
 					<LockOutlinedIcon />
 				</Avatar>
 				<Typography variant='h5'>{isSignup ? 'Sign Up' : 'Sign In'}</Typography>
+				{loading && <LoadingSpinner />}
+				{err && <MessageBox severity='error'>{err}</MessageBox>}
 				<form className={classes.form} onSubmit={handleSubmit}>
 					<Grid container spacing={2}>
 						{isSignup && (
@@ -88,12 +120,14 @@ const SignUp = () => {
 									handleChange={handleChange}
 									autoFocus
 									half
+									type='text'
 								/>
 								<Input
 									name='lastName'
 									label='Last Name'
 									handleChange={handleChange}
 									half
+									type='text'
 								/>
 							</Fragment>
 						)}
@@ -119,32 +153,39 @@ const SignUp = () => {
 							/>
 						)}
 					</Grid>
-
-					<Button type='Forgot' fullWidth variant='outlined' color='secondary'>
-						Forgot Email
-					</Button>
-
-					<Button type='Forgot' fullWidth variant='outlined' color='secondary'>
-						Forgot Password
-					</Button>
-
 					<Button
 						type='submit'
 						fullWidth
 						variant='contained'
 						color='primary'
 						className={classes.submit}
+						disabled={isSignup && !isValid}
 					>
 						{isSignup ? 'Sign Up' : 'Sign In'}
 					</Button>
-					<GoogleLogin
-						clientId={process.env.REACT_APP_CLIENT_ID}
-						buttonText='Google Login'
-						onSuccess={googleSuccess}
-						onFailure={googleError}
-						cookiePolicy={'single_host_origin'}
-						style={{ marginTop: '100px' }}
-					/>
+					<Grid item>
+						{!isSignup && (
+							<GoogleLogin
+								clientId={process.env.REACT_APP_CLIENT_ID}
+								render={(renderProps) => (
+									<Button
+										className={classes.googleButton}
+										color='primary'
+										fullWidth
+										onClick={renderProps.onClick}
+										disabled={renderProps.disabled}
+										startIcon={<AuthIcon />}
+										variant='contained'
+									>
+										Google Sign In
+									</Button>
+								)}
+								onSuccess={googleSuccess}
+								onFailure={googleError}
+								cookiePolicy='single_host_origin'
+							/>
+						)}
+					</Grid>
 					<Grid container justify='flex-end'>
 						<Grid item>
 							<Button onClick={switchMode}>
@@ -152,6 +193,11 @@ const SignUp = () => {
 									? 'Already have an account? Sign In'
 									: "Don't have an account? Sign Up"}
 							</Button>
+						</Grid>
+						<Grid item>
+							{!isSignup && (
+								<Button onClick={forgotPassword}>Forgot your password?</Button>
+							)}
 						</Grid>
 					</Grid>
 				</form>

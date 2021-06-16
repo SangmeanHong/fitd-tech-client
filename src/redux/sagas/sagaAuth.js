@@ -5,8 +5,13 @@ import * as types from '../constants/actionTypes';
 
 function* signUpUser(action) {
 	try {
-		const { success } = yield call(signUp, action.payload);
-		yield put({ type: types.SIGN_UP_USER_SUCCESS, payload: success });
+		const result = yield call(signUp, action.payload);
+		const { success, err } = result.data;
+		if (success) {
+			yield put({ type: types.SIGN_UP_USER_SUCCESS, payload: { success } });
+		} else {
+			yield put({ type: types.SIGN_UP_USER_ERROR, payload: err.name });
+		}
 	} catch (error) {
 		yield put({ type: types.SIGN_UP_USER_ERROR, payload: error });
 	}
@@ -17,9 +22,14 @@ function* watchSignUpUser() {
 }
 
 function* signInUser(action) {
-	try {m
+	try {
 		const { data } = yield call(signIn, action.payload);
-		yield put({ type: types.SIGN_IN_USER_SUCCESS, payload: data });
+		console.log('data :>> ', data);
+		if (data.userId) {
+			yield put({ type: types.SIGN_IN_USER_SUCCESS, payload: data });
+		} else {
+			yield put({ type: types.SIGN_IN_USER_ERROR, payload: data.message });
+		}
 	} catch (error) {
 		yield put({ type: types.SIGN_IN_USER_ERROR, payload: error });
 	}
