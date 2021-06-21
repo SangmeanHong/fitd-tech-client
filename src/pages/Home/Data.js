@@ -8,48 +8,48 @@ export const homeObjOne = {
     'Get the best coaching with the help of experienced tech industry professionals.',
   buttonLabel: 'Find Your Coach',
   imgStart: '',
-  // img: 'images/png-1.png',
-  alt: 'Credit Card'
+  img: 'images/png-2.png',
+  alt: 'Target'
 };
 
 export const homeObjTwo = {
   lightBg: false,
   lightText: true,
   lightTextDesc: true,
-  topLine: '100% SECURE',
-  headline: 'Stay protected 24/7 anywhere anytime',
+  topLine: 'Lorem Ipsum',
+  headline: 'Lorem Ipsum',
   description:
-    'We have you covered no matter where you are located. Over 140 locations worldwide to ensure you have access anytime',
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. ',
   buttonLabel: 'Learn More',
   imgStart: '',
-  // img: 'images/png-1.png',
-  alt: 'Vault'
+  img: 'images/.jpg',
+  alt: 'Need to find an image'
 };
 
 export const homeObjThree = {
   lightBg: true,
   lightText: false,
   lightTextDesc: false,
-  topLine: 'EASY SETUP',
-  headline: 'Super fast and simple onboarding process',
+  topLine: 'Lorem Ipsum',
+  headline: 'Lorem Ipsum',
   description:
-    "Get everything set up and ready in under 10 minutes. All you need to do is add your information and you're ready to go.",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.  ",
   buttonLabel: 'Start Now',
   imgStart: 'start',
   img: 'images/png-1.png',
-  alt: 'Vault'
+  alt: 'Coach'
 };
 
 export const homeObjFour = {
   lightBg: false,
   lightText: true,
   lightTextDesc: true,
-  topLine: 'DATA ANALYTICS',
-  headline: 'Every transaction is stored on our secure cloud database',
+  topLine: 'Earn Extra Income',
+  headline: 'Join our Coaching Team',
   description:
-    'Never ever have to worry again about saved reciepts. We store your data, so you can access it anytime.',
-  buttonLabel: 'Sign Up Now',
+    'Are you an experienced tech professional who wants to help newcomers find their path? Join our coaching team today.',
+  buttonLabel: 'Become a Coach',
   imgStart: 'start',
-  img: 'images/svg-8.svg',
-  alt: 'Vault'
+  img: 'images/.png',
+  alt: 'Need to find an image'
 };
