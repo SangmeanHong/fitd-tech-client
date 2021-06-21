@@ -1,0 +1,12 @@
+
+.avatarButton{
+    background-color: #f1b175;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.avatarButton:hover{
+    background-color: #F89230;
+}

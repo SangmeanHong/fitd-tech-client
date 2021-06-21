@@ -5,6 +5,7 @@ import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
 import useStyles from '../libs/AvatarStyle';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { LOGOUT } from '../redux/constants/actionTypes';
+import './Avatar.css';
 // import decode from 'jwt-decode';
 
 const AvatarIcon = () => {
@@ -56,9 +57,9 @@ const AvatarIcon = () => {
                     </Button>
                 </div>
             ) : (
-                <Button component={Link} to='/auth' variant='contained' color='primary'>
+                <Link className="avatarButton" component={Link} to='/auth' >
                     Sign In
-                </Button>
+                </Link>
             )}
         </Toolbar>
     );

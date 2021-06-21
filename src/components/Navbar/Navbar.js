@@ -37,7 +37,7 @@ const Navbar = () => {
             <IconContext.Provider value={{ color: '#fff' }}>
                 <nav className='navbar'>
                     <div className='navbar-container container'>
-                        <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
+                        <Link to='/' style={{ color: 'black', fontWeight: 'bolder' }} className='navbar-logo' onClick={closeMobileMenu}>
                             <RiDoorOpenFill className='navbar-icon' />
                             FITD Tech
                         </Link>
