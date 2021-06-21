@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from './Button';
+import { Button } from '../../pages/Home/Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { RiDoorOpenFill } from 'react-icons/ri';
@@ -50,7 +50,7 @@ const Navbar = () => {
               </li>
               <li className='nav-item'>
                 <Link
-                  to='/services'
+                  to='/content'
                   className='nav-links'
                   onClick={closeMobileMenu}
                 >
@@ -59,7 +59,7 @@ const Navbar = () => {
               </li>
               <li className='nav-item'>
                 <Link
-                  to='/products'
+                  to='/coaching'
                   className='nav-links'
                   onClick={closeMobileMenu}
                 >
