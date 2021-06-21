@@ -23,3 +23,5 @@ export const RESET_PASSWORD_ERROR = 'RESET_PASSWORD_ERROR';
 
 export const CLEAR_STORE = 'CLEAR_STORE';
 export const NAME_VALIDATE_ERROR = 'NAME_VALIDATE_ERROR';
+
+export const LOGOUT = 'LOGOUT';
