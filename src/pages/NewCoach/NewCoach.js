@@ -25,6 +25,7 @@ import {
 	DialogContentText,
 	DialogTitle,
 } from '@material-ui/core';
+import { coachProfileObj } from '../../libs/coachProfileObj';
 
 const options = [
 	{ label: 'Yes', value: 'yes' },
@@ -46,44 +47,97 @@ const PaidRadioGroup = ({ value, options, name, paidonChange }) => (
 	</FormControl>
 );
 
-const CoachCheckboxGroup = ({ values, label, onChange }) => (
+const CoachCheckboxGroup = ({
+	values,
+	label,
+	onChange,
+	expertiseAreaOther,
+	setExpertiseAreaOther,
+}) => (
 	<FormControl component='fieldset'>
 		<FormLabel component='legend'>{label}</FormLabel>
 		<FormGroup>
-			{values.map((value, index) => (
-				<FormControlLabel
-					key={index}
-					control={
-						<Checkbox checked={value.checked} onChange={onChange(index)} />
-					}
-					label={value.label}
-				/>
-			))}
-			<TextField type='text' style={{ width: '100%' }} />
+			{values.map((value, index) => {
+				if (index === values.length - 1) {
+					return (
+						<div className='lastCheckbox'>
+							<FormControlLabel
+								key={index}
+								control={
+									<Checkbox
+										checked={value.checked}
+										onChange={onChange(index)}
+									/>
+								}
+								label={value.label}
+							/>
+							<TextField
+								type='text'
+								value={expertiseAreaOther}
+								onChange={(e) => setExpertiseAreaOther(e.target.value)}
+							/>
+						</div>
+					);
+				}
+				return (
+					<FormControlLabel
+						key={index}
+						control={
+							<Checkbox checked={value.checked} onChange={onChange(index)} />
+						}
+						label={value.label}
+					/>
+				);
+			})}
 		</FormGroup>
 	</FormControl>
 );
 
-const ProvideCheckboxGroup = ({ values, label, ProvideCheckboxonChange }) => (
+const ProvideCheckboxGroup = ({
+	values,
+	label,
+	ProvideCheckboxonChange,
+	provideCheckedOther,
+	setProvideCheckedOther,
+}) => (
 	<FormControl component='fieldset'>
 		<FormLabel component='legend'>{label}</FormLabel>
 		<FormGroup>
-			{values.map((value, index) => (
-				// if (index === 8) {
-
-				// 	}
-
-				<FormControlLabel
-					key={index}
-					control={
-						<Checkbox
-							checked={value.checked}
-							onChange={ProvideCheckboxonChange(index)}
-						/>
-					}
-					label={value.label}
-				/>
-			))}
+			{values.map((value, index) => {
+				if (index === values.length - 1) {
+					return (
+						<div className='lastCheckbox'>
+							<FormControlLabel
+								key={index}
+								control={
+									<Checkbox
+										checked={value.checked}
+										onChange={ProvideCheckboxonChange(index)}
+									/>
+								}
+								label={value.label}
+							/>
+							<TextField
+								type='text'
+								value={provideCheckedOther}
+								onChange={(e) => setProvideCheckedOther(e.target.value)}
+							/>
+						</div>
+					);
+				}
+				return (
+					<FormControlLabel
+						key={index}
+						control={
+							<Checkbox
+								checked={value.checked}
+								onChange={ProvideCheckboxonChange(index)}
+							/>
+						}
+						label={value.label}
+					/>
+				);
+			})}
 		</FormGroup>
 	</FormControl>
 );
@@ -111,9 +165,17 @@ const CoachAgreeCheckboxGroup = ({ values, label, CoachAgreeOnChange }) => (
 const NewCoach = () => {
 	const history = useHistory();
 
-	const [value, setValue] = useState(false);
-
-	const [values, setValues] = useState([
+	const [firstName, setFirstName] = useState('');
+	const [lastName, setLastName] = useState('');
+	const [email, setEmail] = useState('');
+	const [linkedIn, setLinkedIn] = useState('');
+	const [coachStyle, setCoachStyle] = useState('');
+	const [certification, setCertification] = useState('');
+	const [paidOpt, setPaidOpt] = useState(false);
+	const [wage, setWage] = useState(0);
+	const [numOfPeople, setNumOfPeople] = useState(0);
+	const [hoursPerWeek, setHoursPerWeek] = useState(0);
+	const [expertiseArea, setExpertiseArea] = useState([
 		{ label: 'Software engineering/development', checked: false },
 		{ label: 'Design', checked: false },
 		{ label: 'Product management', checked: false },
@@ -124,7 +186,7 @@ const NewCoach = () => {
 		{ label: 'Non-profit', checked: false },
 		{ label: 'Other:', checked: false },
 	]);
-
+	const [expertiseAreaOther, setExpertiseAreaOther] = useState('');
 	const [provideChecked, setProvideChecked] = useState([
 		{ label: 'General Career Coaching', checked: false },
 		{
@@ -145,24 +207,20 @@ const NewCoach = () => {
 		{ label: 'Founder Coaching', checked: false },
 		{ label: 'Other:', checked: false },
 	]);
-
+	const [provideCheckedOther, setProvideCheckedOther] = useState('');
 	const [coachAgreeChecked, setCoachAgreeChecked] = useState([
 		{ label: 'I agree', checked: false },
 	]);
 
 	const [dialogOpen, setDialogOpen] = useState(false);
 
-	const paidonChange = (e) => {
-		setValue(e.target.value);
-	};
-
 	const onChange =
 		(index) =>
 		({ target: { checked } }) => {
-			const newValues = [...values];
-			const value = values[index];
+			const newValues = [...expertiseArea];
+			const value = expertiseArea[index];
 			newValues[index] = { ...value, checked };
-			setValues(newValues);
+			setExpertiseArea(newValues);
 		};
 
 	const ProvideCheckboxonChange =
@@ -190,7 +248,36 @@ const NewCoach = () => {
 
 	const handleClose = () => {
 		setDialogOpen(false);
-		history.push('/');
+		// history.push('/');
+	};
+
+	const handleSubmit = () => {
+		console.log(`exper`, expertiseAreaOther);
+		console.log(`pro`, provideCheckedOther);
+		// const emailRegEx =
+		// 	/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+		// if (emailRegEx.test(email)) {
+		const obj = coachProfileObj({
+			firstName,
+			lastName,
+			email,
+			linkedIn,
+			coachStyle,
+			certification,
+			paidOpt,
+			wage,
+			numOfPeople,
+			hoursPerWeek,
+			expertiseArea,
+			provideChecked,
+			expertiseAreaOther,
+			provideCheckedOther,
+		});
+		console.log(`obj`, obj);
+		// } else {
+		// 	alert('이메일 체크해');
+		// }
+		// setDialogOpen(false);
 	};
 
 	return (
@@ -205,6 +292,7 @@ const NewCoach = () => {
 							required
 							label='First name'
 							type='text'
+							value={firstName}
 							size='Normal'
 							style={{ width: '100%' }}
 							InputProps={{
@@ -214,6 +302,7 @@ const NewCoach = () => {
 									</InputAdornment>
 								),
 							}}
+							onChange={(e) => setFirstName(e.target.value)}
 						/>
 					</div>
 					<div className='textField'>
@@ -222,6 +311,7 @@ const NewCoach = () => {
 							id='coach-lastname'
 							label='Last name'
 							type='text'
+							value={lastName}
 							style={{ width: '100%' }}
 							InputProps={{
 								startAdornment: (
@@ -230,6 +320,7 @@ const NewCoach = () => {
 									</InputAdornment>
 								),
 							}}
+							onChange={(e) => setLastName(e.target.value)}
 						/>
 					</div>
 					<div className='textField'>
@@ -237,6 +328,7 @@ const NewCoach = () => {
 							required
 							label='E-mail'
 							type='email'
+							value={email}
 							style={{ width: '100%' }}
 							InputProps={{
 								startAdornment: (
@@ -245,6 +337,7 @@ const NewCoach = () => {
 									</InputAdornment>
 								),
 							}}
+							onChange={(e) => setEmail(e.target.value)}
 						/>
 					</div>
 					<div className='textField'>
@@ -252,6 +345,7 @@ const NewCoach = () => {
 							required
 							label='LinkedIn Profile'
 							type='text'
+							value={linkedIn}
 							style={{ width: '100%' }}
 							InputProps={{
 								startAdornment: (
@@ -260,6 +354,7 @@ const NewCoach = () => {
 									</InputAdornment>
 								),
 							}}
+							onChange={(e) => setLinkedIn(e.target.value)}
 						/>
 					</div>
 					<br /> <br />
@@ -268,12 +363,13 @@ const NewCoach = () => {
 						<div className='question_01'>
 							Have you had paid coaching clients?
 						</div>
-						<div className='paid_radio' style={{ color: '#7c7b7b' }}>
+						<div className='paid_radio'>
 							<PaidRadioGroup
-								value={value}
+								required
+								value={paidOpt}
 								options={options}
 								name='radio1'
-								onChange={paidonChange}
+								paidonChange={(e) => setPaidOpt(e.target.value)}
 							/>
 						</div>
 					</div>
@@ -282,6 +378,7 @@ const NewCoach = () => {
 						<TextField
 							required
 							type='number'
+							value={wage}
 							style={{ width: '100%' }}
 							helperText='Without a decimal point'
 							InputProps={{
@@ -291,12 +388,19 @@ const NewCoach = () => {
 									</InputAdornment>
 								),
 							}}
+							onChange={(event) =>
+								event.target.value < 0
+									? setWage(0)
+									: setWage(event.target.value)
+							}
 						/>
 					</div>
 					<div className='question_01'>Please describe your coaching style</div>
 					<div className='textField_01'>
 						<TextField
+							required
 							type='text'
+							value={coachStyle}
 							style={{ width: '100%' }}
 							InputProps={{
 								startAdornment: (
@@ -305,14 +409,15 @@ const NewCoach = () => {
 									</InputAdornment>
 								),
 							}}
+							onChange={(e) => setCoachStyle(e.target.value)}
 						/>
 					</div>
 					<div className='question_01'>How many people have you coached?</div>
 					<div className='textField_01'>
 						<TextField
 							type='number'
+							value={numOfPeople}
 							helperText='Allow only integer'
-							style={{ width: '100%' }}
 							InputProps={{
 								startAdornment: (
 									<InputAdornment position='start'>
@@ -320,6 +425,11 @@ const NewCoach = () => {
 									</InputAdornment>
 								),
 							}}
+							onChange={(event) =>
+								event.target.value < 0
+									? setNumOfPeople(0)
+									: setNumOfPeople(event.target.value)
+							}
 						/>
 					</div>
 					<div className='question_01'>
@@ -329,8 +439,8 @@ const NewCoach = () => {
 						<TextField
 							required
 							type='number'
+							value={hoursPerWeek}
 							helperText='Allow only integer'
-							style={{ width: '100%' }}
 							InputProps={{
 								startAdornment: (
 									<InputAdornment position='start'>
@@ -338,14 +448,19 @@ const NewCoach = () => {
 									</InputAdornment>
 								),
 							}}
+							onChange={(event) =>
+								event.target.value < 0
+									? setHoursPerWeek(0)
+									: setHoursPerWeek(event.target.value)
+							}
 						/>
 					</div>
 					<div className='question_01'>Coaching Certifications</div>
 					<div className='textField_01'>
 						<TextField
 							type='text'
+							value={certification}
 							helperText='(e.g. ICF, CTI - If applicable)'
-							style={{ width: '100%' }}
 							InputProps={{
 								startAdornment: (
 									<InputAdornment position='start'>
@@ -353,20 +468,7 @@ const NewCoach = () => {
 									</InputAdornment>
 								),
 							}}
-						/>
-					</div>
-					<div className='question_01'>Please describe your coaching style</div>
-					<div className='textField_01'>
-						<TextField
-							type='text'
-							style={{ width: '100%' }}
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position='start'>
-										<Create />
-									</InputAdornment>
-								),
-							}}
+							onChange={(e) => setCertification(e.target.value)}
 						/>
 					</div>
 					<div className='question_01'>
@@ -374,7 +476,13 @@ const NewCoach = () => {
 						coaching on?
 					</div>
 					<div className='checkbox'>
-						<CoachCheckboxGroup required values={values} onChange={onChange} />
+						<CoachCheckboxGroup
+							required
+							values={expertiseArea}
+							onChange={onChange}
+							expertiseAreaOther={expertiseAreaOther}
+							setExpertiseAreaOther={setExpertiseAreaOther}
+						/>
 					</div>
 					<div className='question_01'>
 						What services would you be comfortable providing? (Check all that
@@ -385,6 +493,8 @@ const NewCoach = () => {
 							required
 							values={provideChecked}
 							ProvideCheckboxonChange={ProvideCheckboxonChange}
+							provideCheckedOther={provideCheckedOther}
+							setProvideCheckedOther={setProvideCheckedOther}
 						/>
 					</div>
 					<div className='question_01'>
@@ -428,7 +538,7 @@ const NewCoach = () => {
 								<Button onClick={handleClose} color='primary'>
 									Cancel
 								</Button>
-								<Button onClick={handleClose} color='primary' autoFocus>
+								<Button onClick={handleSubmit} color='primary' autoFocus>
 									Process
 								</Button>
 							</DialogActions>
