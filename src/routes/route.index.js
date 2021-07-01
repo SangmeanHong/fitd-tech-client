@@ -9,26 +9,28 @@ import Coaching from '../pages/Coaching/Coaching.index';
 import Content from '../pages/Content/Content.index';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
+import NewCoach from '../pages/NewCoach/NewCoach';
 import { ErrorPage } from '../pages/ErrorPage/ErrorPage';
 
 const RootRoute = () => {
-    return (
-        <BrowserRouter>
-            <Container disableGutters maxWidth={false}>
-                <Navbar />
-                <Switch>
-                    <Route path='/coaching' component={Coaching} />
-                    <Route path='/content' component={Content} />
-                    <Route path='/auth' exact component={Auth} />
-                    <Route path='/resetpw/:token/:email' exact component={ResetPwd} />
-                    <Route path='/forgotPwd' exact component={ForgotPwd} />
-                    <Route path="/" component={HomePage} exact />
-                    <ErrorPage />
-                </Switch>
-                <Footer />
-            </Container>
-        </BrowserRouter>
-    );
+	return (
+		<BrowserRouter>
+			<Container disableGutters maxWidth={false}>
+				<Navbar />
+				<Switch>
+					<Route path='/newcoach' component={NewCoach} />
+					<Route path='/coaching' component={Coaching} />
+					<Route path='/content' component={Content} />
+					<Route path='/auth' component={Auth} />
+					<Route path='/resetpw/:token/:email' exact component={ResetPwd} />
+					<Route path='/forgotPwd' exact component={ForgotPwd} />
+					<Route path='/' component={HomePage} exact />
+					<ErrorPage />
+				</Switch>
+				<Footer />
+			</Container>
+		</BrowserRouter>
+	);
 };
 
 export default RootRoute;
