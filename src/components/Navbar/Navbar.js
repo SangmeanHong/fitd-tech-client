@@ -46,7 +46,7 @@ const Navbar = () => {
                             FITD
                         </Link>
                         <div className='menu-icon' onClick={handleClick}>
-                            {click ? <FaTimes /> : <FaBars style={{ color: 'black' }} />}
+                            {click ? <FaTimes style={{ color: 'black' }} /> : <FaBars style={{ color: 'black' }} />}
                         </div>
                         <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                             <li className='nav-item'>
