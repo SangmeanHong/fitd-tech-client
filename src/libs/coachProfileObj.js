@@ -3,6 +3,7 @@ export const coachProfileObj = ({
 	lastName,
 	email,
 	linkedIn,
+	introOfCoach,
 	coachStyle,
 	certification,
 	paidOpt,
@@ -13,6 +14,7 @@ export const coachProfileObj = ({
 	provideChecked,
 	expertiseAreaOther,
 	provideCheckedOther,
+	uploadPhoto,
 }) => {
 	const filteredProvideChecked = provideChecked.filter(
 		(data) => data.checked === true
@@ -27,6 +29,7 @@ export const coachProfileObj = ({
 	const filteredExpertiseArea = expertiseArea.filter(
 		(data) => data.checked === true
 	);
+
 	const newExpertiseArea = filteredExpertiseArea.map((data) => {
 		if (data.label === 'Other:') {
 			data['label'] = expertiseAreaOther;
@@ -38,6 +41,7 @@ export const coachProfileObj = ({
 		lastName,
 		email,
 		linkedIn,
+		introOfCoach,
 		coachStyle,
 		certification,
 		paidOpt,
@@ -46,5 +50,6 @@ export const coachProfileObj = ({
 		hoursPerwWeek,
 		expertiseArea: newExpertiseArea,
 		provideChecked: newProvideChecked,
+		uploadPhoto,
 	};
 };

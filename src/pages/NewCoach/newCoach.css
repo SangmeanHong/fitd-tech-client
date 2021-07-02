@@ -34,6 +34,12 @@ body {
 	width: 100%;
 }
 
+.uploadPhoto {
+	margin-top: 2%;
+	margin-left: 3%;
+	width: 100%;
+}
+
 .question_01 {
 	font-size: 18px;
 	font-weight: bold;

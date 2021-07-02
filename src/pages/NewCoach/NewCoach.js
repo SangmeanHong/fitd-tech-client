@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './newCoach.css';
-import { useHistory } from 'react-router';
+import 'react-dropzone-uploader/dist/styles.css';
+import Dropzone from 'react-dropzone-uploader';
 import {
 	AccountCircle,
 	AlternateEmail,
@@ -24,6 +25,7 @@ import {
 	DialogContent,
 	DialogContentText,
 	DialogTitle,
+	SnackbarContent,
 } from '@material-ui/core';
 import { coachProfileObj } from '../../libs/coachProfileObj';
 
@@ -163,12 +165,12 @@ const CoachAgreeCheckboxGroup = ({ values, label, CoachAgreeOnChange }) => (
 );
 
 const NewCoach = () => {
-	const history = useHistory();
-
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
 	const [email, setEmail] = useState('');
 	const [linkedIn, setLinkedIn] = useState('');
+	const [introOfCoach, setIntroOfCoach] = useState('');
+	const [uploadPhoto, setUploadPhoto] = useState({});
 	const [coachStyle, setCoachStyle] = useState('');
 	const [certification, setCertification] = useState('');
 	const [paidOpt, setPaidOpt] = useState(false);
@@ -214,7 +216,7 @@ const NewCoach = () => {
 
 	const [dialogOpen, setDialogOpen] = useState(false);
 
-	const onChange =
+	const ExpertiseOnChange =
 		(index) =>
 		({ target: { checked } }) => {
 			const newValues = [...expertiseArea];
@@ -243,41 +245,49 @@ const NewCoach = () => {
 		};
 
 	const handleClickOpen = () => {
+		const emailRegEx =
+			/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+		if (emailRegEx.test(email)) {
+			const obj = coachProfileObj({
+				firstName,
+				lastName,
+				email,
+				linkedIn,
+				introOfCoach,
+				coachStyle,
+				certification,
+				paidOpt,
+				wage,
+				numOfPeople,
+				hoursPerWeek,
+				expertiseArea,
+				provideChecked,
+				expertiseAreaOther,
+				provideCheckedOther,
+				uploadPhoto,
+			});
+			console.log(`obj`, obj);
+		} else {
+			alert('Please check your email');
+		}
 		setDialogOpen(true);
 	};
 
 	const handleClose = () => {
 		setDialogOpen(false);
-		// history.push('/');
 	};
 
 	const handleSubmit = () => {
-		console.log(`exper`, expertiseAreaOther);
-		console.log(`pro`, provideCheckedOther);
-		// const emailRegEx =
-		// 	/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-		// if (emailRegEx.test(email)) {
-		const obj = coachProfileObj({
-			firstName,
-			lastName,
-			email,
-			linkedIn,
-			coachStyle,
-			certification,
-			paidOpt,
-			wage,
-			numOfPeople,
-			hoursPerWeek,
-			expertiseArea,
-			provideChecked,
-			expertiseAreaOther,
-			provideCheckedOther,
-		});
-		console.log(`obj`, obj);
-		// } else {
-		// 	alert('이메일 체크해');
-		// }
-		// setDialogOpen(false);
+		setDialogOpen(false);
+	};
+
+	const getUploadParams = ({ meta }) => {
+		console.log(`meta`, meta);
+		setUploadPhoto(meta);
+	};
+
+	const handleChangeStatus = ({ meta, file }, status) => {
+		console.log('get photo', status, meta, file);
 	};
 
 	return (
@@ -290,11 +300,11 @@ const NewCoach = () => {
 					<div className='textField'>
 						<TextField
 							required
+							error={firstName.errorText.length === 0 ? false : true}
+							helperText={firstName.errorText}
 							label='First name'
 							type='text'
 							value={firstName}
-							size='Normal'
-							style={{ width: '100%' }}
 							InputProps={{
 								startAdornment: (
 									<InputAdornment position='start'>
@@ -312,7 +322,6 @@ const NewCoach = () => {
 							label='Last name'
 							type='text'
 							value={lastName}
-							style={{ width: '100%' }}
 							InputProps={{
 								startAdornment: (
 									<InputAdornment position='start'>
@@ -329,7 +338,6 @@ const NewCoach = () => {
 							label='E-mail'
 							type='email'
 							value={email}
-							style={{ width: '100%' }}
 							InputProps={{
 								startAdornment: (
 									<InputAdornment position='start'>
@@ -346,7 +354,6 @@ const NewCoach = () => {
 							label='LinkedIn Profile'
 							type='text'
 							value={linkedIn}
-							style={{ width: '100%' }}
 							InputProps={{
 								startAdornment: (
 									<InputAdornment position='start'>
@@ -355,6 +362,41 @@ const NewCoach = () => {
 								),
 							}}
 							onChange={(e) => setLinkedIn(e.target.value)}
+						/>
+					</div>
+					<div className='textField'>
+						<TextField
+							required
+							label='Explain yourself'
+							type='text'
+							multiline
+							value={introOfCoach}
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position='start'>
+										<Create />
+									</InputAdornment>
+								),
+							}}
+							onChange={(e) => setIntroOfCoach(e.target.value)}
+						/>
+					</div>
+					<div className='textField'>
+						<TextField
+							required
+							label='Your Photo'
+							defaultValue='Upload your photo or logo'
+							InputProps={{
+								readOnly: true,
+							}}
+						/>
+						<Dropzone
+							required
+							getUploadParams={getUploadParams}
+							onChangeStatus={handleChangeStatus}
+							maxFiles={1}
+							value={uploadPhoto}
+							accept='image/*'
 						/>
 					</div>
 					<br /> <br />
@@ -395,7 +437,9 @@ const NewCoach = () => {
 							}
 						/>
 					</div>
-					<div className='question_01'>Please describe your coaching style</div>
+					<div className='question_01'>
+						Please describe your coaching style.
+					</div>
 					<div className='textField_01'>
 						<TextField
 							required
@@ -479,7 +523,7 @@ const NewCoach = () => {
 						<CoachCheckboxGroup
 							required
 							values={expertiseArea}
-							onChange={onChange}
+							onChange={ExpertiseOnChange}
 							expertiseAreaOther={expertiseAreaOther}
 							setExpertiseAreaOther={setExpertiseAreaOther}
 						/>
