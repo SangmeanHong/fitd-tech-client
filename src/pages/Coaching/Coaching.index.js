@@ -6,9 +6,9 @@ import Pricing from '../Home/Pricing';
 function Coaching() {
   return (
     <>
-      <Pricing />
+      {/* <Pricing /> */}
       <HeroSection {...homeObjOne} />
-      <HeroSection {...homeObjThree} />
+      {/* <HeroSection {...homeObjThree} /> */}
     </>
   );
 }
