@@ -9,7 +9,8 @@ export const homeObjOne = {
     buttonLabel: 'Browse Articles',
     imgStart: '',
     img: 'images/article-svg-1.svg',
-    alt: 'articles'
+    alt: 'articles',
+    path:'/articles'
   };
   
   export const homeObjTwo = {

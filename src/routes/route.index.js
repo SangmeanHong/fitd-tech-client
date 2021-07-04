@@ -11,6 +11,7 @@ import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 import NewCoach from '../pages/NewCoach/NewCoach';
 import { ErrorPage } from '../pages/ErrorPage/ErrorPage';
+import Articles from '../pages/Articles/Articles.index';
 
 const RootRoute = () => {
 	return (
@@ -18,6 +19,7 @@ const RootRoute = () => {
 			<Container disableGutters maxWidth={false}>
 				<Navbar />
 				<Switch>
+					<Route path='/articles' component={Articles} />
 					<Route path='/newcoach' component={NewCoach} />
 					<Route path='/coaching' component={Coaching} />
 					<Route path='/content' component={Content} />
