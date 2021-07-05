@@ -33,6 +33,7 @@ const RootRoute = () => {
 			</Container>
 		</BrowserRouter>
 	);
+
 };
 
 export default RootRoute;
