@@ -13,7 +13,6 @@ API.interceptors.request.use((req) => {
 });
 
 const signIn = async (formData) => {
-	console.log(`formData`, formData);
 	const { email, password, token } = formData;
 	if (token) {
 		return await API.post('/api/user/google', { token });
@@ -31,8 +30,11 @@ const apiForgotPwd = async (email) => {
 };
 
 const apiResetPwd = async (data) => {
-	console.log(`data`, data);
 	return await API.post('/api/user/resetpw', data);
 };
 
-export { signUp, signIn, apiForgotPwd, apiResetPwd };
+const apiNewCoach = async (formData) => {
+	return await API.post('/api/coach/newcoach', formData);
+};
+
+export { signUp, signIn, apiForgotPwd, apiResetPwd, apiNewCoach };

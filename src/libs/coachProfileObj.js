@@ -9,16 +9,18 @@ export const coachProfileObj = ({
 	paidOpt,
 	wage,
 	numOfPeople,
-	hoursPerwWeek,
+	hoursPerWeek,
 	expertiseArea,
 	provideChecked,
 	expertiseAreaOther,
 	provideCheckedOther,
 	uploadPhoto,
+	coachAgreeChecked,
 }) => {
 	const filteredProvideChecked = provideChecked.filter(
 		(data) => data.checked === true
 	);
+
 	const newProvideChecked = filteredProvideChecked.map((data) => {
 		if (data.label === 'Other:') {
 			data['label'] = provideCheckedOther;
@@ -36,6 +38,7 @@ export const coachProfileObj = ({
 		}
 		return data;
 	});
+
 	return {
 		firstName,
 		lastName,
@@ -47,9 +50,10 @@ export const coachProfileObj = ({
 		paidOpt,
 		wage,
 		numOfPeople,
-		hoursPerwWeek,
+		hoursPerWeek,
 		expertiseArea: newExpertiseArea,
 		provideChecked: newProvideChecked,
 		uploadPhoto,
+		coachAgreeChecked,
 	};
 };

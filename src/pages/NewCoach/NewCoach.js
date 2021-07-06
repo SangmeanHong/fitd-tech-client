@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import './newCoach.css';
 import 'react-dropzone-uploader/dist/styles.css';
 import Dropzone from 'react-dropzone-uploader';
+import ProvideCheckboxGroup from '../../libs/ProvideCheckBoxGroup';
+import CoachCheckboxGroup from '../../libs/CoachCheckboxGroup';
+import CoachAgreeCheckboxGroup from '../../libs/CoachAgreeCheckboxGroup';
 import {
 	AccountCircle,
 	AlternateEmail,
@@ -17,166 +20,38 @@ import {
 	Radio,
 	RadioGroup,
 	FormLabel,
-	FormGroup,
-	Checkbox,
 	Button,
-	Dialog,
-	DialogActions,
-	DialogContent,
-	DialogContentText,
-	DialogTitle,
-	SnackbarContent,
+	FormHelperText,
 } from '@material-ui/core';
 import { coachProfileObj } from '../../libs/coachProfileObj';
 
-const options = [
-	{ label: 'Yes', value: 'yes' },
-	{ label: 'No', value: 'no' },
-];
-
-const PaidRadioGroup = ({ value, options, name, paidonChange }) => (
-	<FormControl component='fieldset'>
-		<RadioGroup row name={name} value={value} onChange={paidonChange} disabled>
-			{options.map((option, index) => (
-				<FormControlLabel
-					key={index}
-					control={<Radio color='primary' />}
-					value={option.value}
-					label={option.label}
-				/>
-			))}
-		</RadioGroup>
-	</FormControl>
-);
-
-const CoachCheckboxGroup = ({
-	values,
-	label,
-	onChange,
-	expertiseAreaOther,
-	setExpertiseAreaOther,
-}) => (
-	<FormControl component='fieldset'>
-		<FormLabel component='legend'>{label}</FormLabel>
-		<FormGroup>
-			{values.map((value, index) => {
-				if (index === values.length - 1) {
-					return (
-						<div className='lastCheckbox'>
-							<FormControlLabel
-								key={index}
-								control={
-									<Checkbox
-										checked={value.checked}
-										onChange={onChange(index)}
-									/>
-								}
-								label={value.label}
-							/>
-							<TextField
-								type='text'
-								value={expertiseAreaOther}
-								onChange={(e) => setExpertiseAreaOther(e.target.value)}
-							/>
-						</div>
-					);
-				}
-				return (
-					<FormControlLabel
-						key={index}
-						control={
-							<Checkbox checked={value.checked} onChange={onChange(index)} />
-						}
-						label={value.label}
-					/>
-				);
-			})}
-		</FormGroup>
-	</FormControl>
-);
-
-const ProvideCheckboxGroup = ({
-	values,
-	label,
-	ProvideCheckboxonChange,
-	provideCheckedOther,
-	setProvideCheckedOther,
-}) => (
-	<FormControl component='fieldset'>
-		<FormLabel component='legend'>{label}</FormLabel>
-		<FormGroup>
-			{values.map((value, index) => {
-				if (index === values.length - 1) {
-					return (
-						<div className='lastCheckbox'>
-							<FormControlLabel
-								key={index}
-								control={
-									<Checkbox
-										checked={value.checked}
-										onChange={ProvideCheckboxonChange(index)}
-									/>
-								}
-								label={value.label}
-							/>
-							<TextField
-								type='text'
-								value={provideCheckedOther}
-								onChange={(e) => setProvideCheckedOther(e.target.value)}
-							/>
-						</div>
-					);
-				}
-				return (
-					<FormControlLabel
-						key={index}
-						control={
-							<Checkbox
-								checked={value.checked}
-								onChange={ProvideCheckboxonChange(index)}
-							/>
-						}
-						label={value.label}
-					/>
-				);
-			})}
-		</FormGroup>
-	</FormControl>
-);
-
-const CoachAgreeCheckboxGroup = ({ values, label, CoachAgreeOnChange }) => (
-	<FormControl component='fieldset'>
-		<FormLabel component='legend'>{label}</FormLabel>
-		<FormGroup>
-			{values.map((value, index) => (
-				<FormControlLabel
-					key={index}
-					control={
-						<Checkbox
-							checked={value.checked}
-							onChange={CoachAgreeOnChange(index)}
-						/>
-					}
-					label={value.label}
-				/>
-			))}
-		</FormGroup>
-	</FormControl>
-);
-
 const NewCoach = () => {
 	const [firstName, setFirstName] = useState('');
+	const [firstNameErrorMsg, setFirstNameErrorMsg] = useState(false);
 	const [lastName, setLastName] = useState('');
+	const [lastNameErrorMsg, setLastNameErrorMsg] = useState(false);
 	const [email, setEmail] = useState('');
+	const [emailErrorMsg, setEmailErrorMsg] = useState(false);
 	const [linkedIn, setLinkedIn] = useState('');
+	const [linkedInErrorMsg, setLinkedInErrorMsg] = useState(false);
 	const [introOfCoach, setIntroOfCoach] = useState('');
+	const [introOfCoachErrorMsg, setIntroOfCoachErrorMsg] = useState(false);
 	const [uploadPhoto, setUploadPhoto] = useState({});
-	const [coachStyle, setCoachStyle] = useState('');
-	const [certification, setCertification] = useState('');
-	const [paidOpt, setPaidOpt] = useState(false);
+	const [uploadPhotoErrorMsg, setUploadPhotoErrorMsg] = useState(false);
+	const [paidOpt, setPaidOpt] = useState('');
+	const [paidOptErrorMsg, setPaidOptErrorMsg] = useState(false);
+	const [paidOptHelperText, setPaidOptHelperText] = useState('');
+	const [paidOptError, setPaidOptError] = useState(false);
 	const [wage, setWage] = useState(0);
+	//const [wageErrorMsg, setWageErrorMsg] = useState(false);
+	const [coachStyle, setCoachStyle] = useState('');
+	const [coachStyleErrorMsg, setCoachStyleErrorMsg] = useState(false);
 	const [numOfPeople, setNumOfPeople] = useState(0);
+	//const [numOfPeopleErrorMsg, setNumOfPeopleErrorMsg] = useState(false);
 	const [hoursPerWeek, setHoursPerWeek] = useState(0);
+	//const [hoursPerWeekErrorMsg, setHoursPerWeekErrorMsg] = useState(false);
+	const [certification, setCertification] = useState('');
+	//	const [certificationErrorMsg, setCertificationErrorMsg] = useState(false);
 	const [expertiseArea, setExpertiseArea] = useState([
 		{ label: 'Software engineering/development', checked: false },
 		{ label: 'Design', checked: false },
@@ -188,7 +63,10 @@ const NewCoach = () => {
 		{ label: 'Non-profit', checked: false },
 		{ label: 'Other:', checked: false },
 	]);
+	//const [expertiseAreaErrorMsg, setExpertiseAreaErrorMsg] = useState(false);
 	const [expertiseAreaOther, setExpertiseAreaOther] = useState('');
+	//const [expertiseAreaOtherErrorMsg, setExpertiseAreaOtherErrorMsg] =
+	useState(false);
 	const [provideChecked, setProvideChecked] = useState([
 		{ label: 'General Career Coaching', checked: false },
 		{
@@ -209,12 +87,15 @@ const NewCoach = () => {
 		{ label: 'Founder Coaching', checked: false },
 		{ label: 'Other:', checked: false },
 	]);
+	//const [provideCheckedErrorMsg, setProvideCheckedErrorMsg] = useState(false);
 	const [provideCheckedOther, setProvideCheckedOther] = useState('');
+	// const [provideCheckedOtherErrorMsg, setProvideCheckedOtherErrorMsg] =
+	// 	useState(false);
 	const [coachAgreeChecked, setCoachAgreeChecked] = useState([
 		{ label: 'I agree', checked: false },
 	]);
-
-	const [dialogOpen, setDialogOpen] = useState(false);
+	// const [coachAgreeCheckedErrorMsg, setCoachAgreeCheckedErrorMsg] =
+	// 	useState(false);
 
 	const ExpertiseOnChange =
 		(index) =>
@@ -244,64 +125,182 @@ const NewCoach = () => {
 			setCoachAgreeChecked(newValues);
 		};
 
-	const handleClickOpen = () => {
-		const emailRegEx =
-			/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-		if (emailRegEx.test(email)) {
-			const obj = coachProfileObj({
-				firstName,
-				lastName,
-				email,
-				linkedIn,
-				introOfCoach,
-				coachStyle,
-				certification,
-				paidOpt,
-				wage,
-				numOfPeople,
-				hoursPerWeek,
-				expertiseArea,
-				provideChecked,
-				expertiseAreaOther,
-				provideCheckedOther,
-				uploadPhoto,
-			});
-			console.log(`obj`, obj);
-		} else {
-			alert('Please check your email');
-		}
-		setDialogOpen(true);
-	};
-
-	const handleClose = () => {
-		setDialogOpen(false);
-	};
-
-	const handleSubmit = () => {
-		setDialogOpen(false);
-	};
-
 	const getUploadParams = ({ meta }) => {
 		console.log(`meta`, meta);
 		setUploadPhoto(meta);
 	};
 
 	const handleChangeStatus = ({ meta, file }, status) => {
-		console.log('get photo', status, meta, file);
+		// console.log(`status`, status);
+	};
+
+	const handleRadioChange = (e) => {
+		setPaidOpt(e.target.value);
+
+		if (e.target.value === 'yes') {
+			setPaidOptHelperText('');
+			setPaidOptError(false);
+		} else if (e.target.value === 'no') {
+			setPaidOptHelperText('');
+			setPaidOptError(false);
+		} else {
+			setPaidOptHelperText('Please select an option');
+			setPaidOptError(true);
+		}
+	};
+
+	// https://www.linkedin.com/in/mitchellsung/
+
+	const handleSubmit = () => {
+		let isValid = false;
+
+		const regexName = /[a-zA-Z]/;
+
+		const regexEmail =
+			/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+		const regexLinkedIn =
+			/^((https?:\/\/)?((www|\w\w)\.)?linkedin\.com\/)((([\w]{2,3})?)|([^\/]+\/(([\w|\d-&#?=])+\/?){1,}))$/;
+
+		if (regexName.test(firstName)) {
+			isValid = true;
+		} else {
+			isValid = false;
+			setFirstNameErrorMsg(true);
+			alert('Please enter your first name or only letters');
+			return;
+		}
+
+		if (regexName.test(lastName)) {
+			isValid = true;
+		} else {
+			isValid = false;
+			alert('Please enter your last name or only letters');
+			return;
+		}
+
+		if (regexEmail.test(email)) {
+			isValid = true;
+		} else {
+			isValid = false;
+			alert('Invalid your email');
+			return;
+		}
+
+		if (regexLinkedIn.test(linkedIn)) {
+			isValid = true;
+		} else {
+			isValid = false;
+			alert('Invalid your LinkedIn URL');
+			return;
+		}
+
+		if (introOfCoach !== '') {
+			isValid = true;
+		} else {
+			isValid = false;
+			alert('Please write down your introduction');
+			return;
+		}
+
+		if (uploadPhoto.name !== '') {
+			isValid = true;
+		} else {
+			isValid = false;
+			alert('Please upload your image!');
+			return;
+		}
+
+		if (paidOpt !== '') {
+			isValid = true;
+		} else {
+			isValid = false;
+			alert('Please chose "Yes" or "No');
+			return;
+		}
+
+		if (coachStyle !== '') {
+			isValid = true;
+		} else {
+			isValid = false;
+			alert('Please write down your coaching style');
+			return;
+		}
+
+		const expertiseCheckboxLength = expertiseArea.filter(
+			(value) => value.checked === true
+		).length;
+
+		if (expertiseCheckboxLength > 0) {
+			isValid = true;
+		} else {
+			isValid = false;
+			alert('Please chose at least one.');
+			return;
+		}
+
+		const provideCheckboxLength = provideChecked.filter(
+			(value) => value.checked === true
+		).length;
+
+		if (provideCheckboxLength > 0) {
+			isValid = true;
+		} else {
+			isValid = false;
+			alert('Please chose at least one.');
+			return;
+		}
+
+		const coachAgreeCheckboxLength = coachAgreeChecked.filter(
+			(value) => value.checked === true
+		).length;
+
+		if (coachAgreeCheckboxLength > 0) {
+			isValid = true;
+		} else {
+			isValid = false;
+			alert('You must agree to the agreement.');
+			return;
+		}
+
+		if (isValid === true) {
+			const obj = coachProfileObj({
+				firstName,
+				lastName,
+				email,
+				linkedIn,
+				introOfCoach,
+				uploadPhoto,
+				paidOpt,
+				wage,
+				coachStyle,
+				numOfPeople,
+				hoursPerWeek,
+				certification,
+				expertiseArea,
+				expertiseAreaOther,
+				provideChecked,
+				provideCheckedOther,
+				coachAgreeChecked,
+			});
+
+			console.log(`coachProfileObj`, obj);
+		} else {
+			alert('check again');
+			return;
+		}
 	};
 
 	return (
 		<div className='body'>
 			<div className='main-container'>
-				<div className='title_01'>FITD New Coach Application</div>
-				<br /> <br />
+				<div className='main-title'>FITD New Coach Application</div>
 				<form>
-					<div className='title_02'>Basic Information:</div>
+					<div className='sub-title'>Basic Information:</div>
 					<div className='textField'>
 						<TextField
 							required
-							error={firstName.errorText.length === 0 ? false : true}
-							helperText={firstName.errorText}
+							autoFocus
 							label='First name'
 							type='text'
 							value={firstName}
@@ -312,13 +311,22 @@ const NewCoach = () => {
 									</InputAdornment>
 								),
 							}}
-							onChange={(e) => setFirstName(e.target.value)}
+							onChange={(e) => {
+								setFirstName(e.target.value);
+								setFirstNameErrorMsg(false);
+							}}
+							error={firstNameErrorMsg}
+							helperText={
+								firstNameErrorMsg
+									? 'Please enter your first name or only letters'
+									: ''
+							}
 						/>
 					</div>
 					<div className='textField'>
 						<TextField
 							required
-							id='coach-lastname'
+							autoFocus
 							label='Last name'
 							type='text'
 							value={lastName}
@@ -329,7 +337,16 @@ const NewCoach = () => {
 									</InputAdornment>
 								),
 							}}
-							onChange={(e) => setLastName(e.target.value)}
+							onChange={(e) => {
+								setLastName(e.target.value);
+								setLastNameErrorMsg(false);
+							}}
+							error={lastNameErrorMsg}
+							helperText={
+								lastNameErrorMsg
+									? 'Please enter your last name or only letters'
+									: ''
+							}
 						/>
 					</div>
 					<div className='textField'>
@@ -345,7 +362,12 @@ const NewCoach = () => {
 									</InputAdornment>
 								),
 							}}
-							onChange={(e) => setEmail(e.target.value)}
+							onChange={(e) => {
+								setEmail(e.target.value);
+								setEmailErrorMsg(false);
+							}}
+							error={emailErrorMsg}
+							helperText={emailErrorMsg ? 'Invalid your E-mail' : ''}
 						/>
 					</div>
 					<div className='textField'>
@@ -361,7 +383,14 @@ const NewCoach = () => {
 									</InputAdornment>
 								),
 							}}
-							onChange={(e) => setLinkedIn(e.target.value)}
+							onChange={(e) => {
+								setLinkedIn(e.target.value);
+								setLinkedInErrorMsg(false);
+							}}
+							error={linkedInErrorMsg}
+							helperText={
+								linkedInErrorMsg ? 'Invalid your LinkedIn Profile URL!' : ''
+							}
 						/>
 					</div>
 					<div className='textField'>
@@ -378,7 +407,16 @@ const NewCoach = () => {
 									</InputAdornment>
 								),
 							}}
-							onChange={(e) => setIntroOfCoach(e.target.value)}
+							onChange={(e) => {
+								setIntroOfCoach(e.target.value);
+								setIntroOfCoachErrorMsg(false);
+							}}
+							error={introOfCoachErrorMsg}
+							helperText={
+								introOfCoachErrorMsg
+									? 'Please write down your introduction'
+									: ''
+							}
 						/>
 					</div>
 					<div className='textField'>
@@ -389,6 +427,8 @@ const NewCoach = () => {
 							InputProps={{
 								readOnly: true,
 							}}
+							error={uploadPhotoErrorMsg}
+							helperText={uploadPhotoErrorMsg ? 'Please upload your image' : ''}
 						/>
 						<Dropzone
 							required
@@ -400,193 +440,206 @@ const NewCoach = () => {
 						/>
 					</div>
 					<br /> <br />
-					<div className='title_02'>Coaching Experience:</div>
-					<div className='flex-2row'>
-						<div className='question_01'>
-							Have you had paid coaching clients?
-						</div>
-						<div className='paid_radio'>
-							<PaidRadioGroup
+					<div className='sub-title'>Coaching Experience:</div>
+					<div className='coachExperience'>
+						<FormControl component='fieldset' error={paidOptErrorMsg}>
+							<FormLabel style={{ fontSize: '20px', fontWeight: 'bold' }}>
+								Have you had paid coaching client?
+							</FormLabel>
+							<RadioGroup required value={paidOpt} onChange={handleRadioChange}>
+								<FormControlLabel value='yes' control={<Radio />} label='Yes' />
+								<FormControlLabel value='no' control={<Radio />} label='No' />
+							</RadioGroup>
+							<FormHelperText>{paidOptHelperText}</FormHelperText>
+						</FormControl>
+					</div>
+					<div className='coachExperience'>
+						<FormControl>
+							<FormLabel style={{ fontSize: '20px', fontWeight: 'bold' }}>
+								What is your coaching hourly rate?
+							</FormLabel>
+							<TextField
 								required
-								value={paidOpt}
-								options={options}
-								name='radio1'
-								paidonChange={(e) => setPaidOpt(e.target.value)}
+								type='number'
+								value={wage}
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position='start'>
+											<AttachMoney />
+										</InputAdornment>
+									),
+								}}
+								onChange={(e) =>
+									e.target.value < 0 ? setWage(0) : setWage(e.target.value)
+								}
+								helperText={
+									'If you do not type, your hourly rate will be saved as ZERO.'
+								}
 							/>
-						</div>
+						</FormControl>
 					</div>
-					<div className='question_01'>What is your coaching hourly rate?</div>
-					<div className='textField_01'>
-						<TextField
-							required
-							type='number'
-							value={wage}
-							style={{ width: '100%' }}
-							helperText='Without a decimal point'
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position='start'>
-										<AttachMoney />
-									</InputAdornment>
-								),
-							}}
-							onChange={(event) =>
-								event.target.value < 0
-									? setWage(0)
-									: setWage(event.target.value)
-							}
-						/>
+					<div className='coachExperience'>
+						<FormControl>
+							<FormLabel style={{ fontSize: '20px', fontWeight: 'bold' }}>
+								Please describe your coaching style.
+							</FormLabel>
+							<TextField
+								required
+								type='text'
+								value={coachStyle}
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position='start'>
+											<Create />
+										</InputAdornment>
+									),
+								}}
+								onChange={(e) => {
+									setCoachStyle(e.target.value);
+									setCoachStyleErrorMsg(false);
+								}}
+								error={coachStyleErrorMsg}
+								helperText={
+									coachStyleErrorMsg
+										? 'Please write down your coaching style.'
+										: ''
+								}
+							/>
+						</FormControl>
 					</div>
-					<div className='question_01'>
-						Please describe your coaching style.
+					<div className='coachExperience'>
+						<FormControl>
+							<FormLabel style={{ fontSize: '20px', fontWeight: 'bold' }}>
+								How many people have you coached?
+							</FormLabel>
+							<TextField
+								required
+								type='number'
+								value={numOfPeople}
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position='start'>
+											<Create />
+										</InputAdornment>
+									),
+								}}
+								onChange={(e) =>
+									e.target.value < 0
+										? setNumOfPeople(0)
+										: setNumOfPeople(e.target.value)
+								}
+							/>
+						</FormControl>
 					</div>
-					<div className='textField_01'>
-						<TextField
-							required
-							type='text'
-							value={coachStyle}
-							style={{ width: '100%' }}
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position='start'>
-										<Create />
-									</InputAdornment>
-								),
-							}}
-							onChange={(e) => setCoachStyle(e.target.value)}
-						/>
+					<div className='coachExperience'>
+						<FormControl>
+							<FormLabel style={{ fontSize: '20px', fontWeight: 'bold' }}>
+								How many hours per week will you be available to coach on FITD?
+							</FormLabel>
+							<TextField
+								required
+								type='number'
+								value={hoursPerWeek}
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position='start'>
+											<Create />
+										</InputAdornment>
+									),
+								}}
+								onChange={(e) =>
+									e.target.value < 0
+										? setHoursPerWeek(0)
+										: setHoursPerWeek(e.target.value)
+								}
+							/>
+						</FormControl>
 					</div>
-					<div className='question_01'>How many people have you coached?</div>
-					<div className='textField_01'>
-						<TextField
-							type='number'
-							value={numOfPeople}
-							helperText='Allow only integer'
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position='start'>
-										<Create />
-									</InputAdornment>
-								),
-							}}
-							onChange={(event) =>
-								event.target.value < 0
-									? setNumOfPeople(0)
-									: setNumOfPeople(event.target.value)
-							}
-						/>
+					<div className='coachExperience'>
+						<FormControl>
+							<FormLabel style={{ fontSize: '20px', fontWeight: 'bold' }}>
+								Coaching Certifications
+							</FormLabel>
+							<TextField
+								type='text'
+								value={certification}
+								placeholder='e.g. ICF, CTI'
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position='start'>
+											<Create />
+										</InputAdornment>
+									),
+								}}
+								onChange={(e) => setCertification(e.target.value)}
+								helperText={'If you have a certification, please write here!'}
+							/>
+						</FormControl>
 					</div>
-					<div className='question_01'>
-						How many hours per week will you be available to coach on FITD?
+					<div className='coachExperience'>
+						<FormControl>
+							<FormLabel style={{ fontSize: '20px', fontWeight: 'bold' }}>
+								Please choose areas of expertise you would be most comfortable
+								coaching on?
+							</FormLabel>
+							<div className='checkbox'>
+								<CoachCheckboxGroup
+									required
+									values={expertiseArea}
+									onChange={ExpertiseOnChange}
+									expertiseAreaOther={expertiseAreaOther}
+									setExpertiseAreaOther={setExpertiseAreaOther}
+								/>
+							</div>
+						</FormControl>
 					</div>
-					<div className='textField_01'>
-						<TextField
-							required
-							type='number'
-							value={hoursPerWeek}
-							helperText='Allow only integer'
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position='start'>
-										<Create />
-									</InputAdornment>
-								),
-							}}
-							onChange={(event) =>
-								event.target.value < 0
-									? setHoursPerWeek(0)
-									: setHoursPerWeek(event.target.value)
-							}
-						/>
+					<div className='coachExperience'>
+						<FormControl>
+							<FormLabel style={{ fontSize: '20px', fontWeight: 'bold' }}>
+								What services would you be comfortable providing? (Check all
+								that apply)
+							</FormLabel>
+							<div className='checkbox'>
+								<ProvideCheckboxGroup
+									required
+									values={provideChecked}
+									ProvideCheckboxonChange={ProvideCheckboxonChange}
+									provideCheckedOther={provideCheckedOther}
+									setProvideCheckedOther={setProvideCheckedOther}
+								/>
+							</div>
+						</FormControl>
 					</div>
-					<div className='question_01'>Coaching Certifications</div>
-					<div className='textField_01'>
-						<TextField
-							type='text'
-							value={certification}
-							helperText='(e.g. ICF, CTI - If applicable)'
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position='start'>
-										<Create />
-									</InputAdornment>
-								),
-							}}
-							onChange={(e) => setCertification(e.target.value)}
-						/>
-					</div>
-					<div className='question_01'>
-						Please choose areas of expertise you would be most comfortable
-						coaching on?
-					</div>
-					<div className='checkbox'>
-						<CoachCheckboxGroup
-							required
-							values={expertiseArea}
-							onChange={ExpertiseOnChange}
-							expertiseAreaOther={expertiseAreaOther}
-							setExpertiseAreaOther={setExpertiseAreaOther}
-						/>
-					</div>
-					<div className='question_01'>
-						What services would you be comfortable providing? (Check all that
-						apply)
-					</div>
-					<div className='checkbox'>
-						<ProvideCheckboxGroup
-							required
-							values={provideChecked}
-							ProvideCheckboxonChange={ProvideCheckboxonChange}
-							provideCheckedOther={provideCheckedOther}
-							setProvideCheckedOther={setProvideCheckedOther}
-						/>
-					</div>
-					<div className='question_01'>
-						I have read and agree to the Coach agreement.
-					</div>
-					<div className='checkbox'>
-						<CoachAgreeCheckboxGroup
-							required
-							values={coachAgreeChecked}
-							CoachAgreeOnChange={CoachAgreeOnChange}
-						/>
-					</div>
-					<div>
-						<div className='submitBtn'>
-							<Button
-								variant='outlined'
-								color='primary'
-								onClick={handleClickOpen}
-								style={{ margin: '0 auto', display: 'flex' }}
-							>
-								Submit
-							</Button>
-						</div>
-						<Dialog
-							open={dialogOpen}
-							onClose={handleClose}
-							aria-labelledby='alert-dialog-title'
-							aria-describedby='alert-dialog-description'
-						>
-							<DialogTitle id='alert-dialog-title'>
-								{'Thank you for submitting the coach application from.'}
-							</DialogTitle>
-							<DialogContent>
-								<DialogContentText id='alert-dialog-description'>
+					<div className='coachExperience'>
+						<FormControl>
+							<FormLabel style={{ fontSize: '20px', fontWeight: 'bold' }}>
+								I have read and agree to the Coach agreement.
+							</FormLabel>
+							<div>
+								<div className='typograph'>
 									You need a confirmation procedure to become a coach. It takes
 									about business 5 days, and if it is approved, we will contact
 									you.
-								</DialogContentText>
-							</DialogContent>
-							<DialogActions>
-								<Button onClick={handleClose} color='primary'>
-									Cancel
-								</Button>
-								<Button onClick={handleSubmit} color='primary' autoFocus>
-									Process
-								</Button>
-							</DialogActions>
-						</Dialog>
+								</div>
+							</div>
+							<div className='checkbox'>
+								<CoachAgreeCheckboxGroup
+									required
+									values={coachAgreeChecked}
+									CoachAgreeOnChange={CoachAgreeOnChange}
+								/>
+							</div>
+						</FormControl>
+					</div>
+					<div className='submitBtn'>
+						<Button
+							variant='outlined'
+							color='primary'
+							onClick={handleSubmit}
+							style={{ margin: '0 auto', display: 'flex' }}
+						>
+							Submit
+						</Button>
 					</div>
 				</form>
 			</div>
