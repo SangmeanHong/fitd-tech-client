@@ -1,43 +1,45 @@
+let exampleText = "right now";
+
 export const homeObjOne = {
     lightBg: false,
     lightText: true,
     lightTextDesc: true,
     topLine: 'Coaching',
-    headline: 'Step into your Dream Career',
+    headline: 'From those who are there',
     description:
-        'Get the best coaching with the help of experienced tech industry professionals.',
-    buttonLabel: 'Find Your Coach',
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
+    buttonLabel: 'Meet Our Coaches',
     imgStart: '',
-    img: 'images/png-2.png',
-    alt: 'Target'
+    img: 'images/coach-svg-2.svg',
+    alt: 'Coaches'
 };
 
 export const homeObjTwo = {
-    lightBg: false,
-    lightText: true,
-    lightTextDesc: true,
-    topLine: 'Lorem Ipsum',
-    headline: 'Lorem Ipsum',
-    description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. ',
-    buttonLabel: 'Learn More',
-    imgStart: '',
-    img: 'images/.jpg',
-    alt: 'Need to find an image'
-};
-
-export const homeObjThree = {
     lightBg: true,
     lightText: false,
     lightTextDesc: false,
-    topLine: 'Lorem Ipsum',
-    headline: 'Lorem Ipsum',
+    topLine: 'Easy Setup',
+    headline: 'How it works',
     description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.  ",
-    buttonLabel: 'Start Now',
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    buttonLabel: 'Learn More',
     imgStart: 'start',
-    img: 'images/png-1.png',
-    alt: 'Coach'
+    img: 'images/setup-svg-1.svg',
+    alt: 'Setup'
+};
+
+export const homeObjThree = {
+    lightBg: false,
+    lightText: true,
+    lightTextDesc: true,
+    topLine: 'content',
+    headline: 'Tailored for you',
+    description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing eli sed do eiusmod tempor.',
+    buttonLabel: 'Browse Content',
+    imgStart: '',
+    img: 'images/content-svg-1.svg',
+    alt: 'Content'
 };
 
 export const homeObjFour = {
@@ -47,9 +49,9 @@ export const homeObjFour = {
     topLine: 'Earn Extra Income',
     headline: 'Join our Coaching Team',
     description:
-        'Are you an experienced tech professional who wants to help newcomers find their path? Join our coaching team today.',
+        'Are you an experienced tech professional with a passion for coaching? Do you want to earn extra income? Join our coaching team today.',
     buttonLabel: 'Become a Coach',
     imgStart: 'start',
-    img: 'images/.png',
-    alt: 'Need to find an image'
+    img: 'images/coach-svg-1.svg',
+    alt: 'Coach'
 };
