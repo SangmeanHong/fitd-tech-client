@@ -32,7 +32,7 @@ function HeroSection({
                             <div className='home__hero-text-wrapper'>
                                 <div className='top-line'>{topLine}</div>
                                 <h1 className={lightText ? 'heading' : 'heading dark'}>
-                                    {headline} <span className="italic">right now</span>
+                                    {headline}
                                 </h1>
                                 <p
                                     className={
@@ -43,7 +43,7 @@ function HeroSection({
                                 >
                                     {description}
                                 </p>
-                                <Link to='/content'>
+                                <Link to='/sign-up'>
                                     <Button buttonSize='btn--wide' buttonColor='blue'>
                                         {buttonLabel}
                                     </Button>

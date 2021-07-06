@@ -2,43 +2,42 @@ export const homeObjOne = {
     lightBg: true,
     lightText: false,
     lightTextDesc: false,
-    topLine: 'ARTICLES',
-    headline: 'Articles',
+    topLine: 'VIEW OUR PRODUCTS',
+    headline: 'Shop through our catalog of products',
     description:
-      "Industry related articles to guide your on your journey.",
-    buttonLabel: 'Browse Articles',
+      'We provide worldwide shipping to all countries. If there are any issues, just issue a refund and we will process your request',
+    buttonLabel: 'Shop Now',
     imgStart: '',
-    img: 'images/article-svg-1.svg',
-    alt: 'articles',
-    path:'/articles'
+    img: 'images/svg-4.svg',
+    alt: 'Credit Card'
   };
   
   export const homeObjTwo = {
     lightBg: false,
     lightText: true,
     lightTextDesc: true,
-    topLine: 'PODCASTS',
-    headline: 'The FITD Podcast',
+    topLine: '100% SECURE',
+    headline: 'Stay protected 24/7 anywhere anytime',
     description:
-       'Our podcast featuring our coaches.',
-    buttonLabel: 'Browse Podcasts',
-    imgStart: 'start',
-    img: 'images/podcast-svg-1.svg',
-    alt: 'podcast'
+      'We have you covered no matter where you are located. Over 140 locations worldwide to ensure you have access anytime',
+    buttonLabel: 'Learn More',
+    imgStart: '',
+    img: 'images/svg-5.svg',
+    alt: 'Vault'
   };
   
   export const homeObjThree = {
     lightBg: true,
     lightText: false,
     lightTextDesc: false,
-    topLine: 'VIDEOS',
-    headline: 'Videos',
+    topLine: 'EASY SETUP',
+    headline: 'Super fast and simple onboarding process',
     description:
-      "Videos to help you to better understand the industry.",
-    buttonLabel: 'Browse Videos',
+      "Get everything set up and ready in under 10 minutes. All you need to do is add your information and you're ready to go.",
+    buttonLabel: 'Start Now',
     imgStart: 'start',
-    img: 'images/video-svg-1.svg',
-    alt: 'videos'
+    img: 'images/svg-7.svg',
+    alt: 'Vault'
   };
   
   export const homeObjFour = {

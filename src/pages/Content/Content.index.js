@@ -8,8 +8,6 @@ function Content() {
     <>
       <HeroSection {...homeObjOne} />
       <HeroSection {...homeObjTwo} />
-      <HeroSection {...homeObjThree} />
-      {/* <HeroSection {...homeObjFour} /> */}
     </>
   );
 }

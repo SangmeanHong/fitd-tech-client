@@ -7,8 +7,8 @@ function Home() {
   return (
     <>
       <HeroSection {...homeObjOne} />
-      <HeroSection {...homeObjTwo} />
       <HeroSection {...homeObjThree} />
+      <HeroSection {...homeObjTwo} />
       {/* <Pricing /> */}
       <HeroSection {...homeObjFour} />
     </>

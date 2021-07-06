@@ -4,9 +4,9 @@ import forgotPwdReducer from './reducer.forgotPwd';
 import resetPwdReducer from './reducer.resetPwd';
 
 const rootReducer = combineReducers({
-    authReducer,
-    forgotPwdReducer,
-    resetPwdReducer,
+	authReducer,
+	forgotPwdReducer,
+	resetPwdReducer,
 });
 
 export default rootReducer;

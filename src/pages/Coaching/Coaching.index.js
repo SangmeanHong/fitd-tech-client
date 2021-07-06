@@ -1,23 +1,16 @@
 import React from 'react';
-import { CoachingProfileCard } from '../../components/CoachProfile/CoachingProfileCard';
-import { coachData } from '../../data/coachData';
-import './Coaching.css'
+import HeroSection from '../Home/HeroSection';
+import { homeObjOne, homeObjTwo, homeObjThree, homeObjFour } from './Data';
+import Pricing from '../Home/Pricing';
 
 function Coaching() {
-    return (
-        <div className="Coaching">
-            <h1 className="coaching_header">Explore our Coaches</h1>
-            <div className="coachingCards">
-                {
-                    coachData.map((data) => {
-                        return (
-                            <CoachingProfileCard coachData={data} />
-                        )
-                    })
-                }
-            </div>
-        </div>
-    );
+  return (
+    <>
+      <Pricing />
+      <HeroSection {...homeObjOne} />
+      <HeroSection {...homeObjThree} />
+    </>
+  );
 }
 
 export default Coaching;

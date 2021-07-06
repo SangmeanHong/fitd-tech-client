@@ -57,7 +57,7 @@ const AvatarIcon = () => {
 				</div>
 			) : (
 				<Link className='avatarButton' to='/auth'>
-					Get Started
+					Sign In
 				</Link>
 			)}
 		</Toolbar>
