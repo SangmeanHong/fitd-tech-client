@@ -1,13 +1,11 @@
 let exampleText = "right now";
-function Component() {
-    return <div dangerouslySetInnerHTML={{__html: exampleText }} />;
-  }
+
 export const homeObjOne = {
     lightBg: false,
     lightText: true,
     lightTextDesc: true,
-    topLine: 'Coaching', 
-    headline: 'From those who are there' + Component(),
+    topLine: 'Coaching',
+    headline: 'From those who are there',
     description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
     buttonLabel: 'Meet Our Coaches',

@@ -6,7 +6,7 @@ import './Coaching.css'
 function Coaching() {
     return (
         <div className="Coaching">
-            <div className="coaching_header">Explore our Coaches</div>
+            <h1 className="coaching_header">Explore our Coaches</h1>
             <div className="coachingCards">
                 {
                     coachData.map((data) => {

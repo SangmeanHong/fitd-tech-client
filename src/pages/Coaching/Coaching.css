@@ -1,17 +1,17 @@
 .Coaching{
-
-    background-color: #8d8d8f38;
+    margin: 50px 50px;
 }
 
 .coaching_header{
     font-size: 40px;
     font-weight: bolder;
+    text-align: center;
 }
 
 .coachingCards{
-    padding-top: 100px;
+    padding-top: 50px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     justify-items: center;
-    /* grid-template-rows: 100vh; */
 }
+

@@ -9,53 +9,65 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { CoachCategoriesCard } from './CoachCategoriesCard';
 import './CoachingProfileCard.css';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
     root: {
         maxWidth: 345,
     },
     media: {
-        height: 140,
+        height: 360,
     },
 });
 
 export const CoachingProfileCard = ({ coachData }) => {
     const classes = useStyles();
     const { name, imageURL, categories, coachStyle, email, linkedIn, certification, services, introduction } = coachData
+    function textLengthOverCut(txt, len, lastTxt) {
+        if (len === "" || len === null) { // 기본값
+            len = 20;
+        }
+        if (lastTxt === "" || lastTxt === null) { // 기본값
+            lastTxt = "...";
+        }
+        if (txt.length > len) {
+            txt = txt.substr(0, len) + lastTxt;
+        }
+        return txt;
+    }
     return (
-        <Card className={`${classes.root} CoachingProfileCard`}>
-            <CardActionArea>
+        <div className={`coachingProfileCard`}>
+            <div className='cards__item__link '>
                 <CardMedia
-                    className={classes.media}
+                    className={`${classes.media} coachImg`}
                     image={imageURL}
                     title={imageURL}
                 />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        {name}
-                    </Typography>
-                    <p className="coachCategorySection">
-                        {
-                            categories.map((data) => {
-                                return (
-                                    <CoachCategoriesCard categories={data} />
-                                )
-                            })
-                        }
-                    </p>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {introduction}
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
-            <CardActions>
-                <Button size="small" color="primary">
-                    Share
-                </Button>
-                <Button size="small" color="primary">
-                    Learn More
-                </Button>
-            </CardActions>
-        </Card>
+                <div className="cardActionArea">
+                    <div className="cardContent">
+                        <h2 className="coachName">
+                            {name}
+                        </h2>
+                        <div className="coachCategories">
+                            {
+                                categories.map((data) => {
+                                    return (
+                                        <CoachCategoriesCard categories={data} />
+                                    )
+                                })
+                            }
+                        </div>
+                        <h6 className="coachIntro">
+                            {textLengthOverCut(introduction, '200', '...')}
+                        </h6>
+                    </div>
+                    <div className="cardActions">
+                        <Link className="coachLeanMoreButton" to={`/coaches/${name}`}>
+                            Learn More
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 }
