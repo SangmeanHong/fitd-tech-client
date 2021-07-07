@@ -5,6 +5,8 @@ import Dropzone from 'react-dropzone-uploader';
 import ProvideCheckboxGroup from '../../libs/ProvideCheckBoxGroup';
 import CoachCheckboxGroup from '../../libs/CoachCheckboxGroup';
 import CoachAgreeCheckboxGroup from '../../libs/CoachAgreeCheckboxGroup';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import {
 	AccountCircle,
 	AlternateEmail,
@@ -24,6 +26,7 @@ import {
 	FormHelperText,
 } from '@material-ui/core';
 import { coachProfileObj } from '../../libs/coachProfileObj';
+import actionNewCoach from '../../redux/actions/actionNewCoach';
 
 const NewCoach = () => {
 	const [firstName, setFirstName] = useState('');
@@ -65,6 +68,8 @@ const NewCoach = () => {
 	]);
 	//const [expertiseAreaErrorMsg, setExpertiseAreaErrorMsg] = useState(false);
 	const [expertiseAreaOther, setExpertiseAreaOther] = useState('');
+	const dispatch = useDispatch();
+	const history = useHistory();
 	//const [expertiseAreaOtherErrorMsg, setExpertiseAreaOtherErrorMsg] =
 	useState(false);
 	const [provideChecked, setProvideChecked] = useState([
@@ -263,6 +268,8 @@ const NewCoach = () => {
 			return;
 		}
 
+		const clear = () => {};
+
 		if (isValid === true) {
 			const obj = coachProfileObj({
 				firstName,
@@ -285,6 +292,10 @@ const NewCoach = () => {
 			});
 
 			console.log(`coachProfileObj`, obj);
+
+			dispatch(actionNewCoach(obj));
+
+			history.push('/');
 		} else {
 			alert('check again');
 			return;
@@ -648,3 +659,5 @@ const NewCoach = () => {
 };
 
 export default NewCoach;
+
+// https://www.linkedin.com/in/mitchellsung/

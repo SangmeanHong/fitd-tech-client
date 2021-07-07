@@ -49,7 +49,9 @@ const apiResetPwd = async (data) => {
 };
 
 const apiNewCoach = async (formData) => {
-	return await API.post('/api/coach/newcoach', formData);
+	return await API.post('/api/user/request-coach', formData, {
+		withCredentials: true,
+	});
 };
 
 export {
