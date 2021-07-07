@@ -1,17 +1,21 @@
-.Coaching{
-    margin: 50px 50px;
+.Coaching {
+	margin: 50px 50px;
 }
 
-.coaching_header{
-    font-size: 40px;
-    font-weight: bolder;
-    text-align: center;
+.flex-header {
+	display: flex;
+	justify-content: flex-end;
 }
 
-.coachingCards{
-    padding-top: 50px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    justify-items: center;
+.coaching_header {
+	font-size: 40px;
+	font-weight: bolder;
+	text-align: center;
 }
 
+.coachingCards {
+	padding-top: 50px;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+	justify-items: center;
+}
