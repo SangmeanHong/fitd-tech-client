@@ -28,4 +28,6 @@ export const NEW_COACH_ERROR = 'NEW_COACH_ERROR';
 export const CLEAR_STORE = 'CLEAR_STORE';
 export const NAME_VALIDATE_ERROR = 'NAME_VALIDATE_ERROR';
 
-export const LOGOUT = 'LOGOUT';
+export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT_ERROR = 'LOGOUT_ERROR';

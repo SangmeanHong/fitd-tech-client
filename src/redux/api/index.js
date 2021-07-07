@@ -13,12 +13,27 @@ API.interceptors.request.use((req) => {
 });
 
 const signIn = async (formData) => {
+	console.log(`formData`, formData);
 	const { email, password, token } = formData;
 	if (token) {
 		return await API.post('/api/user/google', { token });
 	} else {
-		return await API.post('/api/user/login', { email, password });
+		return await API.post(
+			'/api/user/login',
+			{ email, password },
+			{
+				withCredentials: true,
+			}
+		);
 	}
+};
+
+const apiLogout = async () => {
+	return await API.get('/api/user/logout', { withCredentials: true });
+};
+
+const getUserInfo = async () => {
+	return await API.get('/api/user/auth', { withCredentials: true });
 };
 
 const signUp = async (formData) => {
@@ -37,4 +52,12 @@ const apiNewCoach = async (formData) => {
 	return await API.post('/api/coach/newcoach', formData);
 };
 
-export { signUp, signIn, apiForgotPwd, apiResetPwd, apiNewCoach };
+export {
+	signUp,
+	signIn,
+	apiForgotPwd,
+	apiResetPwd,
+	apiNewCoach,
+	getUserInfo,
+	apiLogout,
+};
