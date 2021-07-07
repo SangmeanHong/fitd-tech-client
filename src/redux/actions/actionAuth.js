@@ -14,4 +14,11 @@ const actionSignIn = (formData) => {
 	};
 };
 
-export { actionSignUp, actionSignIn };
+const actionLogout = () => {
+	return {
+		type: types.LOGOUT_REQUEST,
+		// payload: _id,
+	};
+};
+
+export { actionSignUp, actionSignIn, actionLogout };

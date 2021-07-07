@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
 import useStyles from '../libs/AvatarStyle';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import { LOGOUT } from '../redux/constants/actionTypes';
+import { LOGOUT_REQUEST } from '../redux/constants/actionTypes';
 import './Avatar.css';
 // import decode from 'jwt-decode';
 
@@ -15,7 +15,7 @@ const AvatarIcon = () => {
 	const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
 
 	const logout = () => {
-		dispatch({ type: LOGOUT });
+		dispatch({ type: LOGOUT_REQUEST });
 		history.push('/');
 		setUser(null);
 	};
@@ -38,14 +38,11 @@ const AvatarIcon = () => {
 				<div className={classes.profile}>
 					<Avatar
 						className={classes.purple}
-						alt={user.result.name}
-						src={user.result.imageUrl}
+						alt={user.firstNname}
+						src={user.imageUrl}
 					>
-						{user.result.name.charAt(0)}
+						{user.firstName.charAt(0)}
 					</Avatar>
-					<Typography className={classes.userName} variant='h6'>
-						{user.result.name}
-					</Typography>
 					<Button
 						variant='contained'
 						className={classes.logout}

@@ -1,6 +1,6 @@
 // import axios from 'axios';
 import { all, call, put, takeEvery, fork } from 'redux-saga/effects';
-import { signUp, signIn } from '../api';
+import { signUp, signIn, getUserInfo, apiLogout } from '../api';
 import * as types from '../constants/actionTypes';
 
 function* signUpUser(action) {
@@ -23,9 +23,10 @@ function* watchSignUpUser() {
 
 function* signInUser(action) {
 	try {
-		const { data } = yield call(signIn, action.payload);
-		console.log('data :>> ', data);
-		if (data.userId) {
+		yield call(signIn, action.payload);
+		const { data } = yield call(getUserInfo, action.payload);
+		console.log(`data`, data);
+		if (data._id) {
 			yield put({ type: types.SIGN_IN_USER_SUCCESS, payload: data });
 		} else {
 			yield put({ type: types.SIGN_IN_USER_ERROR, payload: data.message });
@@ -39,6 +40,26 @@ function* watchSignInUser() {
 	yield takeEvery(types.SIGN_IN_USER_REQUEST, signInUser);
 }
 
+function* logout(action) {
+	try {
+		const data = yield call(apiLogout);
+		const { success, err } = data.data;
+		console.log(`data`, data);
+
+		if (success) {
+			yield put({ type: types.LOGOUT_SUCCESS, payload: success });
+		} else {
+			yield put({ type: types.LOGOUT_ERROR, payload: err });
+		}
+	} catch (error) {
+		yield put({ type: types.LOGOUT_ERROR, payload: error });
+	}
+}
+
+function* watchLogout() {
+	yield takeEvery(types.LOGOUT_REQUEST, logout);
+}
+
 export default function* sagaAuth() {
-	yield all([fork(watchSignUpUser), fork(watchSignInUser)]);
+	yield all([fork(watchSignUpUser), fork(watchSignInUser), fork(watchLogout)]);
 }
