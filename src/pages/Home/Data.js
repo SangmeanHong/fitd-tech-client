@@ -5,7 +5,7 @@ export const homeObjOne = {
     lightText: true,
     lightTextDesc: true,
     topLine: 'Coaching',
-    headline: 'From those who are there',
+    headline: '<span>From those who are there <span class="italic" style={{color: red}}>right now</span></span>',
     description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
     buttonLabel: 'Meet Our Coaches',
@@ -19,7 +19,7 @@ export const homeObjTwo = {
     lightText: false,
     lightTextDesc: false,
     topLine: 'Easy Setup',
-    headline: 'How it works',
+    headline: '<span>How it works</span>',
     description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     buttonLabel: 'Learn More',
@@ -33,7 +33,7 @@ export const homeObjThree = {
     lightText: true,
     lightTextDesc: true,
     topLine: 'content',
-    headline: 'Tailored for you',
+    headline: '<span>Tailored for you</span>',
     description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing eli sed do eiusmod tempor.',
     buttonLabel: 'Browse Content',
@@ -47,7 +47,7 @@ export const homeObjFour = {
     lightText: false,
     lightTextDesc: false,
     topLine: 'Earn Extra Income',
-    headline: 'Join our Coaching Team',
+    headline: '<span>Join our Coaching Team</span>',
     description:
         'Are you an experienced tech professional with a passion for coaching? Do you want to earn extra income? Join our coaching team today.',
     buttonLabel: 'Become a Coach',

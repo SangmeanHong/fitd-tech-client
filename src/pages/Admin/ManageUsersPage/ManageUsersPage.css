@@ -1,0 +1,56 @@
+.manageUserHeader {
+    text-align: center;
+}
+
+.manageUserTable {
+    margin-top: 40px;
+}
+
+.MuiTableRow-head{
+    background-color: #000000fa;
+}
+.MuiTableRow-head >th {
+    color: white;
+}
+
+.manageUser_userimg {
+    width: 40px;
+}
+
+
+
+.even {
+    background-color: #000000bc;
+}
+.even > td {
+    color: white;
+    border-bottom: none;
+}
+
+.even > th {
+    color: white;
+    border-bottom: none;
+}
+
+.odd {
+    background-color: #000000d7;
+}
+
+.odd > td {
+    color: white;
+    border-bottom: none;
+}
+.odd > th {
+    color: white;
+    border-bottom: none;
+}
+
+.manageUserDesc:hover{
+    color: #3b91d8;
+    cursor: pointer;
+}
+
+.manageUserDeleteIcon:hover{
+    color: red;
+    cursor: pointer;
+}

@@ -3,6 +3,17 @@ import './HeroSection.css';
 import { Button } from './Button';
 import { Link } from 'react-router-dom';
 
+const Parse = (txt) => {
+    let parser = new DOMParser();
+    let htmlDoc = parser.parseFromString(txt, 'text/html');
+    // console.log(`htmlDoc`, htmlDoc.getElementsByTagName('h1')[0]);
+    let doc = htmlDoc.getElementsByTagName('h1')[0];
+    console.log(`doc.h1`, doc)
+    return (
+        doc
+    );
+}
+
 function HeroSection({
     lightBg,
     topLine,
@@ -15,6 +26,7 @@ function HeroSection({
     alt,
     imgStart
 }) {
+
     return (
         <>
             <div
@@ -31,9 +43,7 @@ function HeroSection({
                         <div className='row'>
                             <div className='home__hero-text-wrapper'>
                                 <div className='top-line'>{topLine}</div>
-                                <h1 className={lightText ? 'heading' : 'heading dark'}>
-                                    {headline} <span className="italic">right now</span>
-                                </h1>
+                                <div className={lightText ? 'heading' : 'heading dark'} dangerouslySetInnerHTML={{ __html: headline }} />
                                 <p
                                     className={
                                         lightTextDesc

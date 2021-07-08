@@ -13,28 +13,30 @@ import NewCoach from '../pages/NewCoach/NewCoach';
 import { ErrorPage } from '../pages/ErrorPage/ErrorPage';
 import Articles from '../pages/Articles/Articles.index';
 import { CoachDetail } from '../pages/CoachDetailPage/CoachDetail';
+import { ManageUsersPage } from '../pages/Admin/ManageUsersPage/ManageUsersPage';
 
 const RootRoute = () => {
-	return (
-		<BrowserRouter>
-			<Container disableGutters maxWidth={false}>
-				<Navbar />
-				<Switch>
-					<Route path='/articles' component={Articles} />
-					<Route path='/newcoach' component={NewCoach} />
-					<Route path='/coaching' component={Coaching} />
-					<Route path='/content' component={Content} />
-					<Route path='/auth' component={Auth} />
-					<Route path='/resetpw/:token/:email' exact component={ResetPwd} />
-					<Route path='/forgotPwd' exact component={ForgotPwd} />
-					<Route path='/coaches/:name' exact component={CoachDetail} />
-					<Route path='/' component={Home} exact />
-					<Route render={() => <ErrorPage />} />
-				</Switch>
-				<Footer />
-			</Container>
-		</BrowserRouter>
-	);
+    return (
+        <BrowserRouter>
+            <Container disableGutters maxWidth={false}>
+                <Navbar />
+                <Switch>
+                    <Route path='/articles' component={Articles} />
+                    <Route path='/newcoach' component={NewCoach} />
+                    <Route path='/coaching' component={Coaching} />
+                    <Route path='/content' component={Content} />ManageUsers
+                    <Route path='/manageusers' component={ManageUsersPage} />
+                    <Route path='/auth' component={Auth} />
+                    <Route path='/resetpw/:token/:email' exact component={ResetPwd} />
+                    <Route path='/forgotPwd' exact component={ForgotPwd} />
+                    <Route path='/coaches/:name' exact component={CoachDetail} />
+                    <Route path='/' component={Home} exact />
+                    <Route render={() => <ErrorPage />} />
+                </Switch>
+                <Footer />
+            </Container>
+        </BrowserRouter>
+    );
 };
 
 export default RootRoute;

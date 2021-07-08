@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { Toolbar, Avatar, Button } from '@material-ui/core';
 import useStyles from '../libs/AvatarStyle';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { LOGOUT_REQUEST } from '../redux/constants/actionTypes';
+import { AdminDropdown } from './AdminDropdown/AdminDropdown'
 import './Avatar.css';
 // import decode from 'jwt-decode';
 
@@ -21,7 +22,6 @@ const AvatarIcon = () => {
         setUser(JSON.parse(sessionStorage.getItem('profile')));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sessionStorage.getItem('profile')]);
-
     return (
         <Toolbar className={classes.toolbar}>
             {user ? (
@@ -41,6 +41,7 @@ const AvatarIcon = () => {
                     >
                         Logout
                     </Button>
+                    {user.role === 2 && <AdminDropdown />}
                 </div>
             ) : (
                 <Link className='avatarButton' to='/auth'>
