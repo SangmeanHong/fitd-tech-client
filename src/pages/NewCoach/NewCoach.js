@@ -684,5 +684,3 @@ const NewCoach = () => {
 };
 
 export default NewCoach;
-
-// https://www.linkedin.com/in/mitchellsung/

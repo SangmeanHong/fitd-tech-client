@@ -14,7 +14,7 @@ function* approveApplication(action) {
 
 function* watchApproveApplication() {
     yield takeEvery(types.APPROVE_APPLICATION_REQUEST, approveApplication);
-};
+}
 
 export default function* sagaApproveApplication() {
     yield all([fork(watchApproveApplication)]);
