@@ -1,9 +1,12 @@
+.manageUserPage{
+    padding: 20px;
+}
 .manageUserHeader {
     text-align: center;
 }
 
 .manageUserTable {
-    margin-top: 40px;
+    margin: 40px auto;
 }
 
 .MuiTableRow-head{
@@ -54,3 +57,24 @@
     color: red;
     cursor: pointer;
 }
+
+
+
+
+
+
+ @media screen and (max-width: 960px) {
+     .manageUserTable th{
+        font-size: 10px;
+     }
+     .manageUserTable td{
+        font-size:10px;
+     }
+     .manageUserTable img{
+        width: 20px;
+     }
+  }
+  
+  @media screen and (max-width: 768px) {
+
+  }

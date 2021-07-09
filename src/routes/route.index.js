@@ -11,12 +11,14 @@ import Content from '../pages/Content/Content.index';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 import NewCoach from '../pages/NewCoach/NewCoach';
+import AddProduct from '../pages/AddProduct/AddProduct';
 import { ErrorPage } from '../pages/ErrorPage/ErrorPage';
 import Articles from '../pages/Articles/Articles.index';
 import { CoachDetail } from '../pages/CoachDetailPage/CoachDetail';
 import { ManageUsersPage } from '../pages/Admin/ManageUsersPage/ManageUsersPage';
 
 const RootRoute = () => {
+
     return (
         <BrowserRouter>
             <Container disableGutters maxWidth={false}>
@@ -39,6 +41,5 @@ const RootRoute = () => {
             </Container>
         </BrowserRouter>
     );
-};
 
 export default RootRoute;

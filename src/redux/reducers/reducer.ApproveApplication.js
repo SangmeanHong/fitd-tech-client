@@ -11,9 +11,9 @@ const approveApplicationReducer = (state = initialState, action) => {
         case types.APPROVE_APPLICATION_REQUEST:
             return { ...state, loading: true };
         case types.APPROVE_APPLICATION_SUCCESS:
-            return { ...state, loading: false, success: action.payload };
+            return { ...state, loading: false, success: true };
         case types.APPROVE_APPLICATION_FAIL:
-            return { ...state, loading: false, err: action.payload };
+            return { ...state, loading: false, success: false, err: action.payload };
         default:
             return state;
     }
