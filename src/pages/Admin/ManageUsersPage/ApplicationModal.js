@@ -2,8 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import './ApplicationModal.css';
-import { useDispatch, useSelector } from 'react-redux';
-import actionApproveApplication from '../../../redux/actions/actionApproveApplication';
+import { useDispatch } from 'react-redux';
 
 function rand() {
     return Math.round(Math.random() * 20) - 10;
@@ -31,19 +30,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export function ApplicationModal({ open, setOpen, userApplication }) {
+export function ApplicationModal({ open, setOpen, userApplication, handleApprove }) {
     const classes = useStyles();
     const dispatch = useDispatch();
     const [modalStyle] = React.useState(getModalStyle);
-    const { success, loading, err } = useSelector(state => state.approveApplicationReducer);
-    console.log(`success`, success)
-    console.log(`loading`, loading)
     console.log(`userApplication`, userApplication)
 
-    const handleApprove = (userId) => {
-        console.log(`userId`, userId)
-        dispatch(actionApproveApplication(userId));
-    };
 
     const handleClose = () => {
         setOpen(false);
@@ -94,7 +86,11 @@ export function ApplicationModal({ open, setOpen, userApplication }) {
                     <h3 className="certification">{userApplication.certification}</h3>
                 </div>
                 <div className="approveBtn_outter">
-                    <div className="appoveBtn" onClick={() => handleApprove(userApplication.user)}>Approve</div>
+                    {
+                        userApplication.role === 1 ?
+                            <div className="appoveBtn" onClick={() => setOpen(false)}>Close</div> :
+                            <div className="appoveBtn" onClick={() => handleApprove(userApplication.user)}>Approve</div>
+                    }
                 </div>
             </div>
         </div>

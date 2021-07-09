@@ -65,7 +65,7 @@ const apiApplications = async () => {
 }
 
 const apiApproveApplications = async (userId) => {
-    return await API.post('/api/user/approve-coach', { userId }, {
+    return await API.post('/api/user/approve-coach', { _id: userId }, {
         withCredentials: true,
     })
 }
