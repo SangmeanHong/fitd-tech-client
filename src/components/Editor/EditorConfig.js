@@ -153,7 +153,7 @@ export const editorConfiguration = {
 	},
 	language: 'en',
 	simpleUpload: {
-		uploadUrl: `${process.env.REACT_APP_BASIC_SERVER_URL}/api/posts/image`,
+		uploadUrl: `${process.env.REACT_APP_BASIC_SERVER_URL}/api/content/image`,
 		// Headers sent along with the XMLHttpRequest to the upload server.
 		headers: {
 			'X-CSRF-TOKEN': 'CSFR-Token',
