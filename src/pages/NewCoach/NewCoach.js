@@ -154,8 +154,6 @@ const NewCoach = () => {
 		}
 	};
 
-	// https://www.linkedin.com/in/mitchellsung/
-
 	const userInfo = JSON.parse(sessionStorage.getItem('profile'));
 
 	const handleSubmit = () => {
@@ -270,8 +268,6 @@ const NewCoach = () => {
 			return;
 		}
 
-		const clear = () => {};
-
 		if (isValid === true) {
 			const obj = coachProfileObj({
 				firstName,
@@ -292,9 +288,6 @@ const NewCoach = () => {
 				provideCheckedOther,
 				coachAgreeChecked,
 			});
-
-			console.log(`coachProfileObj`, obj);
-
 			dispatch(actionNewCoach(obj));
 
 			history.push('/');

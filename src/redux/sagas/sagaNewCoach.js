@@ -1,6 +1,5 @@
 import { all, call, put, takeEvery, fork } from 'redux-saga/effects';
 import { apiNewCoach } from '../api';
-//import { signUp, signIn } from '../api';
 import * as types from '../constants/actionTypes';
 
 function* newCoach(action) {

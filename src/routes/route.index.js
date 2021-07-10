@@ -10,7 +10,7 @@ import Content from '../pages/Content/Content.index';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 import NewCoach from '../pages/NewCoach/NewCoach';
-import AddProduct from '../pages/AddProduct/AddProduct';
+import AddContent from '../pages/AddContent/AddContent';
 import { ErrorPage } from '../pages/ErrorPage/ErrorPage';
 import Articles from '../pages/Articles/Articles.index';
 import { CoachDetail } from '../pages/CoachDetailPage/CoachDetail';
@@ -22,7 +22,7 @@ const RootRoute = () => {
 			<Container disableGutters maxWidth={false}>
 				<Navbar />
 				<Switch>
-					<Route path='/addproduct' component={AddProduct} />
+					<Route path='/managecontents' component={AddContent} />
 					<Route path='/articles' component={Articles} />
 					<Route path='/newcoach' component={NewCoach} />
 					<Route path='/coaching' component={Coaching} />
