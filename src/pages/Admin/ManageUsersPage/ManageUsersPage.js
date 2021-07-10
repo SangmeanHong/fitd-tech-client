@@ -14,37 +14,34 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import DeleteIcon from '@material-ui/icons/Delete';
 import actionGetUsers from '../../../redux/actions/actionGetUsers';
 import { ApplicationModal } from './ApplicationModal';
+import actionApproveApplication from '../../../redux/actions/actionApproveApplication';
+import LoadingSpinner from '../../../components/LoadingSpinner';
+import Pagination from '@material-ui/lab/Pagination';
 
 const useStyles = makeStyles({
-    table: {
-        minWidth: 650,
-    },
+    // table: {
+    //     minWidth: 650,
+    // },
 });
-
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 export function ManageUsersPage() {
     const { users, applications, loading, err } = useSelector(state => state.getUsersReducer);
+    const { success, loading: approveApplicationLoading, err: approveApplicationError } = useSelector(state => state.approveApplicationReducer);
     const dispatch = useDispatch();
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [userApplication, setUserApplication] = useState({});
-
+    const [selectedUser, setSelectedUser] = useState('');
     useEffect(() => {
         dispatch(actionGetUsers());
-    }, [])
-    console.log(`users`, users)
-    console.log(`applications`, applications)
+    }, [dispatch, success])
+
+    const handleApprove = (userId) => {
+        console.log(`userId`, userId)
+        dispatch(actionApproveApplication(userId));
+        setOpen(false);
+        dispatch(actionGetUsers());
+    };
 
     const checkRole = (roleNum) => {
         switch (roleNum) {
@@ -61,18 +58,43 @@ export function ManageUsersPage() {
         }
     }
 
-    const handleDocs = (id) => {
-        console.log('클릭됨', id)
+    const createFullName = (firstName, lastName) => {
+        if (!firstName || !lastName) return '';
+        return `${firstName} ${lastName}`
+    }
+
+    const handleDocs = (id, role) => {
+        setSelectedUser(id);
         const filteredApplication = applications.filter((data) => data.user === id)[0];
+        filteredApplication["role"] = role;
         setUserApplication(filteredApplication)
         setOpen(true);
     }
 
+
+    const [page, setPage] = useState(1);
+    const [pageData, setPageData] = useState([]);
+    const dataLimit = 5;
+    const indexOfLast = page * dataLimit;
+    const indexOfFirst = indexOfLast - dataLimit;
+    const handlePageChange = (event, value) => {
+        setPage(value);
+    }
+    useEffect(() => {
+        if (users) {
+            // setPageData(createdReviews.slice(0, 4) as reviewType[]); // 0 2 , 1 3, 2 4           0 2 , 2 4, 4 6 
+            // 우선 먼저 sort 를 해서 순서를 바꿔주고 slice 로 data를 나눠준다.
+            setPageData(users.slice(indexOfFirst, indexOfLast)); // 0 2 , 1 3, 2 4           0 2 , 2 4, 4 6
+        }
+    }, [indexOfFirst, indexOfLast, users])
+
+    // ****************************************
+
     return (
-        <>
+        <div className="manageUserPage">
             <h1 className="manageUserHeader">Manage FITD Users</h1>
             {
-                users && users.length > 0 &&
+                pageData && pageData.length > 0 &&
                 <TableContainer className="manageUserTable" component={Paper}>
                     <Table className={classes.table} aria-label="simple table">
                         <TableHead>
@@ -85,26 +107,45 @@ export function ManageUsersPage() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {users.map((user, index) => (
+                            {pageData.map((user, index) => (
                                 <TableRow className={index % 2 === 0 ? "even" : "odd"} key={index}>
                                     <TableCell align="right">{user.image ? <img className="manageUser_userimg" src={user.image} alt="userface" /> : 'No image'}</TableCell>
                                     <TableCell align="right" component="th" scope="row">
-                                        {`${user.firstName} ${user.lastName}`}
+                                        {createFullName(user.firstName, user.lastName)}
                                     </TableCell>
                                     <TableCell align="right">{user.email}</TableCell>
-                                    {/* <TableCell align="right">{checkRole(user.role)}</TableCell> */}
                                     <TableCell align="right">
-                                        {checkRole(user.role)}{user.role === 3 && <DescriptionIcon className="manageUserDesc" onClick={() => handleDocs(user._id)} />}
+
+                                        {
+                                            selectedUser === user._id && approveApplicationLoading ?
+                                                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                                    <LoadingSpinner />
+                                                </div>
+                                                : (
+
+                                                    user.role === 3 || user.role === 1 ? (
+                                                        <>
+                                                            <span>{checkRole(user.role)}</span>
+                                                            <DescriptionIcon className="manageUserDesc" onClick={() => handleDocs(user._id, user.role)} />
+                                                        </>
+                                                    ) : (
+                                                        <span>{checkRole(user.role)}</span>
+                                                    )
+                                                )
+                                        }
                                     </TableCell>
                                     <TableCell align="right"><DeleteIcon className="manageUserDeleteIcon" /></TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
                     </Table>
+                    <div style={{ display: 'flex', justifyContent: 'center', margin: '30px auto' }}>
+                        <Pagination count={Math.ceil(users.length / dataLimit)} color="secondary" onChange={handlePageChange} page={page} />
+                    </div>
                 </TableContainer>
             }
-            <ApplicationModal open={open} setOpen={setOpen} userApplication={userApplication} />
-        </>
+            <ApplicationModal open={open} setOpen={setOpen} userApplication={userApplication} handleApprove={handleApprove} />
+        </div>
     );
 }
 

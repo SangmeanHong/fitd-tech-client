@@ -63,7 +63,7 @@ const Navbar = () => {
                             className='navbar-logo'
                             onClick={closeMobileMenu}
                         >
-                            <RiDoorOpenFill className='navbar-icon' />
+                            <RiDoorOpenFill style={{color:'black'}} className='navbar-icon' />
                             FITD
                         </Link>
                         <div className='menu-icon' onClick={handleClick}>
@@ -105,6 +105,16 @@ const Navbar = () => {
                                     onClick={closeMobileMenu}
                                 >
                                     Coaching
+                                </Link>
+                            </li>
+                            
+                            <li className='nav-item'>
+                                <Link
+                                    to='/faq'
+                                    className='nav-links'
+                                    onClick={closeMobileMenu}
+                                >
+                                    FAQ
                                 </Link>
                             </li>
                             <li className='nav-btn'>

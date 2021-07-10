@@ -1,12 +1,51 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
-
+import { useLocation, useParams } from 'react-router-dom'
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import EmailIcon from '@material-ui/icons/Email';
 export const CoachDetail = () => {
-    const coachName = useParams().name;
+    const coachData = useLocation().state;
+    const { firstName,
+        lastName,
+        expertiseArea,
+        imageURL,
+        categories,
+        coachStyle,
+        email,
+        linkedIn,
+        certification,
+        services,
+        introduction, } = coachData;
+    console.log(`coachData`, coachData)
     return (
-        <div>
-            coach detail page...
-            <h1>{coachName}</h1>
+        <div className="CoachDetailPage">
+            <div className="left">
+                <div className="leftTop">
+                    <div className="leftImg"><img src={imageURL} alt="coach_face" /></div>
+                    <div className="leftName">{`${firstName} ${lastName}`}</div>
+                    <div className="leftExpertise">{expertiseArea.map((data) => {
+                        return (
+                            <span>{data.label}</span>
+                        )
+                    })}
+                    </div>
+                </div>
+                <div className="leftSubscribeBtn"><button>Subscribe</button></div>
+            </div>
+            <div className="leftBottom">
+                <div className="leftEmail">{email}</div>
+                <div className="leftLinkedInBtn"><LinkedInIcon /></div>
+                <div className="leftEmailBtn"><EmailIcon /></div>
+            </div>
+            <div className="right">
+                <div className="rightTop">
+                    <h2 className="righTopTitle">About Me</h2>
+                    <p className="rightIntroduction">{introduction}</p>
+                </div>
+                <div className="rightBottom">
+                    <div className="rightBottomTitle">Teaching</div>
+                    <div>related contents...</div>
+                </div>
+            </div>
         </div>
     )
 }

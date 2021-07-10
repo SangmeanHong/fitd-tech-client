@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 import Auth from '../pages/Auth/auth.index';
 import ForgotPwd from '../pages/ForgotPwd/ForgotPwd.index';
+import Faq from '../pages/Faq/Faq.index';
 import ResetPwd from '../pages/ResetPwd/ResetPwd.index';
 import Home from '../pages/Home/HomePage.index';
 import Coaching from '../pages/Coaching/Coaching.index';
@@ -22,6 +23,7 @@ const RootRoute = () => {
 			<Container disableGutters maxWidth={false}>
 				<Navbar />
 				<Switch>
+					<Route path='/faq' component={Faq} />
 					<Route path='/managecontents' component={AddContent} />
 					<Route path='/articles' component={Articles} />
 					<Route path='/newcoach' component={NewCoach} />

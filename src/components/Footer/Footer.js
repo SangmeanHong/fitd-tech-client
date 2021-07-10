@@ -73,10 +73,10 @@ function Footer() {
           <div className='footer-logo'>
             <Link to='/' className='social-logo'>
               <RiDoorOpenFill className='navbar-icon' />
-              FITD Tech
+              FITD 
             </Link>
           </div>
-          <small className='website-rights'>FITD Tech © 2021</small>
+          <small className='website-rights'>FITD © 2021</small>
           <div className='social-icons'>
             <Link
               className='social-icon-link'
