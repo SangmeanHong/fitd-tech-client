@@ -6,20 +6,20 @@ import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
 import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
 import Code from '@ckeditor/ckeditor5-basic-styles/src/code';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
-import Link from '@ckeditor/ckeditor5-link/src/link';
-import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
-import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
+// import Link from '@ckeditor/ckeditor5-link/src/link';
+// import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
+// import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import Heading from '@ckeditor/ckeditor5-heading/src/heading';
 import Font from '@ckeditor/ckeditor5-font/src/font';
-import Image from '@ckeditor/ckeditor5-image/src/image';
-import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
-import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
-import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
-import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
+// import Image from '@ckeditor/ckeditor5-image/src/image';
+// import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
+// import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
+// import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
+// import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
 import List from '@ckeditor/ckeditor5-list/src/list';
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
-import Table from '@ckeditor/ckeditor5-table/src/table';
-import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
+// import Table from '@ckeditor/ckeditor5-table/src/table';
+// import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent';
 import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
@@ -46,17 +46,17 @@ export const editorConfiguration = {
 		Font,
 		Alignment,
 		List,
-		Link,
-		MediaEmbed,
-		PasteFromOffice,
-		Image,
-		ImageStyle,
-		ImageToolbar,
-		ImageUpload,
-		ImageResize,
+		//Link,
+		//MediaEmbed,
+		//PasteFromOffice,
+		//Image,
+		//ImageStyle,
+		//ImageToolbar,
+		//ImageUpload,
+		//ImageResize,
 		SimpleUploadAdapter,
-		Table,
-		TableToolbar,
+		// Table,
+		// TableToolbar,
 		TextTransformation,
 	],
 	toolbar: [
@@ -79,11 +79,11 @@ export const editorConfiguration = {
 		'numberedList',
 		'blockQuote',
 		'|',
-		'link',
-		'insertTable',
-		'imageUpload',
-		'mediaEmbed',
-		'|',
+		//'link',
+		//'insertTable',
+		//'imageUpload',
+		//'mediaEmbed',
+		//'|',
 		'undo',
 		'redo',
 	],
@@ -124,20 +124,20 @@ export const editorConfiguration = {
 	alignment: {
 		options: ['justify', 'left', 'center', 'right'],
 	},
-	table: {
-		contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
-	},
-	image: {
-		resizeUnit: 'px',
-		toolbar: [
-			'imageStyle:alignLeft',
-			'imageStyle:full',
-			'imageStyle:alignRight',
-			'|',
-			'imageTextAlternative',
-		],
-		styles: ['full', 'alignLeft', 'alignRight'],
-	},
+	// table: {
+	// 	contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
+	// },
+	// image: {
+	// 	resizeUnit: 'px',
+	// 	toolbar: [
+	// 		'imageStyle:alignLeft',
+	// 		'imageStyle:full',
+	// 		'imageStyle:alignRight',
+	// 		'|',
+	// 		'imageTextAlternative',
+	// 	],
+	// 	styles: ['full', 'alignLeft', 'alignRight'],
+	// },
 	typing: {
 		transformations: {
 			remove: [
@@ -151,9 +151,9 @@ export const editorConfiguration = {
 			],
 		},
 	},
-	language: 'en',
+	// language: 'en',
 	simpleUpload: {
-		uploadUrl: `${process.env.REACT_APP_BASIC_SERVER_URL}/api/content/image`,
+		uploadUrl: `${process.env.REACT_APP_BASIC_SERVER_URL}/api/content`,
 		// Headers sent along with the XMLHttpRequest to the upload server.
 		headers: {
 			'X-CSRF-TOKEN': 'CSFR-Token',

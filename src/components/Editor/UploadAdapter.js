@@ -26,16 +26,16 @@ class MyUploadAdapter {
 	_initRequest() {
 		const xhr = (this.xhr = new XMLHttpRequest());
 
-		console.log(
-			'##################',
-			`${process.env.REACT_APP_BASIC_SERVER_URL}/api/content/image`
-		);
+		// console.log(
+		// 	'##################',
+		// 	`${process.env.REACT_APP_BASIC_SERVER_URL}/api/content/image`
+		// );
 
-		xhr.open(
-			'POST',
-			`${process.env.REACT_APP_BASIC_SERVER_URL}/api/content/image`,
-			true
-		);
+		// xhr.open(
+		// 	'POST',
+		// 	`${process.env.REACT_APP_BASIC_SERVER_URL}/api/content/image`,
+		// 	true
+		// );
 		xhr.responseType = 'json';
 	}
 
