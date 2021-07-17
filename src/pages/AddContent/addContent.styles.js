@@ -60,7 +60,21 @@ const useStyles = makeStyles(() => ({
 		background: '#ff6d00',
 		border: 0,
 		color: 'white',
-		// color: '#ff6d00',
+	},
+	uploadBtn: {
+		display: 'none',
+	},
+	file_upload_icon: {
+		cursor: 'pointer',
+		height: '30%',
+		width: '70%',
+		marginTop: '3%',
+		fontSize: '16px',
+		fontColor: '#ff6d00',
+		fontWeight: 'bold',
+		border: 'solid',
+		borderRadius: '5px',
+		borderColor: '#ff6d00',
 	},
 }));
 

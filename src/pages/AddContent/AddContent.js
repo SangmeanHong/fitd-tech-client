@@ -4,11 +4,13 @@ import { useHistory } from 'react-router-dom';
 import useStyles from './addContent.styles';
 import { useDispatch } from 'react-redux';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
+import Dropzone from 'react-dropzone-uploader';
 import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 import { editorConfiguration } from '../../components/Editor/EditorConfig';
 import Myinit from '../../components/Editor/UploadAdapter';
 import { AttachMoney } from '@material-ui/icons';
 import actionAddContent from '../../redux/actions/actionAddContent';
+import FileBase from 'react-file-base64';
 import {
 	Container,
 	FormControl,
@@ -32,6 +34,8 @@ const AddContent = () => {
 	const [typeSelected, setTypeSelected] = useState('none');
 	const [details, setDetails] = useState({});
 
+	const [uploadFile, setUploadFile] = useState({});
+
 	// Error Messages
 	const [titleErrMsg, setTitleErrMsg] = useState(false);
 	const [descriptionErrMsg, setDescriptionErrMsg] = useState(false);
@@ -43,37 +47,23 @@ const AddContent = () => {
 
 	const getDataFromCKEditor = (event, editor) => {
 		const data = editor.getData();
-		if (data && data.match('<img src=')) {
-			const whereImg_start = data.indexOf('<img src=');
-			let whereImg_end = '';
-			let ext_name_find = '';
-			let result_Img_Url = '';
-			const ext_name = ['jpeg', 'png', 'jpg', 'gif'];
-			for (let i = 0; i < ext_name.length; i++) {
-				if (data.match(ext_name[i])) {
-					console.log(data.indexOf(`${ext_name[i]}`));
-					ext_name_find = ext_name[i];
-					whereImg_end = data.indexOf(`${ext_name[i]}`);
-				}
-			}
-			if (ext_name_find === 'jpeg') {
-				result_Img_Url = data.substring(whereImg_start + 10, whereImg_end + 4);
-			} else {
-				result_Img_Url = data.substring(whereImg_start + 10, whereImg_end + 3);
-			}
-			setDetails({
-				...details,
-				fileUrl: result_Img_Url,
-				contents: data,
-			});
-		} else {
-			setDetails({
-				...details,
-				fileUrl: process.env.REACT_APP_BASIC_IMAGE_URL,
-				contents: data,
-			});
-		}
+		setDetails({
+			...details,
+			contents: data,
+		});
 	};
+
+	// const getUploadParams = ({ meta }) => {
+	// 	console.log(`meta`, meta);
+	// 	setDetails({
+	// 		...details,
+	// 		file: meta,
+	// 	});
+	// };
+
+	// const handleChangeStatus = ({ meta, file }, status) => {
+	// 	console.log(`status`, status);
+	// };
 
 	const handleSubmit = () => {
 		let isValid = false;
@@ -132,14 +122,21 @@ const AddContent = () => {
 			return;
 		}
 
-		// if (details.fileUrl !== undefined) {
-		// 	isValid = true;
-		// } else {
-		// 	isValid = false;
-		// 	setDetailsErrMsg(true);
-		// 	alert('Please upload image');
-		// 	return;
-		// }
+		if (details.contents !== '') {
+			isValid = true;
+		} else {
+			isValid = false;
+			alert('Please write down content details');
+			return;
+		}
+
+		if (details.file !== undefined) {
+			isValid = true;
+		} else {
+			isValid = false;
+			alert('Please upload an image');
+			return;
+		}
 
 		if (isValid === true) {
 			const addContentObj = {
@@ -151,6 +148,7 @@ const AddContent = () => {
 				typeSelected,
 				details,
 			};
+			console.log(`addContentObj`, addContentObj);
 			dispatch(actionAddContent(addContentObj));
 			history.push('/');
 		} else {
@@ -287,7 +285,7 @@ const AddContent = () => {
 							<CKEditor
 								editor={ClassicEditor}
 								config={editorConfiguration}
-								onInit={Myinit}
+								onReady={Myinit}
 								onBlur={getDataFromCKEditor}
 								error={detailsErrMsg}
 								helperText={
@@ -295,6 +293,29 @@ const AddContent = () => {
 								}
 							/>
 						</div>
+
+						<div className={classes.ckeditorTitle}>Upload Image:</div>
+						<label className={classes.file_upload_icon}>
+							<div className={classes.uploadBtn}>
+								<FileBase
+									type='file'
+									multiple={false}
+									onDone={({ base64 }) =>
+										setDetails({ ...details, file: base64 })
+									}
+								/>
+							</div>
+							Chose image
+						</label>
+						{/* <Dropzone
+								required
+								getUploadParams={getUploadParams}
+								onChangeStatus={handleChangeStatus}
+								maxFiles={1}
+								value={details}
+								accept='image/*'
+							/> */}
+
 						<Button
 							variant='outlined'
 							size='large'
