@@ -33,9 +33,7 @@ const AddContent = () => {
 	const [viaSelected, setViaSelected] = useState('none');
 	const [typeSelected, setTypeSelected] = useState('none');
 	const [details, setDetails] = useState({});
-
 	const [uploadFile, setUploadFile] = useState({});
-
 	// Error Messages
 	const [titleErrMsg, setTitleErrMsg] = useState(false);
 	const [descriptionErrMsg, setDescriptionErrMsg] = useState(false);
@@ -52,18 +50,6 @@ const AddContent = () => {
 			contents: data,
 		});
 	};
-
-	// const getUploadParams = ({ meta }) => {
-	// 	console.log(`meta`, meta);
-	// 	setDetails({
-	// 		...details,
-	// 		file: meta,
-	// 	});
-	// };
-
-	// const handleChangeStatus = ({ meta, file }, status) => {
-	// 	console.log(`status`, status);
-	// };
 
 	const handleSubmit = () => {
 		let isValid = false;
@@ -130,7 +116,7 @@ const AddContent = () => {
 			return;
 		}
 
-		if (details.file !== undefined) {
+		if (uploadFile !== undefined) {
 			isValid = true;
 		} else {
 			isValid = false;
@@ -147,6 +133,7 @@ const AddContent = () => {
 				viaSelected,
 				typeSelected,
 				details,
+				uploadFile,
 			};
 			console.log(`addContentObj`, addContentObj);
 			dispatch(actionAddContent(addContentObj));
@@ -294,28 +281,21 @@ const AddContent = () => {
 							/>
 						</div>
 
-						<div className={classes.ckeditorTitle}>Upload Image:</div>
-						<label className={classes.file_upload_icon}>
-							<div className={classes.uploadBtn}>
-								<FileBase
-									type='file'
-									multiple={false}
-									onDone={({ base64 }) =>
-										setDetails({ ...details, file: base64 })
-									}
-								/>
-							</div>
-							Chose image
-						</label>
-						{/* <Dropzone
-								required
-								getUploadParams={getUploadParams}
-								onChangeStatus={handleChangeStatus}
-								maxFiles={1}
-								value={details}
-								accept='image/*'
-							/> */}
-
+						{/* <div className={classes.ckeditorTitle}>Upload Image:</div> */}
+						<div className={classes.file_upload_icon}>
+							<label>
+								<div className={classes.uploadBtn}>
+									<FileBase
+										type='file'
+										multiple={false}
+										onDone={({ base64 }) =>
+											setUploadFile({ ...uploadFile, file: base64 })
+										}
+									/>
+								</div>
+								Choose image
+							</label>
+						</div>
 						<Button
 							variant='outlined'
 							size='large'

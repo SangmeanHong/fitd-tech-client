@@ -7,6 +7,7 @@ import CoachCheckboxGroup from '../../libs/CoachCheckboxGroup';
 import CoachAgreeCheckboxGroup from '../../libs/CoachAgreeCheckboxGroup';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import FileBase from 'react-file-base64';
 import {
 	AccountCircle,
 	AlternateEmail,
@@ -39,22 +40,19 @@ const NewCoach = () => {
 	const [linkedInErrorMsg, setLinkedInErrorMsg] = useState(false);
 	const [introOfCoach, setIntroOfCoach] = useState('');
 	const [introOfCoachErrorMsg, setIntroOfCoachErrorMsg] = useState(false);
-	const [uploadPhoto, setUploadPhoto] = useState({});
+	//const [uploadPhoto, setUploadPhoto] = useState({});
 	const [uploadPhotoErrorMsg, setUploadPhotoErrorMsg] = useState(false);
 	const [paidOpt, setPaidOpt] = useState('');
 	const [paidOptErrorMsg, setPaidOptErrorMsg] = useState(false);
 	const [paidOptHelperText, setPaidOptHelperText] = useState('');
 	const [paidOptError, setPaidOptError] = useState(false);
 	const [wage, setWage] = useState(0);
-	//const [wageErrorMsg, setWageErrorMsg] = useState(false);
 	const [coachStyle, setCoachStyle] = useState('');
 	const [coachStyleErrorMsg, setCoachStyleErrorMsg] = useState(false);
 	const [numOfPeople, setNumOfPeople] = useState(0);
-	//const [numOfPeopleErrorMsg, setNumOfPeopleErrorMsg] = useState(false);
 	const [hoursPerWeek, setHoursPerWeek] = useState(0);
-	//const [hoursPerWeekErrorMsg, setHoursPerWeekErrorMsg] = useState(false);
 	const [certification, setCertification] = useState('');
-	//	const [certificationErrorMsg, setCertificationErrorMsg] = useState(false);
+	const [uploadPhoto, setUploadPhoto] = useState({});
 	const [expertiseArea, setExpertiseArea] = useState([
 		{ label: 'Software engineering/development', checked: false },
 		{ label: 'Design', checked: false },
@@ -71,7 +69,7 @@ const NewCoach = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	//const [expertiseAreaOtherErrorMsg, setExpertiseAreaOtherErrorMsg] =
-	useState(false);
+	//useState(false);
 	const [provideChecked, setProvideChecked] = useState([
 		{ label: 'General Career Coaching', checked: false },
 		{
@@ -129,15 +127,6 @@ const NewCoach = () => {
 			newValues[index] = { ...value, checked };
 			setCoachAgreeChecked(newValues);
 		};
-
-	const getUploadParams = ({ meta }) => {
-		console.log(`meta`, meta);
-		setUploadPhoto(meta);
-	};
-
-	const handleChangeStatus = ({ meta, file }, status) => {
-		// console.log(`status`, status);
-	};
 
 	const handleRadioChange = (e) => {
 		setPaidOpt(e.target.value);
@@ -208,7 +197,7 @@ const NewCoach = () => {
 			return;
 		}
 
-		if (uploadPhoto.name !== '') {
+		if (uploadPhoto !== undefined) {
 			isValid = true;
 		} else {
 			isValid = false;
@@ -288,6 +277,7 @@ const NewCoach = () => {
 				provideCheckedOther,
 				coachAgreeChecked,
 			});
+			console.log(`coach obj`, obj);
 			dispatch(actionNewCoach(obj));
 
 			history.push('/');
@@ -440,14 +430,28 @@ const NewCoach = () => {
 										uploadPhotoErrorMsg ? 'Please upload your image' : ''
 									}
 								/>
-								<Dropzone
+								<div className='file_upload_icon'>
+									<label className='test'>
+										<div className='uploadBtn'>
+											<FileBase
+												type='file'
+												multiple={false}
+												onDone={({ base64 }) =>
+													setUploadPhoto({ ...uploadPhoto, file: base64 })
+												}
+											/>
+										</div>
+										Choose image
+									</label>
+								</div>
+								{/* <Dropzone
 									required
 									getUploadParams={getUploadParams}
 									onChangeStatus={handleChangeStatus}
 									maxFiles={1}
 									value={uploadPhoto}
 									accept='image/*'
-								/>
+								/> */}
 							</div>
 							<br /> <br />
 							<div className='sub-title'>Coaching Experience:</div>
@@ -677,3 +681,4 @@ const NewCoach = () => {
 };
 
 export default NewCoach;
+//https://www.linkedin.com/in/coach/

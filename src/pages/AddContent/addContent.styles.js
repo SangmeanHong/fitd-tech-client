@@ -66,15 +66,16 @@ const useStyles = makeStyles(() => ({
 	},
 	file_upload_icon: {
 		cursor: 'pointer',
-		height: '30%',
-		width: '70%',
+		width: '96%',
 		marginTop: '3%',
-		fontSize: '16px',
-		fontColor: '#ff6d00',
+		fontSize: '18px',
 		fontWeight: 'bold',
 		border: 'solid',
-		borderRadius: '5px',
+		borderRadius: '10px',
 		borderColor: '#ff6d00',
+		color: '#ff6d00',
+		padding: '1.5%',
+		textAlign: 'center',
 	},
 }));
 
