@@ -2,6 +2,8 @@ import React from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import EmailIcon from '@material-ui/icons/Email';
+import './CoachDetail.css';
+
 export const CoachDetail = () => {
     const coachData = useLocation().state;
     const { firstName,
@@ -30,11 +32,13 @@ export const CoachDetail = () => {
                     </div>
                 </div>
                 <div className="leftSubscribeBtn"><button>Subscribe</button></div>
-            </div>
-            <div className="leftBottom">
-                <div className="leftEmail">{email}</div>
-                <div className="leftLinkedInBtn"><LinkedInIcon /></div>
-                <div className="leftEmailBtn"><EmailIcon /></div>
+                <div className="leftBottom">
+                    <div className="leftEmail">{email}</div>
+                    <div className="leftSotialLinks">
+                        <div className="leftLinkedInBtn"><LinkedInIcon /></div>
+                        <div className="leftEmailBtn"><EmailIcon /></div>
+                    </div>
+                </div>
             </div>
             <div className="right">
                 <div className="rightTop">
@@ -42,8 +46,8 @@ export const CoachDetail = () => {
                     <p className="rightIntroduction">{introduction}</p>
                 </div>
                 <div className="rightBottom">
-                    <div className="rightBottomTitle">Teaching</div>
-                    <div>related contents...</div>
+                    <h2 className="rightBottomTitle">Teaching</h2>
+                    <div className="bigLink">related contents...</div>
                 </div>
             </div>
         </div>
