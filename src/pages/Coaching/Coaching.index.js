@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CoachingProfileCard } from '../../components/CoachProfile/CoachingProfileCard';
 import { coachData } from '../../data/coachData';
 import './Coaching.css';
 import { useHistory } from 'react-router';
-import axios from 'axios';
+import { getCoaches } from '../../libs/getCoaches';
 
 function Coaching() {
     const [user, setUser] = useState(
         JSON.parse(sessionStorage.getItem('profile'))
     );
+    const [coaches, setCoaches] = useState([]);
 
     const history = useHistory();
 
@@ -19,11 +20,18 @@ function Coaching() {
 
     const handleSearch = async (e) => {
         const search = e.target.value;
-        const result = await axios.get(`http://localhost:${process.env.REACT_APP_PORT}/api/search/coach/${search}`, {
-            withCredentials: true,
-        })
-        console.log(`result`, result)
+        const coaches = await getCoaches(search);
+        setCoaches(coaches)
     };
+
+    useEffect(() => {
+        (
+            async () => {
+                const coaches = await getCoaches();
+                setCoaches(coaches)
+            }
+        )();
+    }, [])
 
     return (
         <div className='Coaching'>

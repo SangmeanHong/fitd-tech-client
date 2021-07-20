@@ -3,23 +3,27 @@ import { apiNewCoach } from '../api';
 import * as types from '../constants/actionTypes';
 
 function* newCoach(action) {
-	try {
-		const result = yield call(apiNewCoach, action.payload);
-		const { success, error } = result.data;
-		if (success) {
-			yield put({ type: types.NEW_COACH_SUCCESS, payload: { success } });
-		} else {
-			yield put({ type: types.NEW_COACH_ERROR, payload: error.name });
-		}
-	} catch (error) {
-		yield put({ type: types.NEW_COACH_ERROR, payload: error });
-	}
+    console.log(`action.payload`, action.payload)
+    try {
+        const result = yield call(apiNewCoach, action.payload);
+        console.log(`result`, result)
+        const { success, error } = result.data;
+        if (success) {
+            yield put({ type: types.NEW_COACH_SUCCESS, payload: { success } });
+        } else {
+            console.log(`error`)
+            yield put({ type: types.NEW_COACH_ERROR, payload: error.name });
+        }
+    } catch (error) {
+        console.log(`error`, error)
+        yield put({ type: types.NEW_COACH_ERROR, payload: error });
+    }
 }
 
 function* watchNewCoach() {
-	yield takeEvery(types.NEW_COACH_REQUEST, newCoach);
+    yield takeEvery(types.NEW_COACH_REQUEST, newCoach);
 }
 
 export default function* sagaNewCoach() {
-	yield all([fork(watchNewCoach)]);
+    yield all([fork(watchNewCoach)]);
 }
