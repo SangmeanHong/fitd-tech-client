@@ -19,3 +19,22 @@
 	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 	justify-items: center;
 }
+
+.coachbtn {
+    font-size: 20px;
+	padding: 8px 20px;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+	background-color: #f1b175;
+    color: #fff;
+    border: none;
+}
+
+.coachbtn:hover {
+    color: #fff;
+    background-color: #F89230;
+    transition: all 0.2s ease-out;
+  }
