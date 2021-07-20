@@ -63,7 +63,7 @@ const Navbar = () => {
                             className='navbar-logo'
                             onClick={closeMobileMenu}
                         >
-                            <RiDoorOpenFill style={{color:'black'}} className='navbar-icon' />
+                            <RiDoorOpenFill style={{color:'#000000da'}} className='navbar-icon' />
                             FITD
                         </Link>
                         <div className='menu-icon' onClick={handleClick}>
