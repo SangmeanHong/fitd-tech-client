@@ -11,7 +11,8 @@ export const homeObjOne = {
     buttonLabel: 'Meet Our Coaches',
     imgStart: '',
     img: 'images/coach-svg-2.svg',
-    alt: 'Coaches'
+    alt: 'Coaches',
+    buttonId:1
 };
 
 export const homeObjTwo = {
@@ -25,7 +26,9 @@ export const homeObjTwo = {
     buttonLabel: 'Learn More',
     imgStart: 'start',
     img: 'images/setup-svg-1.svg',
-    alt: 'Setup'
+    alt: 'Setup',
+    buttonId:2
+
 };
 
 export const homeObjThree = {
@@ -39,7 +42,9 @@ export const homeObjThree = {
     buttonLabel: 'Browse Content',
     imgStart: '',
     img: 'images/content-svg-1.svg',
-    alt: 'Content'
+    alt: 'Content',
+    buttonId:3
+
 };
 
 export const homeObjFour = {
@@ -53,5 +58,6 @@ export const homeObjFour = {
     buttonLabel: 'Become a Coach',
     imgStart: 'start',
     img: 'images/coach-svg-1.svg',
-    alt: 'Coach'
+    alt: 'Coach',
+    buttonId:4
 };

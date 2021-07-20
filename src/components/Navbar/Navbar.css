@@ -28,7 +28,7 @@
   }
   
   .navbar-logo {
-    color: black;
+    color: blue;
     justify-self: start;
     cursor: pointer;
     text-decoration: none;
@@ -57,7 +57,7 @@
   }
   
   .nav-item:hover {
-    border-bottom: 2px solid #f00946;
+    border-bottom: 2px solid #F89230;
   }
   
   .nav-links {

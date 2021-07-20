@@ -23,7 +23,7 @@ function Coaching() {
 				<h1 className='coaching_header'>Explore our Coaches</h1>
 				{userInfo && userInfo.role === 0 ? (
 					<div className='flex-header'>
-						<button onClick={onClickBtn}>Apply new coach</button>
+						<button className='coachbtn' onClick={onClickBtn}>Want to become a coach?</button>
 					</div>
 				) : (
 					<div>
