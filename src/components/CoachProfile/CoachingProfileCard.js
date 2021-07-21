@@ -22,19 +22,9 @@ const useStyles = makeStyles({
 
 export const CoachingProfileCard = ({ coachData, index }) => {
     const classes = useStyles();
-    const {
-        firstName,
-        lastName,
-        expertiseArea,
-        imageURL,
-        categories,
-        coachStyle,
-        email,
-        linkedIn,
-        certification,
-        services,
-        introduction,
-    } = coachData;
+    const { coach } = coachData;
+    console.log(`coach`, coach)
+    const { firstName, lastName, fileUrl, expertiseArea, introOfCoach } = coach[0];
     function textLengthOverCut(txt, len, lastTxt) {
         if (len === '' || len === null) {
             // 기본값
@@ -54,25 +44,25 @@ export const CoachingProfileCard = ({ coachData, index }) => {
             <div className='cards__item__link '>
                 <CardMedia
                     className={`${classes.media} coachImg`}
-                    image={imageURL}
-                    title={imageURL}
+                    image={fileUrl}
+                    title={fileUrl}
                 />
                 <div className='cardActionArea'>
                     <div className='cardContent'>
                         <h2 className='coachName'>{`${firstName} ${lastName}`}</h2>
                         <div className='coachCategories'>
-                            {categories.map((data) => {
+                            {expertiseArea.map((data) => {
                                 return <CoachCategoriesCard categories={data} />;
                             })}
                         </div>
                         <h6 className='coachIntro'>
-                            {textLengthOverCut(introduction, '200', '...')}
+                            {textLengthOverCut(introOfCoach, '200', '...')}
                         </h6>
                     </div>
                     <div className='cardActions'>
                         <Link className='coachLeanMoreButton' to={{
                             pathname: `/coaches/${firstName} ${lastName}`,
-                            state: coachData,
+                            state: coach[0],
                         }}>
                             Learn More
                         </Link>

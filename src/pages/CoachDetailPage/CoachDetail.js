@@ -6,23 +6,24 @@ import './CoachDetail.css';
 
 export const CoachDetail = () => {
     const coachData = useLocation().state;
+    console.log(`coachData디테일에서`, coachData)
     const { firstName,
         lastName,
         expertiseArea,
-        imageURL,
+        fileUrl,
         categories,
         coachStyle,
         email,
         linkedIn,
         certification,
         services,
-        introduction, } = coachData;
+        introOfCoach, } = coachData;
     console.log(`coachData`, coachData)
     return (
         <div className="CoachDetailPage">
             <div className="left">
                 <div className="leftTop">
-                    <div className="leftImg"><img src={imageURL} alt="coach_face" /></div>
+                    <div className="leftImg"><img src={fileUrl} alt="coach_face" /></div>
                     <div className="leftName">{`${firstName} ${lastName}`}</div>
                     <div className="leftExpertise">{expertiseArea.map((data) => {
                         return (
@@ -43,7 +44,7 @@ export const CoachDetail = () => {
             <div className="right">
                 <div className="rightTop">
                     <h2 className="righTopTitle">About Me</h2>
-                    <p className="rightIntroduction">{introduction}</p>
+                    <p className="rightIntroduction">{introOfCoach}</p>
                 </div>
                 <div className="rightBottom">
                     <h2 className="rightBottomTitle">Teaching</h2>

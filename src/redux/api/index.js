@@ -64,6 +64,13 @@ const apiGetUsers = async () => {
     );
 };
 
+const apiGetCoaches = async () => {
+    return await API.post(
+        'api/user/userlist', { option: 'coach' },
+        { withCredentials: true },
+    )
+}
+
 const apiApplications = async () => {
     return await API.post(
         '/api/user/getApplication',
@@ -102,4 +109,5 @@ export {
     apiApplications,
     apiApproveApplications,
     apiAddContent,
+    apiGetCoaches,
 };
