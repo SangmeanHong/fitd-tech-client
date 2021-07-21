@@ -12,6 +12,7 @@ import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 import NewCoach from '../pages/NewCoach/NewCoach';
 import AddContent from '../pages/AddContent/AddContent';
+import BookScheduler from '../components/BookScheduler/BookScheduler';
 import { ErrorPage } from '../pages/ErrorPage/ErrorPage';
 import Articles from '../pages/Articles/Articles.index';
 import { CoachDetail } from '../pages/CoachDetailPage/CoachDetail';
@@ -23,6 +24,7 @@ const RootRoute = () => {
 			<Container disableGutters maxWidth={false}>
 				<Navbar />
 				<Switch>
+					<Route path='/bookscheduler' component={BookScheduler} />
 					<Route path='/faq' component={Faq} />
 					<Route path='/managecontents' component={AddContent} />
 					<Route path='/articles' component={Articles} />
