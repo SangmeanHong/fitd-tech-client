@@ -180,7 +180,7 @@ const SignUp = () => {
                                                     startIcon={<AuthIcon />}
                                                     variant='contained'
                                                 >
-                                                    Google Sign In
+                                                    Sign in with Google
                                                 </Button>
                                             )}
                                             onSuccess={googleSuccess}

@@ -66,6 +66,7 @@ export function ManageUsersPage() {
     const handleDocs = (id, role) => {
         setSelectedUser(id);
         const filteredApplication = applications.filter((data) => data.user === id)[0];
+        console.log(`filteredApplication`, filteredApplication)
         filteredApplication["role"] = role;
         setUserApplication(filteredApplication)
         setOpen(true);

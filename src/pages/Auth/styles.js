@@ -7,6 +7,8 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: 'column',
 		alignItems: 'center',
 		padding: theme.spacing(2),
+		marginBottom:  theme.spacing(15)
+
 	},
 	root: {
 		'& .MuiTextField-root': {
@@ -15,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	avatar: {
 		margin: theme.spacing(1),
-		backgroundColor: theme.palette.secondary.main,
+		backgroundColor: '#000000da',
 	},
 	form: {
 		width: '100%', // Fix IE 11 issue.
@@ -23,9 +25,12 @@ const useStyles = makeStyles((theme) => ({
 	},
 	submit: {
 		margin: theme.spacing(3, 0, 2),
+		backgroundColor: '#F89230',
+
 	},
 	googleButton: {
 		marginBottom: theme.spacing(2),
+
 	},
 }));
 

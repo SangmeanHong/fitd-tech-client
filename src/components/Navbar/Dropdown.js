@@ -17,15 +17,17 @@ function Dropdown() {
         {MenuItems.map((item, index) => {
           const newWebPage = item.path.includes('https://');
           return (
+            // <div className = 'dropdown-link'>
             <li key={index}>
               {
                 newWebPage ? (
-                  <a href={item.path} target="_blank" rel="noopener noreferrer">{item.title}</a>
+                  <a id='contentlink' href={item.path} target="_blank" rel="noopener noreferrer">{item.title}</a>
                 ):(
-                  <a href={item.path} >{item.title}</a>
+                  <a id='contentlink' href={item.path} >{item.title}</a>
                 )
               }
             </li>
+            // </div>
           );
         })}
       </ul>
