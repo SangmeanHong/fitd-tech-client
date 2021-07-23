@@ -126,3 +126,16 @@ const BookScheduler = () => {
 };
 
 export default BookScheduler;
+
+const convertDate = (time) => {
+	const timeStr = time.toString();
+	return timeStr.slice(0, 21);
+};
+
+const handleEventResult = (e) => {
+	console.log(`e`, e);
+	// const title = e.title;
+	// const startTime = convertDate(e.start);
+	// const endTime = convertDate(e.end);
+	setOpen(true);
+};

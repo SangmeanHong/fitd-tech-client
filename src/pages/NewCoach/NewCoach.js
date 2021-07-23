@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import './newCoach.css';
 import 'react-dropzone-uploader/dist/styles.css';
-import Dropzone from 'react-dropzone-uploader';
 import ProvideCheckboxGroup from '../../libs/ProvideCheckBoxGroup';
 import CoachCheckboxGroup from '../../libs/CoachCheckboxGroup';
 import CoachAgreeCheckboxGroup from '../../libs/CoachAgreeCheckboxGroup';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import BookScheduler from '../../components/BookScheduler/BookScheduler';
-// import FileBase from 'react-file-base64';
 import {
 	AccountCircle,
 	AlternateEmail,
@@ -43,7 +41,6 @@ const NewCoach = () => {
 	const [introOfCoach, setIntroOfCoach] = useState('');
 	const [introOfCoachErrorMsg, setIntroOfCoachErrorMsg] = useState(false);
 	const [uploadFile, setUploadFile] = useState({});
-	const [uploadPhotoErrorMsg, setUploadPhotoErrorMsg] = useState(false);
 	const [paidOpt, setPaidOpt] = useState('');
 	const [paidOptErrorMsg, setPaidOptErrorMsg] = useState(false);
 	const [paidOptHelperText, setPaidOptHelperText] = useState('');
@@ -65,12 +62,9 @@ const NewCoach = () => {
 		{ label: 'Non-profit', checked: false },
 		{ label: 'Other:', checked: false },
 	]);
-	//const [expertiseAreaErrorMsg, setExpertiseAreaErrorMsg] = useState(false);
 	const [expertiseAreaOther, setExpertiseAreaOther] = useState('');
 	const dispatch = useDispatch();
 	const history = useHistory();
-	//const [expertiseAreaOtherErrorMsg, setExpertiseAreaOtherErrorMsg] =
-	//useState(false);
 	const [provideChecked, setProvideChecked] = useState([
 		{ label: 'General Career Coaching', checked: false },
 		{
@@ -91,15 +85,13 @@ const NewCoach = () => {
 		{ label: 'Founder Coaching', checked: false },
 		{ label: 'Other:', checked: false },
 	]);
-	//const [provideCheckedErrorMsg, setProvideCheckedErrorMsg] = useState(false);
 	const [provideCheckedOther, setProvideCheckedOther] = useState('');
-	// const [provideCheckedOtherErrorMsg, setProvideCheckedOtherErrorMsg] =
-	// 	useState(false);
 	const [coachAgreeChecked, setCoachAgreeChecked] = useState([
 		{ label: 'I agree', checked: false },
 	]);
-	// const [coachAgreeCheckedErrorMsg, setCoachAgreeCheckedErrorMsg] =
-	// 	useState(false);
+
+	// useState for calendar
+	const [events, setEvents] = useState([]);
 
 	const ExpertiseOnChange =
 		(index) =>
@@ -265,7 +257,7 @@ const NewCoach = () => {
 			const file = imageInput.files[0];
 
 			const result = await axios.get(
-				`http://localhost:7010/api/user/s3Url/newCoach-${file.name}`
+				`http://localhost:8080/api/user/s3Url/newCoach-${file.name}`
 			);
 			const url = result.data.url;
 			console.log(`url`, url);
@@ -297,6 +289,7 @@ const NewCoach = () => {
 				provideChecked,
 				provideCheckedOther,
 				coachAgreeChecked,
+				events,
 			});
 
 			console.log(`obj`, obj);
@@ -311,28 +304,48 @@ const NewCoach = () => {
 		}
 	};
 
-	// const imageUpload = async (e) => {
-	//     e.preventDefault();
-	//     const imageInput = document.querySelector("#imageInput");
-	//     const file = imageInput.files[0];
-	//     console.log(`file`, file)
-	//     const result = await axios.get(`http://localhost:7010/api/user/s3Url/${file.name}`);
+	useEffect(() => {
+		console.log(`useEffect`);
+		const getContent = async () => {
+			const result = await axios.get('http://localhost:8080/api/content');
+			console.log(`result`, result);
+			result.data.map((data) => {
+				if (data.events.length > 0) {
+					const preDate = data.events[0];
+					const startDateObj = new Date(preDate.start);
+					const hours = startDateObj.getUTCHours();
+					const minutes = startDateObj.getUTCMinutes();
+					const year = startDateObj.getFullYear();
+					const month = startDateObj.getMonth();
+					const date = startDateObj.getDate();
 
-	//     const url = result.data.url;
-	//     console.log(`url`, url)
-	//     const imgUrl = await axios.put(url, file, {
-	//         headers: {
-	//             "Content-Type": "multipart/form-data"
-	//         }
-	//     });
-	//     console.log(`imgUrl`, imgUrl);
+					const endDateObj = new Date(preDate.end);
+					const endhours = endDateObj.getUTCHours();
+					const endminutes = endDateObj.getUTCMinutes();
+					const endyear = endDateObj.getFullYear();
+					const endmonth = endDateObj.getMonth();
+					const enddate = endDateObj.getDate();
 
-	//     const imageUrl = url.split('?')[0]
-	//     console.log('imageUrl', imageUrl)
-	// }
+					preDate.start = new Date(year, month, date, hours, minutes);
+					preDate.end = new Date(
+						endyear,
+						endmonth,
+						enddate,
+						endhours,
+						endminutes
+					);
+					console.log(`data.events`, data.events);
+					setEvents(data.events);
+				}
+			});
+		};
+		getContent();
+	}, []);
 
 	return (
 		<>
+			{console.log('events in newcoach =>>>', events)}
+			<BookScheduler events={events} setEvents={setEvents} />
 			{userInfo ? (
 				<div className='body'>
 					<div className='main-container'>
@@ -461,11 +474,17 @@ const NewCoach = () => {
 									}
 								/>
 							</div>
-							<div className='textField'>
+							<div className='uploadPhoto'>
 								<form id='imageForm' onSubmit={(e) => e.preventDefault()}>
 									<input id='imageInput' type='file' accept='image/*' />
 								</form>
 								{/* <img src="https://fitdcanada.s3.us-west-1.amazonaws.com/profile/48951c2c8c4b25de80a0491ffb6ecf10" alt="" width="100px" height="100px" /> */}
+							</div>
+							<div className='sub-title'>
+								Set the available time for the coaching:
+							</div>
+							<div>
+								<BookScheduler />
 							</div>
 							<br /> <br />
 							<div className='sub-title'>Coaching Experience:</div>

@@ -17,6 +17,7 @@ import { ErrorPage } from '../pages/ErrorPage/ErrorPage';
 import Articles from '../pages/Articles/Articles.index';
 import { CoachDetail } from '../pages/CoachDetailPage/CoachDetail';
 import { ManageUsersPage } from '../pages/Admin/ManageUsersPage/ManageUsersPage';
+import ShowScheduler from '../components/Modal_BookScheduler/Modal_ShowScheduler';
 
 const RootRoute = () => {
 	return (
@@ -24,7 +25,8 @@ const RootRoute = () => {
 			<Container disableGutters maxWidth={false}>
 				<Navbar />
 				<Switch>
-					<Route path='/bookscheduler' component={BookScheduler} />
+					{/* <Route path='/bookscheduler' component={BookScheduler} />
+					<Route path='/showscheduler' component={ShowScheduler} /> */}
 					<Route path='/faq' component={Faq} />
 					<Route path='/managecontents' component={AddContent} />
 					<Route path='/articles' component={Articles} />
