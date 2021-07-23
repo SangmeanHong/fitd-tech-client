@@ -12,63 +12,66 @@ import './CoachingProfileCard.css';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
-    root: {
-        maxWidth: 345,
-    },
-    media: {
-        height: 360,
-    },
+	root: {
+		maxWidth: 345,
+	},
+	media: {
+		height: 360,
+	},
 });
 
 export const CoachingProfileCard = ({ coachData, index }) => {
-    const classes = useStyles();
-    const { coach } = coachData;
-    console.log(`coach`, coach)
-    const { firstName, lastName, fileUrl, expertiseArea, introOfCoach } = coach[0];
-    function textLengthOverCut(txt, len, lastTxt) {
-        if (len === '' || len === null) {
-            // 기본값
-            len = 20;
-        }
-        if (lastTxt === '' || lastTxt === null) {
-            // 기본값
-            lastTxt = '...';
-        }
-        if (txt.length > len) {
-            txt = txt.substr(0, len) + lastTxt;
-        }
-        return txt;
-    }
-    return (
-        <div className={`coachingProfileCard`} key={index}>
-            <div className='cards__item__link '>
-                <CardMedia
-                    className={`${classes.media} coachImg`}
-                    image={fileUrl}
-                    title={fileUrl}
-                />
-                <div className='cardActionArea'>
-                    <div className='cardContent'>
-                        <h2 className='coachName'>{`${firstName} ${lastName}`}</h2>
-                        <div className='coachCategories'>
-                            {expertiseArea.map((data) => {
-                                return <CoachCategoriesCard categories={data} />;
-                            })}
-                        </div>
-                        <h6 className='coachIntro'>
-                            {textLengthOverCut(introOfCoach, '200', '...')}
-                        </h6>
-                    </div>
-                    <div className='cardActions'>
-                        <Link className='coachLeanMoreButton' to={{
-                            pathname: `/coaches/${firstName} ${lastName}`,
-                            state: coach[0],
-                        }}>
-                            Learn More
-                        </Link>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+	const classes = useStyles();
+	const { coach } = coachData;
+	const { firstName, lastName, fileUrl, expertiseArea, introOfCoach } =
+		coach[0];
+	function textLengthOverCut(txt, len, lastTxt) {
+		if (len === '' || len === null) {
+			// 기본값
+			len = 20;
+		}
+		if (lastTxt === '' || lastTxt === null) {
+			// 기본값
+			lastTxt = '...';
+		}
+		if (txt.length > len) {
+			txt = txt.substr(0, len) + lastTxt;
+		}
+		return txt;
+	}
+	return (
+		<div className={`coachingProfileCard`} key={index}>
+			<div className='cards__item__link '>
+				<CardMedia
+					className={`${classes.media} coachImg`}
+					image={fileUrl}
+					title={fileUrl}
+				/>
+				<div className='cardActionArea'>
+					<div className='cardContent'>
+						<h2 className='coachName'>{`${firstName} ${lastName}`}</h2>
+						<div className='coachCategories'>
+							{expertiseArea.map((data) => {
+								return <CoachCategoriesCard categories={data} />;
+							})}
+						</div>
+						<h6 className='coachIntro'>
+							{textLengthOverCut(introOfCoach, '200', '...')}
+						</h6>
+					</div>
+					<div className='cardActions'>
+						<Link
+							className='coachLeanMoreButton'
+							to={{
+								pathname: `/coaches/${firstName} ${lastName}`,
+								state: coach[0],
+							}}
+						>
+							Learn More
+						</Link>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 };
