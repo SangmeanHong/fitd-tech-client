@@ -305,10 +305,8 @@ const NewCoach = () => {
 	};
 
 	useEffect(() => {
-		console.log(`useEffect`);
 		const getContent = async () => {
 			const result = await axios.get('http://localhost:8080/api/content');
-			console.log(`result`, result);
 			result.data.map((data) => {
 				if (data.events.length > 0) {
 					const preDate = data.events[0];
@@ -334,7 +332,6 @@ const NewCoach = () => {
 						endhours,
 						endminutes
 					);
-					console.log(`data.events`, data.events);
 					setEvents(data.events);
 				}
 			});
@@ -344,8 +341,6 @@ const NewCoach = () => {
 
 	return (
 		<>
-			{console.log('events in newcoach =>>>', events)}
-			<BookScheduler events={events} setEvents={setEvents} />
 			{userInfo ? (
 				<div className='body'>
 					<div className='main-container'>
@@ -484,7 +479,7 @@ const NewCoach = () => {
 								Set the available time for the coaching:
 							</div>
 							<div>
-								<BookScheduler />
+								<BookScheduler events={events} setEvents={setEvents} />
 							</div>
 							<br /> <br />
 							<div className='sub-title'>Coaching Experience:</div>

@@ -13,8 +13,6 @@ import './styles.css';
 const BookScheduler = ({ events, setEvents }) => {
 	const [open, setOpen] = useState(false);
 	const [selectedEvent, setSelectedEvent] = useState();
-	console.log(`bookscheduler init events`, events);
-	console.log(`bookscheduler init events`, typeof events);
 
 	const localizer = momentLocalizer(moment);
 
@@ -26,7 +24,6 @@ const BookScheduler = ({ events, setEvents }) => {
 	};
 
 	const handleEventResult = (eventData) => {
-		console.log('hello handleEventResult');
 		setSelectedEvent(eventData);
 		setOpen(true);
 	};
@@ -46,7 +43,7 @@ const BookScheduler = ({ events, setEvents }) => {
 				defaultDate={moment().toDate()}
 				defaultView='month'
 				localizer={localizer}
-				events={[events]}
+				events={events}
 				titleAccessor={events?.title}
 				startAccessor={events?.start}
 				endAccessor={events?.end}

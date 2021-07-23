@@ -12,7 +12,6 @@ const ShowScheduler = ({ open, setOpen, events, setEvents, selectedEvent }) => {
 	};
 
 	const onDeleteDate = (selectedEvent) => {
-		console.log(`eventsㅁㅗ달에서`, events);
 		if (events.length > 0) {
 			const nextEvents = events.filter((events) => {
 				return events.id !== selectedEvent.id;
