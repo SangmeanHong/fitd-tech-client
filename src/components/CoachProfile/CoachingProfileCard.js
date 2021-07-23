@@ -21,8 +21,11 @@ const useStyles = makeStyles({
 });
 
 export const CoachingProfileCard = ({ coachData, index }) => {
+	console.log(`coachData`, coachData);
 	const classes = useStyles();
 	const { coach } = coachData;
+	console.log(`coach`, coach);
+	console.log('coach array', coach[0]);
 	const { firstName, lastName, fileUrl, expertiseArea, introOfCoach } =
 		coach[0];
 	function textLengthOverCut(txt, len, lastTxt) {

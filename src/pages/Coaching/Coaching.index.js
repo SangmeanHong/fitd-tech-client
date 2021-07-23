@@ -27,7 +27,6 @@ function Coaching() {
 	useEffect(() => {
 		(async () => {
 			const coaches = await getCoaches();
-			console.log(`coaches코치페이지에서`, coaches);
 			setCoaches(coaches);
 		})();
 	}, []);
