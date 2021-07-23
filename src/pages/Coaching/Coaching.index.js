@@ -6,66 +6,66 @@ import { useHistory } from 'react-router';
 import { getCoaches } from '../../libs/getCoaches';
 
 function Coaching() {
-	const [user, setUser] = useState(
-		JSON.parse(sessionStorage.getItem('profile'))
-	);
-	const [coaches, setCoaches] = useState([]);
+    const [user, setUser] = useState(
+        JSON.parse(sessionStorage.getItem('profile'))
+    );
+    const [coaches, setCoaches] = useState([]);
 
-	const history = useHistory();
+    const history = useHistory();
 
-	const userInfo = JSON.parse(sessionStorage.getItem('profile'));
-	const onClickBtn = () => {
-		history.push('/newcoach');
-	};
+    const userInfo = JSON.parse(sessionStorage.getItem('profile'));
+    const onClickBtn = () => {
+        history.push('/newcoach');
+    };
 
-	const handleSearch = async (e) => {
-		const search = e.target.value;
-		const coaches = await getCoaches(search);
-		setCoaches(coaches);
-	};
+    const handleSearch = async (e) => {
+        const search = e.target.value;
+        const coaches = await getCoaches(search);
+        setCoaches(coaches);
+    };
 
-	useEffect(() => {
-		(async () => {
-			const coaches = await getCoaches();
-			setCoaches(coaches);
-		})();
-	}, []);
+    useEffect(() => {
+        (async () => {
+            const coaches = await getCoaches();
+            setCoaches(coaches);
+        })();
+    }, []);
 
-	return (
-		<div className='Coaching'>
-			<div>
-				<h1 className='coaching_header'>Explore our Coaches</h1>
-				<div className='searchCoach'>
-					<input
-						onChange={handleSearch}
-						type='text'
-						placeholder='search coach'
-					/>
-				</div>
-				{userInfo && userInfo.role === 0 ? (
-					<div className='flex-header'>
-						<button className='coachbtn' onClick={onClickBtn}>
-							Want to become a coach?
-						</button>
-					</div>
-				) : (
-					<div>
-						{userInfo && userInfo.role === 3 ? (
-							<div>You already applied</div>
-						) : (
-							''
-						)}
-					</div>
-				)}
-			</div>
-			<div className='coachingCards'>
-				{coaches.length > 0 &&
-					coaches.map((coach, index) => {
-						return <CoachingProfileCard coachData={coach} index={index} />;
-					})}
-			</div>
-		</div>
-	);
+    return (
+        <div className='Coaching'>
+            <div>
+                <h1 className='coaching_header'>Explore our Coaches</h1>
+                <div className='searchCoach'>
+                    <input
+                        onChange={handleSearch}
+                        type='text'
+                        placeholder='search coach'
+                    />
+                </div>
+                {userInfo && userInfo.role === 0 ? (
+                    <div className='flex-header'>
+                        <button className='coachbtn' onClick={onClickBtn}>
+                            Want to become a coach?
+                        </button>
+                    </div>
+                ) : (
+                    <div>
+                        {userInfo && userInfo.role === 3 ? (
+                            <div>You already applied</div>
+                        ) : (
+                            ''
+                        )}
+                    </div>
+                )}
+            </div>
+            <div className='coachingCards'>
+                {coaches && coaches.length > 0 &&
+                    coaches.map((coach, index) => {
+                        return <CoachingProfileCard coachData={coach} index={index} />;
+                    })}
+            </div>
+        </div>
+    );
 }
 
 export default Coaching;

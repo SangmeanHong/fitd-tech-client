@@ -1,4 +1,4 @@
-/* .pricing__section {
+.pricing__section {
     padding: 100px 0 160px;
     display: flex;
     flex-direction: column;
@@ -119,4 +119,4 @@
     .pricing__container-card:hover {
       transform: none;
     }
-  } */
+  }

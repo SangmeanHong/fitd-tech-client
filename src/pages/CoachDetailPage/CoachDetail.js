@@ -1,8 +1,10 @@
 import React from 'react'
-import { useLocation, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import EmailIcon from '@material-ui/icons/Email';
 import './CoachDetail.css';
+import Pricing from '../Home/Pricing';
+import Button from '../../pages/Home/Button';
 
 export const CoachDetail = () => {
     const coachData = useLocation().state;
@@ -50,6 +52,7 @@ export const CoachDetail = () => {
                     <h2 className="rightBottomTitle">Teaching</h2>
                     <div className="bigLink">related contents...</div>
                 </div>
+                <Link to="/payment">asdfasdasdf</Link>
             </div>
         </div>
     )

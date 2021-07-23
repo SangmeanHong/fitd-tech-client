@@ -8,10 +8,11 @@ export const getCoaches = async (search) => {
         });
         coaches = data.users;
     } else {
-        const { data } = await axios.post(`http://localhost:${process.env.REACT_APP_PORT}/api/user/userlist/`, { option: 'coach' }, {
+        const { data } = await axios.get(`http://localhost:${process.env.REACT_APP_PORT}/api/user/coachlist/`, {
             withCredentials: true,
         });
-        coaches = data.users;
+        const coachResults = data.users;
+        coaches = coachResults;
     }
     return coaches;
 };
