@@ -32,18 +32,15 @@ const ShowScheduler = ({ open, setOpen, events, setEvents, selectedEvent }) => {
 				<DialogTitle>Booked Schedule</DialogTitle>
 				<DialogContent>
 					<DialogContentText>
-						<div>
-							<b>TITLE : </b>
-							{selectedEvent?.title}
-						</div>
-						<div>
-							<b>START TIME : </b>
-							{selectedEvent?.start.toString()}
-						</div>
-						<div>
-							<b>END TIME : </b>
-							{selectedEvent?.end.toString()}
-						</div>
+						<b>TITLE : </b>
+						{selectedEvent?.title}
+						<br></br>
+						<b>START TIME : </b>
+						{selectedEvent?.start.toString()}
+						<br></br>
+						<b>END TIME : </b>
+						{selectedEvent?.end.toString()}
+						<br></br>
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>

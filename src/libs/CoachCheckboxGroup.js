@@ -20,9 +20,8 @@ const CoachCheckboxGroup = ({
 			{values.map((value, index) => {
 				if (index === values.length - 1) {
 					return (
-						<div className='lastCheckbox'>
+						<div key={index} className='lastCheckbox'>
 							<FormControlLabel
-								key={index}
 								control={
 									<Checkbox
 										checked={value.checked}

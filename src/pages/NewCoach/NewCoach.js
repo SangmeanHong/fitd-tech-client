@@ -470,9 +470,9 @@ const NewCoach = () => {
 								/>
 							</div>
 							<div className='uploadPhoto'>
-								<form id='imageForm' onSubmit={(e) => e.preventDefault()}>
-									<input id='imageInput' type='file' accept='image/*' />
-								</form>
+								{/* <form id='imageForm' onSubmit={(e) => e.preventDefault()}> */}
+								<input id='imageInput' type='file' accept='image/*' />
+								{/* </form> */}
 								{/* <img src="https://fitdcanada.s3.us-west-1.amazonaws.com/profile/48951c2c8c4b25de80a0491ffb6ecf10" alt="" width="100px" height="100px" /> */}
 							</div>
 							<div className='sub-title'>
