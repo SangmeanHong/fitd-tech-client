@@ -57,5 +57,3 @@ const ShowScheduler = ({ open, setOpen, events, setEvents, selectedEvent }) => {
 };
 
 export default ShowScheduler;
-
-//onClick={onDialogClose}
