@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import EmailIcon from '@material-ui/icons/Email';
 import './CoachDetail.css';
@@ -8,8 +9,10 @@ import Button from '../../pages/Home/Button';
 
 export const CoachDetail = () => {
 	const coachData = useLocation().state;
-	console.log(`useLocation()`, useLocation());
-	console.log(`coachData`, coachData);
+
+	const history = useHistory();
+	// console.log(`useLocation()`, useLocation());
+	// console.log(`coachData`, coachData);
 	const {
 		firstName,
 		lastName,
@@ -23,6 +26,10 @@ export const CoachDetail = () => {
 		services,
 		introOfCoach,
 	} = coachData;
+
+	const onClickBookBtn = () => {
+		history.push(`/payment/${firstName} ${lastName}`);
+	};
 
 	return (
 		<div className='CoachDetailPage'>
@@ -38,8 +45,13 @@ export const CoachDetail = () => {
 						})}
 					</div>
 				</div>
-				<div className='leftSubscribeBtn'>
-					<button>Subscribe</button>
+				<div className='btnFlex'>
+					<div className='leftSubscribeBtn'>
+						<button onClick={onClickBookBtn}>Book Coach</button>
+					</div>
+					<div className='leftSubscribeBtn'>
+						<button>Subscribe</button>
+					</div>
 				</div>
 				<div className='leftBottom'>
 					<div className='leftEmail'>{email}</div>
@@ -62,9 +74,7 @@ export const CoachDetail = () => {
 					<h2 className='rightBottomTitle'>Teaching</h2>
 					<div className='bigLink'>related contents...</div>
 				</div>
-				<div className='bookCoachBtn'>
-					<button>Book Coach</button>
-				</div>
+
 				<Link to='/payment'>Place Order</Link>
 			</div>
 		</div>

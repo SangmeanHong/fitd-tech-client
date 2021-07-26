@@ -1,15 +1,26 @@
-import React from 'react'
-import Pricing from '../Home/Pricing'
+import React from 'react';
+import Pricing from '../Home/Pricing';
 
-export const Payment = ({ }) => {
-    // const userId = userId;
+const Payment = ({}) => {
+	// const userId = userId;
 
-    return (
-        <div>
-            {/* {
+	const { userInfo } = JSON.parse(sessionStorage.getItem('profile'));
+	console.log(`userInfo`, userInfo);
+
+	return (
+		<div>
+			{/* {
                 !userId && */}
-            <Pricing />
-            {/* } */}
-        </div>
-    )
-}
+			<Pricing />
+			{/* } */}
+		</div>
+	);
+};
+
+export default Payment;
+
+//const { users, applications, loading, err } = useSelector(state => state.getUsersReducer);
+
+// const [user, setUser] = useState(
+// 	JSON.parse(sessionStorage.getItem('profile'))
+// );
