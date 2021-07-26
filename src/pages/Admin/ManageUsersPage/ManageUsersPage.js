@@ -43,10 +43,14 @@ export function ManageUsersPage() {
 	}, [dispatch, success]);
 
 	const handleApprove = (userId) => {
-		// console.log(`userId`, userId);
+		console.log(`userId`, userId);
 		dispatch(actionApproveApplication(userId));
 		setOpen(false);
 		dispatch(actionGetUsers());
+	};
+
+	const handleDeleteUser = (userId) => {
+		console.log(`userId`, userId);
 	};
 
 	const checkRole = (roleNum) => {
@@ -74,7 +78,7 @@ export function ManageUsersPage() {
 		const filteredApplication = applications.filter(
 			(data) => data.user === id
 		)[0];
-		//console.log(`filteredApplication`, filteredApplication)
+		console.log(`filteredApplication`, filteredApplication);
 		filteredApplication['role'] = role;
 		setUserApplication(filteredApplication);
 		setOpen(true);
@@ -154,7 +158,10 @@ export function ManageUsersPage() {
 										)}
 									</TableCell>
 									<TableCell align='right'>
-										<DeleteIcon className='manageUserDeleteIcon' />
+										<DeleteIcon
+											className='manageUserDeleteIcon'
+											onClick={() => handleDeleteUser(user._id)}
+										/>
 									</TableCell>
 								</TableRow>
 							))}
