@@ -74,8 +74,6 @@ export const CoachDetail = () => {
 					<h2 className='rightBottomTitle'>Teaching</h2>
 					<div className='bigLink'>related contents...</div>
 				</div>
-
-				<Link to='/payment'>Place Order</Link>
 			</div>
 		</div>
 	);
