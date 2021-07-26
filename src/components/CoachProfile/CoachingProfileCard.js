@@ -21,7 +21,6 @@ const useStyles = makeStyles({
 });
 
 export const CoachingProfileCard = ({ coachData, index }) => {
-    console.log(`coachData`, coachData);
     const classes = useStyles();
     const { firstName, lastName, fileUrl, expertiseArea, introOfCoach } =
         coachData;
