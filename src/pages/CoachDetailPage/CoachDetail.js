@@ -28,8 +28,17 @@ export const CoachDetail = () => {
 	} = coachData;
 
 	const onClickBookBtn = () => {
-		history.push(`/payment/${firstName} ${lastName}`);
+		history.push({
+			pathname: `/payment/${firstName} ${lastName}`,
+			state: coachData,
+		});
 	};
+
+	// this.props.history.push({
+	// 	pathname: '/template',
+	// 	search: '?query=abc',
+	// 	state: { detail: response.data }
+	// })
 
 	return (
 		<div className='CoachDetailPage'>

@@ -1,8 +1,7 @@
-import React, { useEffect, useState, Components } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import ShowScheduler from '../Modal_BookScheduler/Modal_ShowScheduler';
 import moment from 'moment';
-import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -30,7 +29,6 @@ const BookScheduler = ({ events, setEvents }) => {
 
 	return (
 		<div className='container-main'>
-			{console.log(`events 북 뷰ㅌ에서 `, events)}
 			<ShowScheduler
 				open={open}
 				setOpen={setOpen}

@@ -40,7 +40,7 @@ const NewCoach = () => {
 	const [linkedInErrorMsg, setLinkedInErrorMsg] = useState(false);
 	const [introOfCoach, setIntroOfCoach] = useState('');
 	const [introOfCoachErrorMsg, setIntroOfCoachErrorMsg] = useState(false);
-	const [uploadFile, setUploadFile] = useState({});
+	// const [uploadFile, setUploadFile] = useState({});
 	const [paidOpt, setPaidOpt] = useState('');
 	const [paidOptErrorMsg, setPaidOptErrorMsg] = useState(false);
 	const [paidOptHelperText, setPaidOptHelperText] = useState('');
@@ -291,8 +291,7 @@ const NewCoach = () => {
 				coachAgreeChecked,
 				events,
 			});
-
-			console.log(`obj`, obj);
+			// console.log(`obj`, obj);
 			setTimeout(() => {
 				dispatch(actionNewCoach(obj));
 			}, 2000);
@@ -304,40 +303,40 @@ const NewCoach = () => {
 		}
 	};
 
-	useEffect(() => {
-		const getContent = async () => {
-			const result = await axios.get('http://localhost:8080/api/content');
-			result.data.map((data) => {
-				if (data.events.length > 0) {
-					const preDate = data.events[0];
-					const startDateObj = new Date(preDate.start);
-					const hours = startDateObj.getUTCHours();
-					const minutes = startDateObj.getUTCMinutes();
-					const year = startDateObj.getFullYear();
-					const month = startDateObj.getMonth();
-					const date = startDateObj.getDate();
+	// useEffect(() => {
+	// 	const getContent = async () => {
+	// 		const result = await axios.get('http://localhost:8080/api/content');
+	// 		result.data.map((data) => {
+	// 			if (data.events.length > 0) {
+	// 				const preDate = data.events[0];
+	// 				const startDateObj = new Date(preDate.start);
+	// 				const hours = startDateObj.getUTCHours();
+	// 				const minutes = startDateObj.getUTCMinutes();
+	// 				const year = startDateObj.getFullYear();
+	// 				const month = startDateObj.getMonth();
+	// 				const date = startDateObj.getDate();
 
-					const endDateObj = new Date(preDate.end);
-					const endhours = endDateObj.getUTCHours();
-					const endminutes = endDateObj.getUTCMinutes();
-					const endyear = endDateObj.getFullYear();
-					const endmonth = endDateObj.getMonth();
-					const enddate = endDateObj.getDate();
+	// 				const endDateObj = new Date(preDate.end);
+	// 				const endhours = endDateObj.getUTCHours();
+	// 				const endminutes = endDateObj.getUTCMinutes();
+	// 				const endyear = endDateObj.getFullYear();
+	// 				const endmonth = endDateObj.getMonth();
+	// 				const enddate = endDateObj.getDate();
 
-					preDate.start = new Date(year, month, date, hours, minutes);
-					preDate.end = new Date(
-						endyear,
-						endmonth,
-						enddate,
-						endhours,
-						endminutes
-					);
-					setEvents(data.events);
-				}
-			});
-		};
-		getContent();
-	}, []);
+	// 				preDate.start = new Date(year, month, date, hours, minutes);
+	// 				preDate.end = new Date(
+	// 					endyear,
+	// 					endmonth,
+	// 					enddate,
+	// 					endhours,
+	// 					endminutes
+	// 				);
+	// 				setEvents(data.events);
+	// 			}
+	// 		});
+	// 	};
+	// 	getContent();
+	// }, []);
 
 	return (
 		<>
