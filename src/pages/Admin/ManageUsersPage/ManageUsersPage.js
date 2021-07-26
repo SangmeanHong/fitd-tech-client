@@ -43,6 +43,10 @@ export function ManageUsersPage() {
         dispatch(actionGetUsers());
     };
 
+    const handleDeleteUser = (userId) => {
+        console.log(`userId`, userId)
+    }
+
     const checkRole = (roleNum) => {
         switch (roleNum) {
             case 0:
@@ -135,7 +139,7 @@ export function ManageUsersPage() {
                                                 )
                                         }
                                     </TableCell>
-                                    <TableCell align="right"><DeleteIcon className="manageUserDeleteIcon" /></TableCell>
+                                    <TableCell align="right"><DeleteIcon className="manageUserDeleteIcon" onClick={() => handleDeleteUser(user._id)} /></TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
