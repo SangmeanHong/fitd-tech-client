@@ -6,12 +6,14 @@ export const getCoaches = async (search) => {
         const { data } = await axios.get(`http://localhost:${process.env.REACT_APP_PORT}/api/search/coach/${search}`, {
             withCredentials: true,
         });
-        coaches = data.users;
+        console.log(`data 써치한거`, data)
+        coaches = data;
     } else {
-        const { data } = await axios.get(`http://localhost:${process.env.REACT_APP_PORT}/api/user/coachlist/`, {
+        const { data } = await axios.get(`http://localhost:${process.env.REACT_APP_PORT}/api/search/coach/all`, {
             withCredentials: true,
         });
-        const coachResults = data.users;
+        console.log(`data 모두`, data)
+        const coachResults = data;
         coaches = coachResults;
     }
     return coaches;
