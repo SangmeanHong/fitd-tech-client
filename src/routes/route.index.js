@@ -16,7 +16,7 @@ import { ErrorPage } from '../pages/ErrorPage/ErrorPage';
 import Articles from '../pages/Articles/Articles.index';
 import { CoachDetail } from '../pages/CoachDetailPage/CoachDetail';
 import { ManageUsersPage } from '../pages/Admin/ManageUsersPage/ManageUsersPage';
-import { Payment } from '../pages/Payment/Payment';
+import Payment from '../pages/Payment/Payment';
 import Checkout from '../components/Checkout/Checkout';
 
 const RootRoute = () => {

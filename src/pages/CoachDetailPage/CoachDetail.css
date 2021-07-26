@@ -78,17 +78,6 @@
 	cursor: pointer;
 }
 
-.bookCoachBtn {
-	background-color: white;
-	color: black;
-	border: 2px solid #008cba;
-}
-
-.bookCoachBtn > button:hover {
-	background-color: #008cba;
-	color: white;
-}
-
 .leftBottom {
 	width: 100%;
 	border-top: 1px solid #dcdee1;
@@ -141,5 +130,8 @@
 	font-family: 'gt walsheim pro', helvetica, arial, sans-serif;
 }
 
-.bigLink {
+.btnFlex {
+	width: 70%;
+	display: flex;
+	justify-content: space-between;
 }
