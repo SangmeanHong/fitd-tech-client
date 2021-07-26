@@ -1,33 +1,23 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import Pricing from '../Home/Pricing';
+import BookScheduler from '../../components/BookScheduler/BookScheduler';
+import BookTable from '../../components/BookTable/BookTable';
 
-const Payment = ({}) => {
-	// const userId = userId;
+const Payment = () => {
+	const { firstName, lastName, events } = useLocation().state;
 
 	const userInfo = JSON.parse(sessionStorage.getItem('profile'));
-	// const user = useSelector(user.isMembership);
-	// const { user } = useSelector((state) => state.getUsersReducer);
-	//const userInfo = localStorage.getItem('profile');
-	// const user = JSON.parse(localStorage.getItem('profile'));
-
-	//const user = useSelector((state) => state.getUsersReducer);
-	console.log(`userInfo`, userInfo.isMembership);
 
 	return (
 		<div>
-			{/* {
-                !userId && */}
-			<Pricing />
-			{/* } */}
+			{userInfo.isMembership === 0 && userInfo._id && <Pricing />}
+			{/* {userInfo.isMembership > 0 && <BookScheduler events={events} />} */}
+			{userInfo.isMembership > 0 && (
+				<BookTable events={events} firstName={firstName} lastName={lastName} />
+			)}
 		</div>
 	);
 };
 
 export default Payment;
-
-//const { users, applications, loading, err } = useSelector(state => state.getUsersReducer);
-
-// const [user, setUser] = useState(
-// 	JSON.parse(sessionStorage.getItem('profile'))
-// );
