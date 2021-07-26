@@ -12,42 +12,40 @@ import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 import NewCoach from '../pages/NewCoach/NewCoach';
 import AddContent from '../pages/AddContent/AddContent';
-import BookScheduler from '../components/BookScheduler/BookScheduler';
 import { ErrorPage } from '../pages/ErrorPage/ErrorPage';
 import Articles from '../pages/Articles/Articles.index';
 import { CoachDetail } from '../pages/CoachDetailPage/CoachDetail';
 import { ManageUsersPage } from '../pages/Admin/ManageUsersPage/ManageUsersPage';
-import ShowScheduler from '../components/Modal_BookScheduler/Modal_ShowScheduler';
 import { Payment } from '../pages/Payment/Payment';
+import Checkout from '../components/Checkout/Checkout';
 
 const RootRoute = () => {
-    return (
-        <BrowserRouter>
-            <Container disableGutters maxWidth={false}>
-                <Navbar />
-                <Switch>
-                    {/* <Route path='/bookscheduler' component={BookScheduler} />
-					<Route path='/showscheduler' component={ShowScheduler} /> */}
-                    <Route path='/faq' component={Faq} />
-                    <Route path='/managecontents' component={AddContent} />
-                    <Route path='/articles' component={Articles} />
-                    <Route path='/newcoach' component={NewCoach} />
-                    <Route path='/coaching' component={Coaching} />
-                    <Route path='/content' component={Content} />
-                    <Route path='/payment' component={Payment} />
-                    ManageUsers
-                    <Route path='/manageusers' component={ManageUsersPage} />
-                    <Route path='/auth' component={Auth} />
-                    <Route path='/resetpw/:token/:email' exact component={ResetPwd} />
-                    <Route path='/forgotPwd' exact component={ForgotPwd} />
-                    <Route path='/coaches/:name' exact component={CoachDetail} />
-                    <Route path='/' component={Home} exact />
-                    <Route render={() => <ErrorPage />} />
-                </Switch>
-                <Footer />
-            </Container>
-        </BrowserRouter>
-    );
+	return (
+		<BrowserRouter>
+			<Container disableGutters maxWidth={false}>
+				<Navbar />
+				<Switch>
+					<Route path='/checkout' component={Checkout} />
+					<Route path='/faq' component={Faq} />
+					<Route path='/managecontents' component={AddContent} />
+					<Route path='/articles' component={Articles} />
+					<Route path='/newcoach' component={NewCoach} />
+					<Route path='/coaching' component={Coaching} />
+					<Route path='/content' component={Content} />
+					<Route path='/payment' component={Payment} />
+					ManageUsers
+					<Route path='/manageusers' component={ManageUsersPage} />
+					<Route path='/auth' component={Auth} />
+					<Route path='/resetpw/:token/:email' exact component={ResetPwd} />
+					<Route path='/forgotPwd' exact component={ForgotPwd} />
+					<Route path='/coaches/:name' exact component={CoachDetail} />
+					<Route path='/' component={Home} exact />
+					<Route render={() => <ErrorPage />} />
+				</Switch>
+				<Footer />
+			</Container>
+		</BrowserRouter>
+	);
 };
 
 export default RootRoute;
