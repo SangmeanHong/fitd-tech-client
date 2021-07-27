@@ -39,7 +39,7 @@ function Coaching() {
                     <input
                         onChange={handleSearch}
                         type='text'
-                        placeholder='search coach'
+                        placeholder='Search Coach'
                     />
                 </div>
                 {userInfo && userInfo.role === 0 ? (

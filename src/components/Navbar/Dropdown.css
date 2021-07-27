@@ -19,8 +19,8 @@
   }
   
   .dropdown-menu li:hover {
-    background:#f3b982;
-
+    background:#f1b175;
+    width: 100px;
   }
   
   .dropdown-menu.clicked {
