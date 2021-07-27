@@ -10,6 +10,7 @@ import { TextField } from '@material-ui/core';
 import Rating, { RatingProps } from '@material-ui/lab/Rating';
 import axios from 'axios';
 import Pagination from '@material-ui/lab/Pagination';
+import { API } from '../../config';
 
 export const CoachDetail = () => {
     const coachData = useLocation().state;
@@ -59,7 +60,7 @@ export const CoachDetail = () => {
                 userName: loginUserFullname,
                 coachId,
             }
-            const result = await axios.post(`http://localhost:${process.env.REACT_APP_PORT}/api/review/coach-review`, reviewObj, { withCredentials: true })
+            const result = await axios.post(`${API}/api/review/coach-review`, reviewObj, { withCredentials: true })
             console.log(`result 코치데이터에서`, result);
             setComment("");
         }
@@ -69,7 +70,7 @@ export const CoachDetail = () => {
     useEffect(() => {
         (
             async () => {
-                const { data } = await axios.get(`http://localhost:${process.env.REACT_APP_PORT}/api/review/${coachData._id}/coach-reviews`, {
+                const { data } = await axios.get(`${API}/api/review/${coachData._id}/coach-reviews`, {
                     withCredentials: true
                 });
                 const reviews = data.reviews;

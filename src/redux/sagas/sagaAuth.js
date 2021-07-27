@@ -1,4 +1,3 @@
-// import axios from 'axios';
 import { all, call, put, takeEvery, fork } from 'redux-saga/effects';
 import { signUp, signIn, getUserInfo, apiLogout } from '../api';
 import * as types from '../constants/actionTypes';
