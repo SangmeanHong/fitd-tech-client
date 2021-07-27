@@ -9,7 +9,7 @@ export const MenuItems = [
     },
     {
       title: 'Podcasts',
-      path: "https://open.spotify.com/show/4rOoJ6Egrf8K2IrywzwOMk",
+      path: "https://play.acast.com/s/ninetwentynine?source=explore-tab",
       cName: 'dropdown-link'
     },
     // {

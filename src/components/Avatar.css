@@ -10,3 +10,7 @@
 .avatarButton:hover{
     background-color: #F89230;
 }
+
+.MuiButton-contained {
+    background-color: white;
+}

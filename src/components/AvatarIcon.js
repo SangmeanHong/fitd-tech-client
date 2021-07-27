@@ -38,7 +38,7 @@ const AvatarIcon = () => {
 					<Button
 						variant='contained'
 						className={classes.logout}
-						color='secondary'
+						color='primary'
 						onClick={logout}
 					>
 						Logout

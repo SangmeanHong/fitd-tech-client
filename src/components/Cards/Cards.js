@@ -21,14 +21,14 @@ function Cards() {
               src='images/article-2.jpg'
               text='10 Ways Technology Is Changing Coaching Now And In The Future'
               label='forbes.com'
-              path='/https://www.forbes.com/sites/johnwelsheurope/2019/04/08/10-ways-technology-is-changing-coaching-now-and-in-the-future/?sh=5823b7bf7eab'
+              path='https://www.forbes.com/sites/johnwelsheurope/2019/04/08/10-ways-technology-is-changing-coaching-now-and-in-the-future/?sh=5823b7bf7eab'
             />
-            {/* <CardItem
-              src='images/img-2.jpg'
-              text='Travel through the Islands of Bali in a Private Cruise'
-              label='Luxury'
-              path='/services'
-            /> */}
+            <CardItem
+              src='images/article-6.jpg'
+              text='11 technologies developers should explore now'
+              label='infoworld.com'
+              path='https://www.infoworld.com/article/3191260/11-technologies-developers-should-explore-now.html'
+            />
           </ul>
           <ul className='cards__items'>
             <CardItem
