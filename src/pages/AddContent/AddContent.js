@@ -21,6 +21,7 @@ import {
     Button,
 } from '@material-ui/core';
 import axios from 'axios';
+import { API } from '../../config';
 
 const AddContent = () => {
     const classes = useStyles();
@@ -129,7 +130,7 @@ const AddContent = () => {
         }
 
         if (isValid === true) {
-            const result = await axios.get(`http://localhost:7010/api/user/s3Url/content-${file.name}`);
+            const result = await axios.get(`${API}/api/user/s3Url/content-${file.name}`);
             const url = result.data.url;
             console.log(`새로운 컨텐트 url`, url)
             const imgUrl = await axios.put(url, file, {

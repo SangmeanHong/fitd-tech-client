@@ -34,6 +34,7 @@ function Coaching() {
     return (
         <div className='Coaching'>
             <div>
+                {console.log(`process.env.NODE_ENV`, process.env.NODE_ENV)}
                 <h1 className='coaching_header'>Explore our Coaches</h1>
                 <div className='searchCoach'>
                     <input
