@@ -5,6 +5,7 @@ import BookScheduler from '../../components/BookScheduler/BookScheduler';
 import BookTable from '../../components/BookTable/BookTable';
 
 const Payment = () => {
+	//console.log(`useLocation`, useLocation());
 	const { firstName, lastName, events } = useLocation().state;
 
 	const userInfo = JSON.parse(sessionStorage.getItem('profile'));
