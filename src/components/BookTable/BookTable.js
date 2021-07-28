@@ -24,26 +24,35 @@ const columns = [
 ];
 
 const BookTable = ({ events, firstName, lastName }) => {
-	const [userSelectedSchedule, setUserSelectedSchedule] = useState([]);
+	const [eventIds, setEventIds] = useState([]);
 
-	console.log(`events`, events);
+	// MEMO MEMO
+	// events.map((event, index) => {
+	// 	console.log(`event.id`, event.id);
+	// 	// if (event.id === events) {
+	// 	// 	setUserSelectedSchedule(events);
+	// 	// }
+	// });
+	const handleSend = async () => {
+		const selectedEvents = events.filter((event) =>
+			eventIds.includes(event.id)
+		);
+		console.log(`seselectedEventsle`, selectedEvents);
+		// const result = await axios.post()
+	};
 
-	const modifiedEvents = events.map((map) => {
-		console.log('events.length', events.length);
-		if (events.length > 0) {
-			const tempData = events[0];
-
-			const tempStart = tempData.start.slice(0, 16);
+	const modifiedEvents = events.reduce((acc, curr) => {
+		if (curr.start) {
+			const tempStart = curr.start.slice(0, 16);
 			const modifiedStart = tempStart.replace('T', ' ');
-
-			const tempEnd = tempData.end.slice(0, 16);
+			const tempEnd = curr.end.slice(0, 16);
 			const modifiedEnd = tempEnd.replace('T', ' ');
+			curr['start'] = modifiedStart;
+			curr['end'] = modifiedEnd;
+			acc.push(curr);
 		}
-
-		// return [{ modifiedTitle, modifiedStart, modifiedEnd }];
-	});
-
-	console.log(`modifiedEvents`, modifiedEvents);
+		return acc;
+	}, []);
 
 	return (
 		<div className='container-main'>
@@ -51,14 +60,16 @@ const BookTable = ({ events, firstName, lastName }) => {
 				Coach name : {firstName} {lastName}
 			</div>
 			<DataGrid
-				rows={events}
+				rows={modifiedEvents}
 				columns={columns}
 				pageSize={10}
 				checkboxSelection
 				disableSelectionOnClick
 				onRowSelected
-				onSelectionModelChange={(e) => setUserSelectedSchedule(e)}
+				// onSelectionModelChange={(e) => setUserSelectedSchedule(e)}
+				onSelectionModelChange={(e) => setEventIds(e)}
 			/>
+			<button onClick={() => handleSend()}>Send</button>
 		</div>
 	);
 };

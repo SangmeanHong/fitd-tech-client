@@ -29,12 +29,12 @@ function Copyright() {
 	);
 }
 
-function getStepContent(step) {
+function getStepContent(step, success, setSuccess) {
 	switch (step) {
 		case 0:
 			return <AddressForm />;
 		case 1:
-			return <PaymentForm />;
+			return <PaymentForm success={success} setSuccess={setSuccess} />;
 		default:
 			throw new Error('Unknown step');
 	}
@@ -45,6 +45,7 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 const Checkout = () => {
 	const classes = useStyles();
 	const [activeStep, setActiveStep] = useState(0);
+	const [success, setSuccess] = useState(false);
 
 	const handleNext = () => {
 		setActiveStep(activeStep + 1);
@@ -83,7 +84,7 @@ const Checkout = () => {
 								</Fragment>
 							) : (
 								<Fragment>
-									{getStepContent(activeStep)}
+									{getStepContent(activeStep, success, setSuccess)}
 									<div className={classes.buttons}>
 										{activeStep !== 0 && (
 											<Button onClick={handleBack} className={classes.button}>
@@ -95,6 +96,11 @@ const Checkout = () => {
 											color='primary'
 											onClick={handleNext}
 											className={classes.button}
+											disabled={
+												activeStep !== steps.length - 1 || success
+													? false
+													: true
+											}
 										>
 											{activeStep === steps.length - 1 ? 'Done' : 'Next'}
 										</Button>
