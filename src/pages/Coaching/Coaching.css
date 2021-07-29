@@ -21,31 +21,36 @@
 }
 
 .coachbtn {
-    font-size: 20px;
+	font-size: 20px;
 	padding: 7px 20px;
-    border-radius: 4px;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    white-space: nowrap;
+	border-radius: 4px;
+	outline: none;
+	border: none;
+	cursor: pointer;
+	white-space: nowrap;
 	background-color: #ffa24b;
-    color: #fff;
+	color: #fff;
 }
 
 .coachbtn:hover {
-    color: #fff;
-    background-color: #F89230;
-    transition: all 0.2s ease-out;
-  }
+	color: #fff;
+	background-color: #f89230;
+	transition: all 0.2s ease-out;
+}
 
-.searchCoach input {
-    padding: 8px 24px;
-    border-radius: 2px;
-    margin-right: 10px;
-    outline: none;
-    border: none;
-    font-size: 18px;
-    margin-bottom: 16px;
-    border: 1px solid black;
-    float: left;
+.container-search_btn {
+	height: 50px;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-top: 4%;
+}
+
+.input {
+	/* margin-top: 4%; */
+	width: 300px;
+	height: 40px;
+	margin-left: 25px;
+	padding: 2px;
+	border-radius: 15px;
 }
