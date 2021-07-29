@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import ShowScheduler from '../Modal_BookScheduler/Modal_ShowScheduler';
 import moment from 'moment';
@@ -39,7 +39,7 @@ const BookScheduler = ({ events, setEvents }) => {
 			<Calendar
 				selectable
 				defaultDate={moment().toDate()}
-				defaultView='month'
+				defaultView='week'
 				localizer={localizer}
 				events={events}
 				titleAccessor={events?.title}

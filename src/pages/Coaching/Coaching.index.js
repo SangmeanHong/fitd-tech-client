@@ -4,8 +4,48 @@ import { coachData } from '../../data/coachData';
 import './Coaching.css';
 import { useHistory } from 'react-router';
 import { getCoaches } from '../../libs/getCoaches';
+import TextField from '@material-ui/core/TextField';
+import InputBase from '@material-ui/core/InputBase';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import SearchIcon from '@material-ui/icons/Search';
+import { createMuiTheme } from '@material-ui/core';
+import { makeStyles, withStyles } from '@material-ui/core';
+
+// const CssTextField = withStyles({
+// 	root: {
+// 		'& label.Mui-focused': {
+// 			color: 'green',
+// 		},
+// 		'& .MuiInput-underline:after': {
+// 			borderBottomColor: 'green',
+// 		},
+// 		'& .MuiOutlinedInput-root': {
+// 			'& fieldset': {
+// 				borderColor: 'red',
+// 			},
+// 			'&:hover fieldset': {
+// 				borderColor: 'yellow',
+// 			},
+// 			'&.Mui-focused fieldset': {
+// 				borderColor: 'green',
+// 			},
+// 		},
+// 	},
+// })(TextField);
+
+const useStyles = makeStyles((theme) => ({
+	textField: {
+		border: '1px solid #ffa24b',
+	},
+	inputBase: {
+		border: '1px solid #ffa24b',
+		borderRadius: theme.shape.borderRadius,
+		height: '6vh',
+	},
+}));
 
 function Coaching() {
+	const classes = useStyles();
 	const [user, setUser] = useState(
 		JSON.parse(sessionStorage.getItem('profile'))
 	);
@@ -18,11 +58,7 @@ function Coaching() {
 		history.push('/newcoach');
 	};
 
-	const icon = document.querySelector('.icon');
-	const search = document.querySelector('.search');
-
 	const handleSearch = async (e) => {
-		search.classList.toggle('active');
 		const search = e.target.value;
 		const coaches = await getCoaches(search);
 		setCoaches(coaches);
@@ -37,20 +73,25 @@ function Coaching() {
 
 	return (
 		<div className='Coaching'>
-			<div>
-				<h1 className='coaching_header'>Explore our Coaches</h1>
-				<div className='search-container'>
-					<div className='search'>
-						<div className='icon'>
-							<div className='input'>
-								<input
-									onChange={handleSearch}
-									type='text'
-									placeholder='Search Coach'
-								/>
-							</div>
-						</div>
-					</div>
+			<h1 className='coaching_header'>Explore our Coaches</h1>
+			<div className='container-search_btn'>
+				<div className='input'>
+					<TextField
+						className={classes.textField}
+						id='outlined-basic'
+						label='Search Coach'
+						variant='outlined'
+						size='small'
+						color='primary'
+						onChange={handleSearch}
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position='start'>
+									<SearchIcon />
+								</InputAdornment>
+							),
+						}}
+					/>
 				</div>
 				{userInfo && userInfo.role === 0 ? (
 					<div className='flex-header'>
