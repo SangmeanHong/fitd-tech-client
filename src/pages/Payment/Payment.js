@@ -5,20 +5,20 @@ import BookScheduler from '../../components/BookScheduler/BookScheduler';
 import BookTable from '../../components/BookTable/BookTable';
 
 const Payment = () => {
-	//console.log(`useLocation`, useLocation());
-	const { firstName, lastName, events } = useLocation().state;
+    //console.log(`useLocation`, useLocation());
+    const { firstName, lastName, events } = useLocation().state;
 
-	const userInfo = JSON.parse(sessionStorage.getItem('profile'));
+    const userInfo = JSON.parse(sessionStorage.getItem('profile'));
 
-	return (
-		<div>
-			{userInfo.isMembership === 0 && userInfo._id && <Pricing />}
-			{/* {userInfo.isMembership > 0 && <BookScheduler events={events} />} */}
-			{userInfo.isMembership > 0 && (
-				<BookTable events={events} firstName={firstName} lastName={lastName} />
-			)}
-		</div>
-	);
+    return (
+        <div>
+            {userInfo.isMembership === 0 && userInfo._id && <Pricing events={events} firstName={firstName} lastName={lastName} />}
+            {/* {userInfo.isMembership > 0 && <BookScheduler events={events} />} */}
+            {userInfo.isMembership > 0 && (
+                <BookTable events={events} firstName={firstName} lastName={lastName} />
+            )}
+        </div>
+    );
 };
 
 export default Payment;
