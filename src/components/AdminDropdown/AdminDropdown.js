@@ -5,7 +5,7 @@ import './AdminDropdown.css'
 
 export const AdminDropdown = () => {
     return (
-        <div className="dropdown">
+        <div className="adminDropdown">
             <DropdownButton id="dropdown" title="Admin">
                 <Link to="/manageusers">Manage User</Link>
                 <Link to="/managecontents">Manage Content</Link>

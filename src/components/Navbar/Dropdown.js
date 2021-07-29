@@ -10,14 +10,14 @@ function Dropdown() {
 
     return (
         <>
-            <ul
+            <div
                 onClick={handleClick}
                 className={click ? 'dropdown-menu clicked' : 'dropdown-menu'}
             >
                 {MenuItems.map((item, index) => {
                     const newWebPage = item.path.includes('https://');
                     return (
-                        <li key={index}>
+                        <>
                             {
                                 newWebPage ? (
                                     <a id='contentlink' href='https://play.acast.com/s/ninetwentynine?source=explore-tab' target="_blank" rel="noopener noreferrer">{item.title}</a>
@@ -25,10 +25,10 @@ function Dropdown() {
                                     <Link id='contentlink' to='/articles' >{item.title}</Link>
                                 )
                             }
-                        </li>
+                        </>
                     );
                 })}
-            </ul>
+            </div>
         </>
     );
 }
