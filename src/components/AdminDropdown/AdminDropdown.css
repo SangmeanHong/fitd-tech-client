@@ -5,9 +5,19 @@
 
 #dropdown{
     height: 40px;
+    font-size: 0.875rem;
+}
+
+.defaultAdminDropDown > button{
+      transition: all 0.7s ease-in-out;
     background-color: #f1b175;
     color: white;
-    font-size: 0.875rem;
+}
+
+.scrollDownAdminDropDown > button{
+            background-color: #292828f3;
+      transition: all 0.7s ease-in-out;
+    color: white;
 }
 
 .dropdown-menu.show{
