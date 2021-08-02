@@ -11,38 +11,31 @@ import SearchIcon from '@material-ui/icons/Search';
 import { createMuiTheme } from '@material-ui/core';
 import { makeStyles, withStyles } from '@material-ui/core';
 
-// const CssTextField = withStyles({
-// 	root: {
-// 		'& label.Mui-focused': {
-// 			color: 'green',
+const styles = {
+	root: {
+		border: 'green',
+	},
+	input: {
+		color: 'green',
+	},
+};
+
+// const useStyles = makeStyles({
+// 	underline: {
+// 		// normal style
+// 		'&::before': {
+// 			borderBottom: '4px solid green',
 // 		},
-// 		'& .MuiInput-underline:after': {
-// 			borderBottomColor: 'green',
+// 		// hover style
+// 		'&:hover:not(.Mui-disabled):before': {
+// 			borderBottom: '4px solid blue',
 // 		},
-// 		'& .MuiOutlinedInput-root': {
-// 			'& fieldset': {
-// 				borderColor: 'red',
-// 			},
-// 			'&:hover fieldset': {
-// 				borderColor: 'yellow',
-// 			},
-// 			'&.Mui-focused fieldset': {
-// 				borderColor: 'green',
-// 			},
+// 		// focus style
+// 		'&::after': {
+// 			borderBottom: '4px solid red',
 // 		},
 // 	},
-// })(TextField);
-
-const useStyles = makeStyles((theme) => ({
-	textField: {
-		border: '1px solid #ffa24b',
-	},
-	inputBase: {
-		border: '1px solid #ffa24b',
-		borderRadius: theme.shape.borderRadius,
-		height: '6vh',
-	},
-}));
+// });
 
 function Coaching() {
 	const classes = useStyles();
@@ -90,6 +83,7 @@ function Coaching() {
 									<SearchIcon />
 								</InputAdornment>
 							),
+							className: classes.input,
 						}}
 					/>
 				</div>
