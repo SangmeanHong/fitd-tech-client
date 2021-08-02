@@ -38,7 +38,8 @@ const styles = {
 // });
 
 function Coaching() {
-	const classes = useStyles();
+	//const {classes} = props;
+	// const classes = useStyles();
 	const [user, setUser] = useState(
 		JSON.parse(sessionStorage.getItem('profile'))
 	);
@@ -70,7 +71,7 @@ function Coaching() {
 			<div className='container-search_btn'>
 				<div className='input'>
 					<TextField
-						className={classes.textField}
+						//className={classes.textField}
 						id='outlined-basic'
 						label='Search Coach'
 						variant='outlined'
@@ -83,7 +84,7 @@ function Coaching() {
 									<SearchIcon />
 								</InputAdornment>
 							),
-							className: classes.input,
+							//className: classes.input,
 						}}
 					/>
 				</div>
