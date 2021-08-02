@@ -4,42 +4,9 @@ import { coachData } from '../../data/coachData';
 import './Coaching.css';
 import { useHistory } from 'react-router';
 import { getCoaches } from '../../libs/getCoaches';
-import TextField from '@material-ui/core/TextField';
-import InputBase from '@material-ui/core/InputBase';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import SearchIcon from '@material-ui/icons/Search';
-import { createMuiTheme } from '@material-ui/core';
-import { makeStyles, withStyles } from '@material-ui/core';
-
-const styles = {
-	root: {
-		border: 'green',
-	},
-	input: {
-		color: 'green',
-	},
-};
-
-// const useStyles = makeStyles({
-// 	underline: {
-// 		// normal style
-// 		'&::before': {
-// 			borderBottom: '4px solid green',
-// 		},
-// 		// hover style
-// 		'&:hover:not(.Mui-disabled):before': {
-// 			borderBottom: '4px solid blue',
-// 		},
-// 		// focus style
-// 		'&::after': {
-// 			borderBottom: '4px solid red',
-// 		},
-// 	},
-// });
+import { BiSearch } from 'react-icons/bi';
 
 function Coaching() {
-	//const {classes} = props;
-	// const classes = useStyles();
 	const [user, setUser] = useState(
 		JSON.parse(sessionStorage.getItem('profile'))
 	);
@@ -69,24 +36,17 @@ function Coaching() {
 		<div className='Coaching'>
 			<h1 className='coaching_header'>Explore our Coaches</h1>
 			<div className='container-search_btn'>
-				<div className='input'>
-					<TextField
-						//className={classes.textField}
-						id='outlined-basic'
-						label='Search Coach'
-						variant='outlined'
-						size='small'
-						color='primary'
+				<div className='search-box'>
+					<input
+						type='text'
+						className='search-txt'
+						name=''
+						placeholder='Search Coach'
 						onChange={handleSearch}
-						InputProps={{
-							startAdornment: (
-								<InputAdornment position='start'>
-									<SearchIcon />
-								</InputAdornment>
-							),
-							//className: classes.input,
-						}}
 					/>
+					<a className='search-btn' href='#'>
+						<BiSearch size={25} />
+					</a>
 				</div>
 				{userInfo && userInfo.role === 0 ? (
 					<div className='flex-header'>
