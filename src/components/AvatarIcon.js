@@ -6,6 +6,8 @@ import { Link, useHistory } from 'react-router-dom';
 import { LOGOUT_REQUEST } from '../redux/constants/actionTypes';
 import { AdminDropdown } from './AdminDropdown/AdminDropdown';
 import './Avatar.css';
+import { CoachDropdown } from './CoachDropdown/CoachDropdown';
+import { GeneralUserDropdown } from './GeneralUserDropdown/GeneralUserDropdown';
 // import decode from 'jwt-decode';
 
 const AvatarIcon = ({ scrollDown }) => {
@@ -31,7 +33,7 @@ const AvatarIcon = ({ scrollDown }) => {
 					style={{
 						display: 'flex',
 						justifyContent: 'space-between',
-						width: `${user.role === 0 ? '200px' : '250px'}`,
+						width: `250px`,
 					}}
 				>
 					<Avatar
@@ -50,6 +52,8 @@ const AvatarIcon = ({ scrollDown }) => {
 						Logout
 					</Button>
 					{user.role === 2 && <AdminDropdown scrollDown={scrollDown} />}
+					{user.role === 1 && <CoachDropdown scrollDown={scrollDown} />}
+					{user.role === 0 && <GeneralUserDropdown scrollDown={scrollDown} />}
 				</div>
 			) : (
 				<Link

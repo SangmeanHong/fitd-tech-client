@@ -19,6 +19,7 @@ import { ManageUsersPage } from '../pages/Admin/ManageUsersPage/ManageUsersPage'
 import Payment from '../pages/Payment/Payment';
 import Checkout from '../components/Checkout/Checkout';
 import BookTable from '../components/BookTable/BookTable';
+import { ManageUserSchedule } from '../pages/ManageUserSchedule/ManageUserSchedule';
 
 const RootRoute = () => {
     return (
@@ -35,6 +36,7 @@ const RootRoute = () => {
                     <Route path='/coaching' component={Coaching} />
                     <Route path='/content' component={Content} />
                     <Route path='/payment' component={Payment} />
+                    <Route path='/managemyschedule/user' component={ManageUserSchedule} />
                     ManageUsers
                     <Route path='/manageusers' component={ManageUsersPage} />
                     <Route path='/auth' component={Auth} />
