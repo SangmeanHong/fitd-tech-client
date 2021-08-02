@@ -8,7 +8,7 @@ import { AdminDropdown } from './AdminDropdown/AdminDropdown';
 import './Avatar.css';
 // import decode from 'jwt-decode';
 
-const AvatarIcon = () => {
+const AvatarIcon = ({ scrollDown }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const history = useHistory();
@@ -29,7 +29,7 @@ const AvatarIcon = () => {
             {user ? (
                 <div style={{ display: 'flex', justifyContent: 'space-between', width: `${user.role === 0 ? '200px' : '250px'}` }}>
                     <Avatar
-                        className={classes.purple}
+                        className={`${scrollDown ? 'scrolldownBtn' : 'defaultBtn'}`}
                         alt={user.firstNname}
                         src={user.imageUrl}
                     >
@@ -43,10 +43,10 @@ const AvatarIcon = () => {
                     >
                         Logout
                     </Button>
-                    {user.role === 2 && <AdminDropdown />}
+                    {user.role === 2 && <AdminDropdown scrollDown={scrollDown} />}
                 </div>
             ) : (
-                <Link className='avatarButton' to='/auth'>
+                <Link className={`avatarButton ${scrollDown ? 'scrolldownBtn' : 'defaultBtn'}`} to='/auth'>
                     Get Started
                 </Link>
             )}

@@ -1,7 +1,5 @@
 
 .avatarButton{
-    background-color: #f1b175;
-    color: white;
     text-decoration: none;
     padding: 10px;
     border-radius: 10px;
@@ -13,4 +11,22 @@
 
 .MuiButton-contained {
     background-color: white;
+}
+
+
+
+.defaultBtn{
+    background-color: #f1b175;
+      transition: all 0.7s ease-in-out;
+    color: white;
+}
+
+.scrolldownBtn{
+        background-color: #292828f3;
+      transition: all 0.7s ease-in-out;
+    color: white;
+}
+
+.scrolldownBtn:hover{
+        background-color: #000000f3;
 }

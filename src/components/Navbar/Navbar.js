@@ -52,10 +52,26 @@ const Navbar = () => {
         return {};
     }, []);
 
+    const [scrollDown, setScrollDown] = useState(false);
+    const controlNavbar = () => {
+        if (window.scrollY < 100) {
+            setScrollDown(false);
+        } else {
+            setScrollDown(true);
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', controlNavbar);
+        return () => {
+            window.removeEventListener('scroll', controlNavbar);
+        }
+    }, []);
+
     return (
         <>
             <IconContext.Provider value={{ color: '#fff' }}>
-                <nav className='navbar'>
+                <nav className={`navbar ${scrollDown ? 'scrolldown' : 'default'}`}>
                     <div className='navbar-container container'>
                         <Link
                             to='/'
@@ -63,27 +79,17 @@ const Navbar = () => {
                             className='navbar-logo'
                             onClick={closeMobileMenu}
                         >
-                            <RiDoorOpenFill style={{color:'#000000da'}} className='navbar-icon' />
-                            FITD
+                            <RiDoorOpenFill style={{ color: scrollDown ? '#fff' : '#000000da' }} className='navbar-icon' />
+                            <span style={{ color: scrollDown ? '#fff' : '#000000da' }}>FITD</span>
                         </Link>
                         <div className='menu-icon' onClick={handleClick}>
                             {click ? (
-                                <FaTimes style={{ color: 'black' }} />
+                                <FaTimes style={{ color: scrollDown ? '#fff' : '#000000da' }} />
                             ) : (
-                                <FaBars style={{ color: 'black' }} />
+                                <FaBars style={{ color: scrollDown ? '#fff' : '#000000da' }} />
                             )}
                         </div>
                         <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-                            {/* <li className='nav-item'>
-                                <Link
-                                    to='/category'
-                                    className='nav-links'
-                                    onClick={closeMobileMenu}
-                                >
-                                    Category
-                                </Link>
-                            </li> */}
-                            {/* <li className='nav-item'> */}
                             <li
                                 className='nav-item'
                                 onMouseEnter={onMouseEnter}
@@ -91,7 +97,7 @@ const Navbar = () => {
                             >
                                 <Link
                                     to='/content'
-                                    className='nav-links'
+                                    className={`nav-links ${scrollDown ? 'scrolldownLink' : 'default'}`}
                                     onClick={closeMobileMenu}
                                 >
                                     Content <i className='fas fa-caret-down' />
@@ -101,24 +107,24 @@ const Navbar = () => {
                             <li className='nav-item'>
                                 <Link
                                     to='/coaching'
-                                    className='nav-links'
+                                    className={`nav-links ${scrollDown ? 'scrolldownLink' : 'default'}`}
                                     onClick={closeMobileMenu}
                                 >
                                     Coaching
                                 </Link>
                             </li>
-                            
+
                             <li className='nav-item'>
                                 <Link
                                     to='/faq'
-                                    className='nav-links'
+                                    className={`nav-links ${scrollDown ? 'scrolldownLink' : 'default'}`}
                                     onClick={closeMobileMenu}
                                 >
                                     FAQ
                                 </Link>
                             </li>
                             <li className='nav-btn'>
-                                <AvatarIcon />
+                                <AvatarIcon scrollDown={scrollDown} />
                             </li>
                         </ul>
                     </div>
