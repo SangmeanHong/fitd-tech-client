@@ -33,7 +33,6 @@ const PaymentForm = ({ success, setSuccess, membershipData, _id }) => {
 					},
 					{ withCredentials: true }
 				);
-				console.log(`response`, response);
 				const { isMembership } = response.data.user;
 
 				if (response.data.success) {

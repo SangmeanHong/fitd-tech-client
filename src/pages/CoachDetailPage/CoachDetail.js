@@ -21,8 +21,6 @@ export const CoachDetail = () => {
 	const [noMoreReviews, setNoMoreReviews] = useState(false);
 	const profile = JSON.parse(sessionStorage.getItem('profile'));
 	const history = useHistory();
-	// console.log(`useLocation()`, useLocation());
-	// console.log(`coachData`, coachData);
 	const {
 		firstName,
 		lastName,
@@ -38,19 +36,12 @@ export const CoachDetail = () => {
 	} = coachData;
 
 	const onClickBookBtn = () => {
-		console.log(`coachData`, coachData);
 		history.push({
 			pathname: `/payment/${firstName} ${lastName}`,
 			state: coachData,
 		});
 	};
-	//console.log(`firstName`, firstName);
 
-	// this.props.history.push({
-	//     pathname: '/template',
-	//     search: '?query=abc',
-	//     state: { detail: response.data }
-	//   })
 	const ratingChange = (event, value) => {
 		setRating(value?.toString());
 	};
@@ -63,9 +54,6 @@ export const CoachDetail = () => {
 				firstName: logginUserFirstName,
 				lastName: logginUserLastName,
 			} = profile;
-			console.log(`rating`, rating);
-			console.log(`comment`, comment);
-			console.log(`coachData`, coachData);
 			const coachId = coachData._id;
 			const loginUserFullname = `${logginUserFirstName} ${logginUserLastName}`;
 			const reviewObj = {
@@ -80,7 +68,6 @@ export const CoachDetail = () => {
 				reviewObj,
 				{ withCredentials: true }
 			);
-			console.log(`result 코치데이터에서`, result);
 			setComment('');
 		}
 		setSubmittedReview(true);
@@ -95,7 +82,7 @@ export const CoachDetail = () => {
 				}
 			);
 			const reviews = data.reviews;
-			console.log(`reviews 리뷰찾기`, reviews);
+
 			setReviews(reviews);
 			if (profile) {
 				const { _id } = profile;
@@ -103,7 +90,6 @@ export const CoachDetail = () => {
 					reviews.filter((data) => data.creator === _id).length > 0
 						? true
 						: false;
-				// console.log(`alreadyReviewed`, alreadyReviewed);
 				setNoMoreReviews(alreadyReviewed);
 			}
 		})();
