@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import HeroSection from '../Home/HeroSection';
 import { homeObjOne, homeObjTwo, homeObjThree, homeObjFour } from './Data';
 import Pricing from '../Home/Pricing';
 
 function Content() {
-  return (
-    <>
-      <HeroSection {...homeObjOne} />
-      <HeroSection {...homeObjTwo} />
-      <HeroSection {...homeObjThree} />
-      {/* <HeroSection {...homeObjFour} /> */}
-    </>
-  );
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
+    return (
+        <>
+            <HeroSection {...homeObjOne} />
+            <HeroSection {...homeObjTwo} />
+            {/* <HeroSection {...homeObjFour} /> */}
+        </>
+    );
 }
 
 export default Content;

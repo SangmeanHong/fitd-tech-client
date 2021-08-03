@@ -12,7 +12,8 @@ export const homeObjOne = {
     imgStart: '',
     img: 'images/coach-svg-2.svg',
     alt: 'Coaches',
-    buttonId:1
+    buttonId: 1,
+    browse: '/coaching',
 };
 
 export const homeObjTwo = {
@@ -20,14 +21,15 @@ export const homeObjTwo = {
     lightText: false,
     lightTextDesc: false,
     topLine: 'Easy Setup',
-    headline: '<span>How it works</span>',
+    headline: '<span>How it works, FAQ</span>',
     description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     buttonLabel: 'Learn More',
     imgStart: 'start',
     img: 'images/setup-svg-1.svg',
     alt: 'Setup',
-    buttonId:2
+    buttonId: 2,
+    browse: '/faq',
 
 };
 
@@ -43,7 +45,8 @@ export const homeObjThree = {
     imgStart: '',
     img: 'images/content-svg-1.svg',
     alt: 'Content',
-    buttonId:3
+    buttonId: 3,
+    browse: '/content',
 
 };
 
@@ -59,5 +62,6 @@ export const homeObjFour = {
     imgStart: 'start',
     img: 'images/coach-svg-1.svg',
     alt: 'Coach',
-    buttonId:4
+    buttonId: 4,
+    browse: '/newcoach',
 };
