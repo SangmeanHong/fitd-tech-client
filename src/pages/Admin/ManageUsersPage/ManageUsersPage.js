@@ -43,7 +43,6 @@ export function ManageUsersPage() {
 	}, [dispatch, success]);
 
 	const handleApprove = (userId) => {
-		console.log(`userId`, userId);
 		dispatch(actionApproveApplication(userId));
 		setOpen(false);
 		dispatch(actionGetUsers());
@@ -78,7 +77,6 @@ export function ManageUsersPage() {
 		const filteredApplication = applications.filter(
 			(data) => data.user === id
 		)[0];
-		console.log(`filteredApplication`, filteredApplication);
 		filteredApplication['role'] = role;
 		setUserApplication(filteredApplication);
 		setOpen(true);
@@ -94,13 +92,9 @@ export function ManageUsersPage() {
 	};
 	useEffect(() => {
 		if (users) {
-			// setPageData(createdReviews.slice(0, 4) as reviewType[]); // 0 2 , 1 3, 2 4           0 2 , 2 4, 4 6
-			// 우선 먼저 sort 를 해서 순서를 바꿔주고 slice 로 data를 나눠준다.
-			setPageData(users.slice(indexOfFirst, indexOfLast)); // 0 2 , 1 3, 2 4           0 2 , 2 4, 4 6
+			setPageData(users.slice(indexOfFirst, indexOfLast));
 		}
 	}, [indexOfFirst, indexOfLast, users]);
-
-	// ****************************************
 
 	return (
 		<div className='manageUserPage'>
@@ -192,42 +186,3 @@ export function ManageUsersPage() {
 		</div>
 	);
 }
-
-// <TableContainer className="manageUserTable" component={Paper}>
-//     {console.log(users)}
-//     <Table className={classes.table} aria-label="simple table">
-//         <TableHead>
-//             <TableRow >
-//                 <TableCell align="right">Name</TableCell>
-//                 <TableCell align="right">Email</TableCell>
-//                 <TableCell align="right">Linkedin</TableCell>
-//                 <TableCell align="right">Hours&nbsp;(week)</TableCell>
-//                 <TableCell align="right">certification</TableCell>
-//                 <TableCell align="right">wage&nbsp;($)</TableCell>
-//                 <TableCell align="right">Modify</TableCell>
-//             </TableRow>
-//         </TableHead>
-//         <TableBody>
-//             {/* {console.log(users)}
-//                             {users.map((user, index) => (
-//                                 <TableRow style={index % 2 === 0 ? { backgroundColor: '#f1b175' } : null} key={index}>
-//                                     <TableCell component="th" scope="row">
-//                                         {`${user.firstName} ${user.lastName}`}
-//                                     </TableCell>
-//                                     <TableCell align="right">{user.email}</TableCell>
-//                                     <TableCell align="right">{user.linkedIn}</TableCell>
-//                                     <TableCell align="right">{user.hoursPerWeek} h</TableCell>
-//                                     <TableCell align="right"> {
-//                                         user.expertiseArea.map((area) => {
-//                                             return (
-//                                                 area.label
-//                                             )
-//                                         })
-//                                     }</TableCell>
-//                                     <TableCell align="right">$ {user.wage}</TableCell>
-//                                     <TableCell align="right">수정할부분</TableCell>
-//                                 </TableRow>
-//                             ))} */}
-//         </TableBody>
-//     </Table>
-// </TableContainer>

@@ -106,7 +106,6 @@ const NewCoach = () => {
 	const ProvideCheckboxonChange =
 		(index) =>
 		({ target: { checked } }) => {
-			console.log(`checked`, checked);
 			const newValues = [...provideChecked];
 			const value = provideChecked[index];
 			newValues[index] = { ...value, checked };
@@ -260,17 +259,16 @@ const NewCoach = () => {
 			const result = await axios.get(
 				`${API}/api/user/s3Url/newCoach-${file.name}`
 			);
+
 			const url = result.data.url;
-			console.log(`url`, url);
+
 			const imgUrl = await axios.put(url, file, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
 				},
 			});
-			console.log(`imgUrl`, imgUrl);
 
 			const uploadFile = url.split('?')[0];
-			console.log('uploadFile', uploadFile);
 
 			const obj = coachProfileObj({
 				firstName,
@@ -292,7 +290,6 @@ const NewCoach = () => {
 				coachAgreeChecked,
 				events,
 			});
-			// console.log(`obj`, obj);
 			setTimeout(() => {
 				dispatch(actionNewCoach(obj));
 			}, 2000);

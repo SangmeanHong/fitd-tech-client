@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import actionUserSchedule from '../../redux/actions/actionUserSchedule';
 import { DataGrid } from '@material-ui/data-grid';
 import './bookTableStyles.css';
 
@@ -24,24 +27,26 @@ const columns = [
 ];
 
 const BookTable = ({ events, firstName, lastName }) => {
+	const dispatch = useDispatch();
+	const history = useHistory();
+
 	const [eventIds, setEventIds] = useState([]);
 
-	// MEMO MEMO
-	// events.map((event, index) => {
-	// 	console.log(`event.id`, event.id);
-	// 	// if (event.id === events) {
-	// 	// 	setUserSelectedSchedule(events);
-	// 	// }
-	// });
 	const handleSend = async () => {
 		const selectedEvents = events.filter((event) =>
 			eventIds.includes(event.id)
 		);
-		console.log(`seselectedEventsle`, selectedEvents);
-		// const result = await axios.post()
+		if (selectedEvents) {
+			dispatch(actionUserSchedule(selectedEvents));
+			history.push('/');
+		} else {
+			alert('Please check the time you want to take the coach');
+			return;
+		}
 	};
+	const copiedEvents = JSON.parse(JSON.stringify(events));
 
-	const modifiedEvents = events.reduce((acc, curr) => {
+	const modifiedEvents = copiedEvents.reduce((acc, curr) => {
 		if (curr.start) {
 			const tempStart = curr.start.slice(0, 16);
 			const modifiedStart = tempStart.replace('T', ' ');
@@ -59,17 +64,22 @@ const BookTable = ({ events, firstName, lastName }) => {
 			<div className='coachInfo'>
 				Coach name : {firstName} {lastName}
 			</div>
-			<DataGrid
-				rows={modifiedEvents}
-				columns={columns}
-				pageSize={10}
-				checkboxSelection
-				disableSelectionOnClick
-				onRowSelected
-				// onSelectionModelChange={(e) => setUserSelectedSchedule(e)}
-				onSelectionModelChange={(e) => setEventIds(e)}
-			/>
-			<button onClick={() => handleSend()}>Send</button>
+			<div className='data-grid'>
+				<DataGrid
+					rows={modifiedEvents}
+					columns={columns}
+					pageSize={10}
+					checkboxSelection
+					disableSelectionOnClick
+					onRowSelected
+					onSelectionModelChange={(e) => setEventIds(e)}
+				/>
+			</div>
+			<div className='container-btn'>
+				<button className='sendBtn' onClick={() => handleSend()}>
+					Send
+				</button>
+			</div>
 		</div>
 	);
 };

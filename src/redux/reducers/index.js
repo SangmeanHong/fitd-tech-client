@@ -7,16 +7,18 @@ import getUsersReducer from './reducer.getUsers';
 import getCoachesReducer from './reducer.getCoaches';
 import approveApplicationReducer from './reducer.ApproveApplication';
 import addContentReducer from './reducer.addContent';
+import addUserSchedule from './reducer.addUserSchedule';
 
 const rootReducer = combineReducers({
-    authReducer,
-    forgotPwdReducer,
-    resetPwdReducer,
-    newCoachReducer,
-    getUsersReducer,
-    getCoachesReducer,
-    approveApplicationReducer,
-    addContentReducer,
+	authReducer,
+	forgotPwdReducer,
+	resetPwdReducer,
+	newCoachReducer,
+	getUsersReducer,
+	getCoachesReducer,
+	approveApplicationReducer,
+	addContentReducer,
+	addUserSchedule,
 });
 
 export default rootReducer;
