@@ -1,27 +1,32 @@
 import React from 'react';
-
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 
-const ManageUserSchedule = ({ events }) => {
+const ManageUserSchedule = () => {
+	const { events } =
+		sessionStorage.getItem('profile') &&
+		JSON.parse(sessionStorage.getItem('profile'));
+
 	const localizer = momentLocalizer(moment);
+
+	events.map((data) => {
+		data['start'] = new Date(data.start);
+		data['end'] = new Date(data.end);
+	});
+
 	return (
-		<React.Fragment>
-			<div>general user schedule.</div>
-			{/* <div>
-				<Calendar
-					defaultDate={moment().toDate()}
-					defaultView='week'
-					localizer={localizer}
-					events={events}
-					titleAccessor={events?.title}
-					startAccessor={events?.start}
-					endAccessor={events?.end}
-					onSelectEvent={(e) => handleEventResult(e)}
-					onSelectSlot={handleSelect}
-				/>
-			</div> */}
-		</React.Fragment>
+		<div className='container-main'>
+			<Calendar
+				selectable='false'
+				defaultDate={moment().toDate()}
+				defaultView='week'
+				localizer={localizer}
+				events={events}
+				titleAccessor={events.title}
+				startAccessor={events.start}
+				endAccessor={events.end}
+			/>
+		</div>
 	);
 };
 
