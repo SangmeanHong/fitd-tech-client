@@ -38,7 +38,7 @@ const BookTable = ({ events, firstName, lastName, coachId }) => {
         );
         if (selectedEvents.length > 0) {
             dispatch(actionUserSchedule({ selectedEvents, coachId }));
-            history.push('/');
+            // history.push('/');
         } else {
             alert('Please check the time you want to take the coach');
             return;

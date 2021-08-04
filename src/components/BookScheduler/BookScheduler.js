@@ -27,10 +27,6 @@ const BookScheduler = ({ events, setEvents }) => {
         setOpen(true);
     };
 
-    const checkBtn = () => {
-        console.log(`events`, events)
-    }
-
     return (
         <div className='container-main'>
             <ShowScheduler
@@ -53,7 +49,6 @@ const BookScheduler = ({ events, setEvents }) => {
                 onSelectSlot={handleSelect}
                 eventPropGetter={(eventStyleGetter)}
             />
-            <button onClick={() => checkBtn()}>check</button>
         </div>
     );
 };
