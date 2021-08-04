@@ -4,7 +4,9 @@ import { useDispatch } from 'react-redux';
 import actionUserSchedule from '../../redux/actions/actionUserSchedule';
 import { DataGrid } from '@material-ui/data-grid';
 import './bookTableStyles.css';
-
+import { useSelector } from 'react-redux';
+import LoadingSpinner from '../LoadingSpinner';
+import { MessageBox } from '../MessageBox';
 const columns = [
     {
         field: 'title',
@@ -29,18 +31,32 @@ const columns = [
 const BookTable = ({ events, firstName, lastName, coachId }) => {
     const dispatch = useDispatch();
     const history = useHistory();
-
+    // const { error, loading } = useSelector((state) => state.addUserSchedule);
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState('');
     const [eventIds, setEventIds] = useState([]);
 
     const handleSend = async () => {
+        setLoading(true);
         const selectedEvents = events.filter((event) =>
             eventIds.includes(event.id)
         );
         if (selectedEvents.length > 0) {
             dispatch(actionUserSchedule({ selectedEvents, coachId }));
-            // history.push('/');
+            setTimeout(() => {
+                setLoading(false);
+                const currentSession = JSON.parse(sessionStorage.getItem('profile'));
+                currentSession.events = [...currentSession.events, ...selectedEvents];
+                sessionStorage.setItem('profile', JSON.stringify(currentSession));
+                setMessage('Booking Completed, redirecting to Home Page...');
+            }, 1500);
+
+            setTimeout(() => {
+                history.push('/');
+            }, 3500);
         } else {
             alert('Please check the time you want to take the coach');
+            setLoading(false);
             return;
         }
     };
@@ -73,6 +89,12 @@ const BookTable = ({ events, firstName, lastName, coachId }) => {
                     onRowSelected
                     onSelectionModelChange={(e) => setEventIds(e)}
                 />
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+                {message !== '' && <MessageBox>{message}</MessageBox>}
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+                {loading && <LoadingSpinner />}
             </div>
             <div className='container-btn'>
                 <button className='sendBtn' onClick={() => handleSend()}>

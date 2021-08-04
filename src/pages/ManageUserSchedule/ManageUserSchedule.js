@@ -3,31 +3,34 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 
 const ManageUserSchedule = () => {
-	const { events } =
-		sessionStorage.getItem('profile') &&
-		JSON.parse(sessionStorage.getItem('profile'));
+    const { events } =
+        sessionStorage.getItem('profile') &&
+        JSON.parse(sessionStorage.getItem('profile'));
 
-	const localizer = momentLocalizer(moment);
+    const localizer = momentLocalizer(moment);
 
-	events.map((data) => {
-		data['start'] = new Date(data.start);
-		data['end'] = new Date(data.end);
-	});
+    events.map((data) => {
+        data['start'] = new Date(data.start);
+        data['end'] = new Date(data.end);
+    });
 
-	return (
-		<div className='container-main'>
-			<Calendar
-				selectable='false'
-				defaultDate={moment().toDate()}
-				defaultView='week'
-				localizer={localizer}
-				events={events}
-				titleAccessor={events.title}
-				startAccessor={events.start}
-				endAccessor={events.end}
-			/>
-		</div>
-	);
+    return (
+        <div className='container-main'>
+            <div className='manageCoachSchdule-title'>
+                Check Your Schedule
+            </div>
+            <Calendar
+                selectable='false'
+                defaultDate={moment().toDate()}
+                defaultView='week'
+                localizer={localizer}
+                events={events}
+                titleAccessor={events.title}
+                startAccessor={events.start}
+                endAccessor={events.end}
+            />
+        </div>
+    );
 };
 
 export default ManageUserSchedule;

@@ -1,11 +1,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import BookScheduler from '../../components/BookScheduler/BookScheduler'
+import LoadingSpinner from '../../components/LoadingSpinner';
+import { MessageBox } from '../../components/MessageBox';
 import { API } from '../../config';
 import './ManageCoachSchedule.css';
 
 export const ManageCoachSchedule = () => {
     const [events, setEvents] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState('');
     const { _id } = JSON.parse(sessionStorage.getItem('profile'));
     useEffect(() => {
         (
@@ -13,7 +17,6 @@ export const ManageCoachSchedule = () => {
                 const { data } = await axios.post(`${API}/api/user/getApplication`, {}, {
                     withCredentials: true
                 });
-                console.log(`_id`, _id)
                 const application = data.app.filter((data) => data.user === _id);
                 if (application.length > 0) {
                     const events = application[0].events
@@ -29,10 +32,20 @@ export const ManageCoachSchedule = () => {
     }, []);
 
     const handleSubmit = async () => {
-        const result = await axios.post(`${API}/api/schedule/manage-coach-schedule`, { changedEvents: events }, {
+        setLoading(true);
+        await axios.post(`${API}/api/schedule/manage-coach-schedule`, { changedEvents: events }, {
             withCredentials: true
         });
-        console.log(`result`, result)
+
+        setTimeout(() => {
+            setLoading(false);
+            setMessage('Schedule is Updated');
+        }, 1500);
+        setTimeout(() => {
+            setMessage('');
+        }, 2500);
+
+
     }
 
     return (
@@ -43,9 +56,15 @@ export const ManageCoachSchedule = () => {
             <div className='manageCoachSchdule-scheduler'>
                 <BookScheduler events={events} setEvents={setEvents} />
             </div>
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+                {message !== '' && <MessageBox>{message}</MessageBox>}
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+                {loading && <LoadingSpinner />}
+            </div>
             <div className='manageCoachSchdule-btn'>
                 <button className='sendBtn' onClick={() => handleSubmit()}>
-                    Send
+                    Update
                 </button>
             </div>
         </div>
