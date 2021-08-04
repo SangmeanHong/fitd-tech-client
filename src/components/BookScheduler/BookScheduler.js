@@ -10,46 +10,51 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './styles.css';
 
 const BookScheduler = ({ events, setEvents }) => {
-	const [open, setOpen] = useState(false);
-	const [selectedEvent, setSelectedEvent] = useState();
+    const [open, setOpen] = useState(false);
+    const [selectedEvent, setSelectedEvent] = useState();
 
-	const localizer = momentLocalizer(moment);
+    const localizer = momentLocalizer(moment);
 
-	const handleSelect = ({ start, end }) => {
-		const title = window.prompt('Coaching Title Name');
-		if (title) {
-			setEvents([...events, { title, start, end, id: uuidv4() }]);
-		}
-	};
+    const handleSelect = ({ start, end }) => {
+        const title = window.prompt('Coaching Title Name');
+        if (title) {
+            setEvents([...events, { title, start, end, id: uuidv4(), booked: false }]);
+        }
+    };
 
-	const handleEventResult = (eventData) => {
-		setSelectedEvent(eventData);
-		setOpen(true);
-	};
+    const handleEventResult = (eventData) => {
+        setSelectedEvent(eventData);
+        setOpen(true);
+    };
 
-	return (
-		<div className='container-main'>
-			<ShowScheduler
-				open={open}
-				setOpen={setOpen}
-				events={events}
-				setEvents={setEvents}
-				selectedEvent={selectedEvent}
-			/>
-			<Calendar
-				selectable
-				defaultDate={moment().toDate()}
-				defaultView='week'
-				localizer={localizer}
-				events={events}
-				titleAccessor={events?.title}
-				startAccessor={events?.start}
-				endAccessor={events?.end}
-				onSelectEvent={(e) => handleEventResult(e)}
-				onSelectSlot={handleSelect}
-			/>
-		</div>
-	);
+    const checkBtn = () => {
+        console.log(`events`, events)
+    }
+
+    return (
+        <div className='container-main'>
+            <ShowScheduler
+                open={open}
+                setOpen={setOpen}
+                events={events}
+                setEvents={setEvents}
+                selectedEvent={selectedEvent}
+            />
+            <Calendar
+                selectable
+                defaultDate={moment().toDate()}
+                defaultView='week'
+                localizer={localizer}
+                events={events}
+                titleAccessor={events?.title}
+                startAccessor={events?.start}
+                endAccessor={events?.end}
+                onSelectEvent={(e) => handleEventResult(e)}
+                onSelectSlot={handleSelect}
+            />
+            <button onClick={() => checkBtn()}>check</button>
+        </div>
+    );
 };
 
 export default BookScheduler;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
@@ -12,7 +12,7 @@ import { API } from '../../config';
 
 export const CoachDetail = () => {
     const coachData = useLocation().state;
-    const [rating, setRating] = useState('Select');
+    const [rating, setRating] = useState('2.5');
     const [comment, setComment] = useState('');
     const [reviews, setReviews] = useState([]);
     const [submittedReview, setSubmittedReview] = useState(false);
@@ -54,6 +54,11 @@ export const CoachDetail = () => {
 
     const handleSubmitReview = async () => {
         setSubmittedReview(false);
+        console.log(`rating`, rating)
+        console.log(`reviews`, reviews)
+        if (comment === '') {
+            return alert('Should leave message');
+        }
         if (profile) {
             const {
                 _id,
@@ -110,6 +115,7 @@ export const CoachDetail = () => {
         setPage(value);
     };
     useEffect(() => {
+        window.scrollTo(0, 0);
         if (reviews) {
             setPageData(reviews.slice(indexOfFirst, indexOfLast));
         }
@@ -131,7 +137,7 @@ export const CoachDetail = () => {
                 </div>
                 {userInfo?.role === 0 || userInfo === null ? (
                     <div className='leftSubscribeBtn'>
-                        <button onClick={onClickBookBtn}>Book Coach</button>
+                        <button className="bookBtn" onClick={onClickBookBtn}>Book Coach</button>
                     </div>
                 ) : (
                     ''
@@ -211,7 +217,7 @@ export const CoachDetail = () => {
                         style={{ fontSize: '30px' }}
                     />
 
-                    <div className=''>
+                    <div className='rightBottomRating'>
                         <h2 className='rightBottomSubTitle'>Comment</h2>
                         <TextField
                             id='outlined-multiline-static'

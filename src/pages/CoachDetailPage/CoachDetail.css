@@ -22,7 +22,6 @@
 	flex-direction: column;
 	margin-bottom: 100px;
 	justify-content: space-between;
-	height: 150vh;
 }
 
 .leftImg {
@@ -67,9 +66,9 @@
 	width: 170px;
 }
 
-button {
-	margin-left: 30%;
+.bookBtn {
 	font-weight: bold;
+    width: 100%;
 }
 
 .leftSubscribeBtn > button {
@@ -190,4 +189,23 @@ button {
 
 .creatorName {
 	font-weight: bolder;
+}
+
+
+.rightTop{
+    margin-bottom: 30px;
+}
+
+.rightMiddle{
+ margin-bottom: 30px;
+}
+.rightReviews{
+ margin-bottom: 30px;
+}
+.rightBottom{
+ margin-bottom: 30px;
+}
+
+.rightBottomRating{
+    margin-top: 30px;
 }

@@ -7,7 +7,7 @@ export const CoachDropdown = ({ scrollDown }) => {
     return (
         <div className={`adminDropdown`}>
             <DropdownButton id="dropdown" className={scrollDown ? 'scrollDownAdminDropDown' : 'defaultAdminDropDown'} title="Coach">
-                <Link to="/manageusers">Manage Schedule</Link>
+                <Link to="/manageCoach">Manage Schedule</Link>
             </DropdownButton>
         </div>
     )
