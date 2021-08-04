@@ -131,7 +131,7 @@ export const CoachDetail = () => {
                     <div className='leftName'>{`${firstName} ${lastName}`}</div>
                     <div className='leftExpertise'>
                         {expertiseArea.map((data) => {
-                            return <span>{data.label}</span>;
+                            return <div>{data.label}</div>;
                         })}
                     </div>
                 </div>
