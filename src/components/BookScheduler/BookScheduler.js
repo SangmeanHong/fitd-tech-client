@@ -51,6 +51,7 @@ const BookScheduler = ({ events, setEvents }) => {
                 endAccessor={events?.end}
                 onSelectEvent={(e) => handleEventResult(e)}
                 onSelectSlot={handleSelect}
+                eventPropGetter={(eventStyleGetter)}
             />
             <button onClick={() => checkBtn()}>check</button>
         </div>
@@ -58,3 +59,18 @@ const BookScheduler = ({ events, setEvents }) => {
 };
 
 export default BookScheduler;
+
+
+const eventStyleGetter = (event, start, end, isSelected) => {
+    var style = {
+        backgroundColor: event.booked ? 'red' : 'blue',
+        borderRadius: '0px',
+        opacity: 0.8,
+        color: 'white',
+        border: '0px',
+        display: 'block'
+    };
+    return {
+        style: style
+    };
+}
