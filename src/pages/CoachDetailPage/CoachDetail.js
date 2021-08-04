@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import EmailIcon from '@material-ui/icons/Email';
 import './CoachDetail.css';
-import Pricing from '../Home/Pricing';
-import Button from '../../pages/Home/Button';
 import { TextField } from '@material-ui/core';
-import Rating, { RatingProps } from '@material-ui/lab/Rating';
+import Rating from '@material-ui/lab/Rating';
 import axios from 'axios';
 import Pagination from '@material-ui/lab/Pagination';
 import { API } from '../../config';
@@ -35,11 +33,19 @@ export const CoachDetail = () => {
         introOfCoach,
     } = coachData;
 
+    const userInfo =
+        sessionStorage.getItem('profile') &&
+        JSON.parse(sessionStorage.getItem('profile'));
+
     const onClickBookBtn = () => {
-        history.push({
-            pathname: `/payment/${firstName} ${lastName}`,
-            state: coachData,
-        });
+        if (userInfo === null) {
+            history.push('/auth');
+        } else {
+            history.push({
+                pathname: `/payment/${firstName} ${lastName}`,
+                state: coachData,
+            });
+        }
     };
 
     const ratingChange = (event, value) => {
@@ -104,11 +110,8 @@ export const CoachDetail = () => {
         setPage(value);
     };
     useEffect(() => {
-        window.scrollTo(0, 0);
         if (reviews) {
-            // setPageData(createdReviews.slice(0, 4) as reviewType[]); // 0 2 , 1 3, 2 4           0 2 , 2 4, 4 6
-            // 우선 먼저 sort 를 해서 순서를 바꿔주고 slice 로 data를 나눠준다.
-            setPageData(reviews.slice(indexOfFirst, indexOfLast)); // 0 2 , 1 3, 2 4           0 2 , 2 4, 4 6
+            setPageData(reviews.slice(indexOfFirst, indexOfLast));
         }
     }, [indexOfFirst, indexOfLast, reviews]);
 
@@ -126,14 +129,13 @@ export const CoachDetail = () => {
                         })}
                     </div>
                 </div>
-                <div className='btnFlex'>
+                {userInfo?.role === 0 || userInfo === null ? (
                     <div className='leftSubscribeBtn'>
                         <button onClick={onClickBookBtn}>Book Coach</button>
                     </div>
-                    <div className='leftSubscribeBtn'>
-                        <button>Subscribe</button>
-                    </div>
-                </div>
+                ) : (
+                    ''
+                )}
                 <div className='leftBottom'>
                     <div className='leftEmail'>{email}</div>
                     <div className='leftSotialLinks'>
