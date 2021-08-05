@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { CoachingProfileCard } from '../../components/CoachProfile/CoachingProfileCard';
-import { coachData } from '../../data/coachData';
 import './Coaching.css';
 import { useHistory } from 'react-router';
 import { getCoaches } from '../../libs/getCoaches';
 import { BiSearch } from 'react-icons/bi';
 
 function Coaching() {
-    const [user, setUser] = useState(
-        JSON.parse(sessionStorage.getItem('profile'))
-    );
     const [coaches, setCoaches] = useState([]);
 
     const history = useHistory();
@@ -26,6 +22,7 @@ function Coaching() {
     };
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         (async () => {
             const coaches = await getCoaches();
             setCoaches(coaches);

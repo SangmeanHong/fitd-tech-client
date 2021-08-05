@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import actionUserSchedule from '../../redux/actions/actionUserSchedule';
 import { DataGrid } from '@material-ui/data-grid';
 import './bookTableStyles.css';
-import { useSelector } from 'react-redux';
 import LoadingSpinner from '../LoadingSpinner';
 import { MessageBox } from '../MessageBox';
 const columns = [

@@ -1,5 +1,3 @@
-let exampleText = "right now";
-
 export const homeObjOne = {
     lightBg: false,
     lightText: true,
@@ -7,7 +5,7 @@ export const homeObjOne = {
     topLine: 'Coaching',
     headline: '<span>From those who are there <span class="italic" style={{color: red}}>right now</span></span>',
     description:
-        'We are your future colleagues and managers who\'ve made it to where you want to be.Equipped with the right tools, we\'re here to help you achieve your career goals.',
+        'We are your future colleagues and managers. We help you achieve your career goals the way we did',
     buttonLabel: 'Browse FAQ',
     imgStart: '',
     img: 'images/coach-svg-2.svg',

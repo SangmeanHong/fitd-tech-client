@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import HeroSection from '../Home/HeroSection';
-import { homeObjOne, homeObjTwo, homeObjThree, homeObjFour } from './Data';
-import Pricing from '../Home/Pricing';
+import { homeObjOne, homeObjTwo } from './Data';
 
 function Content() {
     useEffect(() => {
@@ -11,7 +10,6 @@ function Content() {
         <>
             <HeroSection {...homeObjOne} />
             <HeroSection {...homeObjTwo} />
-            {/* <HeroSection {...homeObjFour} /> */}
         </>
     );
 }

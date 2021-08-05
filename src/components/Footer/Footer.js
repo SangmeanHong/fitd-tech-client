@@ -1,6 +1,5 @@
 import React from 'react';
 import './Footer.css';
-import { Button } from '../../pages/Home/Button';
 import { Link } from 'react-router-dom';
 import {
     FaFacebook,
@@ -106,7 +105,7 @@ function Footer() {
                         </a>
                         <a
                             className='social-icon-link'
-                            href='https://www.linkedin.com/'
+                            href='https://www.linkedin.com/company/footinthedoor/'
                             target='_blank'
                             aria-label='LinkedIn'
                             without rel="noreferrer"
