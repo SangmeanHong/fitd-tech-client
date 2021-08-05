@@ -7,13 +7,13 @@ export const homeObjOne = {
     topLine: 'Coaching',
     headline: '<span>From those who are there <span class="italic" style={{color: red}}>right now</span></span>',
     description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
-    buttonLabel: 'Meet Our Coaches',
+        'We are your future colleagues and managers who\'ve made it to where you want to be.Equipped with the right tools, we\'re here to help you achieve your career goals.',
+    buttonLabel: 'Browse FAQ',
     imgStart: '',
     img: 'images/coach-svg-2.svg',
     alt: 'Coaches',
     buttonId: 1,
-    browse: '/coaching',
+    browse: '/faq',
 };
 
 export const homeObjTwo = {
@@ -21,15 +21,15 @@ export const homeObjTwo = {
     lightText: false,
     lightTextDesc: false,
     topLine: 'Easy Setup',
-    headline: '<span>How it works, FAQ</span>',
+    headline: '<span>How it works</span>',
     description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    buttonLabel: 'Learn More',
+        "Take a browse through our coaches and choose one to have a free 15-minute chat with. There, you will learn about their strategy to help you achieve your goals. Only sign-up for a monthly no obligation membership when you are ready.",
+    buttonLabel: 'Browse Coaches',
     imgStart: 'start',
     img: 'images/setup-svg-1.svg',
     alt: 'Setup',
     buttonId: 2,
-    browse: '/faq',
+    browse: '/coaching',
 
 };
 
