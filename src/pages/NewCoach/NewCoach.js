@@ -262,7 +262,7 @@ const NewCoach = () => {
 
             const url = result.data.url;
 
-            const imgUrl = await axios.put(url, file, {
+            await axios.put(url, file, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
