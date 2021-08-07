@@ -45,7 +45,7 @@ function Cards() {
             <CardItem
                 // src='images/article-5.jpg'
                 heading='How do I talk to my coach?'
-                text='Your subscription minutes can be used for video or audio calls. Additionally, you can use the private chat feature for checking in, quick updates, or setting an agenda for your next meeting. The coaches you meet with are also completely private and confidential'
+                text='Your subscription minutes can be used for video or audio calls. Additionally, you can use the private chat feature for checking in, quick updates, or setting an agenda for your next meeting.'
                 //label='monster.ca'
                // path='https://www.monster.ca/career-advice/article/Graduated-and-confused-Questions-to-ask-yourself-to-land-a-job'
             />
