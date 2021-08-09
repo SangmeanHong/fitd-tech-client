@@ -28,21 +28,25 @@ export function ManageUsersPage() {
 	const { users, applications, loading, err } = useSelector(
 		(state) => state.getUsersReducer
 	);
+
 	const {
 		success,
 		loading: approveApplicationLoading,
 		err: approveApplicationError,
 	} = useSelector((state) => state.approveApplicationReducer);
+
 	const dispatch = useDispatch();
 	const classes = useStyles();
 	const [open, setOpen] = React.useState(false);
 	const [userApplication, setUserApplication] = useState({});
 	const [selectedUser, setSelectedUser] = useState('');
+
 	useEffect(() => {
 		dispatch(actionGetUsers());
 	}, [dispatch, success]);
 
 	const handleApprove = (userId) => {
+		// console.log(`handleApprove`);
 		dispatch(actionApproveApplication(userId));
 		setOpen(false);
 		dispatch(actionGetUsers());
@@ -74,9 +78,11 @@ export function ManageUsersPage() {
 
 	const handleDocs = (id, role) => {
 		setSelectedUser(id);
+
 		const filteredApplication = applications.filter(
 			(data) => data.user === id
 		)[0];
+
 		filteredApplication['role'] = role;
 		setUserApplication(filteredApplication);
 		setOpen(true);
@@ -90,6 +96,7 @@ export function ManageUsersPage() {
 	const handlePageChange = (event, value) => {
 		setPage(value);
 	};
+
 	useEffect(() => {
 		if (users) {
 			setPageData(users.slice(indexOfFirst, indexOfLast));
